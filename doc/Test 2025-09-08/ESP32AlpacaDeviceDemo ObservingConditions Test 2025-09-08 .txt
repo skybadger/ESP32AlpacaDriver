@@ -1,0 +1,49 @@
+
+ 334 [     INFO] void AlpacaServer::OnAlpacaDiscovery(AsyncUDPPacket&):   BEGIN length=16 ...
+ 335 [   NOTICE] void AlpacaServer::OnAlpacaDiscovery(AsyncUDPPacket&):   ... Remote ip 192.168.178.030 ...
+ 336 [     INFO] void AlpacaServer::OnAlpacaDiscovery(AsyncUDPPacket&):   ... Header v.=1 ...
+ 337 [   NOTICE] void AlpacaServer::OnAlpacaDiscovery(AsyncUDPPacket&):   ... END rsp={"AlpacaPort":80}
+ 338 [     INFO] void AlpacaServer::_getApiVersions(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /management/apiversions
+ 339 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+ 340 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": [1], "ClientTransactionID": 0, "ServerTransactionID": 36, "ErrorNumber": 0, "ErrorMessage": ""}
+
+ 341 [     INFO] void AlpacaServer::_getDescription(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /management/v1/description
+ 342 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+ 343 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": {"ServerName":"ALPACA-ESP32-DEMO","Manufacturer":"DIY by @BigPet","ManufacturerVersion":"4.2.1","Location":"Germany/Bavaria"}, "ClientTransactionID": 0, "ServerTransactionID": 37, "ErrorNumber": 0, "ErrorMessage": ""}
+
+ 344 [     INFO] void AlpacaServer::_getConfiguredDevices(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /management/v1/configureddevices
+ 345 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+ 346 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": [{"DeviceName":"covercalibrator-0","DeviceType":"covercalibrator","DeviceNumber":0,"UniqueID":"covercalibrator-5C013B95EF3C00"},{"DeviceName":"switch-0","DeviceType":"switch","DeviceNumber":0,"UniqueID":"switch-5C013B95EF3C00"},{"DeviceName":"observingconditions-0","DeviceType":"observingconditions","DeviceNumber":0,"UniqueID":"observingconditions-5C013B95EF3C00"},{"DeviceName":"focuser-0","DeviceType":"focuser","DeviceNumber":0,"UniqueID":"focuser-5C013B95EF3C00"}], "ClientTransactionID": 0, "ServerTransactionID": 38, "ErrorNumber": 0, "ErrorMessage": ""}
+
+ 347 [     INFO] virtual void AlpacaDevice::AlpacaPutConnected(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_PUT /api/v1/observingconditions/0/connected - Connected=<True> - ClientID=<15725> - ClientTransactionID=<1>
+ 348 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&):   Respond(without value)
+ 349 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "ClientTransactionID": 1, "ServerTransactionID": 39, "ErrorNumber": 0, "ErrorMessage": ""}
+
+ 350 [     INFO] virtual void AlpacaDevice::AlpacaGetConnected(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/observingconditions/0/connected - ClientID=<15725> - ClientTransactionID=<2>
+ 351 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, bool):   Respond(with bool value)
+ 352 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": true, "ClientTransactionID": 2, "ServerTransactionID": 40, "ErrorNumber": 0, "ErrorMessage": ""}
+
+ 353 [     INFO] void AlpacaDevice::AlpacaGetInterfaceVersion(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/observingconditions/0/interfaceversion - ClientID=<15725> - ClientTransactionID=<3>
+ 354 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, int32_t):   Respond(with int32_t value)
+ 355 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": 2, "ClientTransactionID": 3, "ServerTransactionID": 41, "ErrorNumber": 0, "ErrorMessage": ""}
+
+ 356 [     INFO] void AlpacaDevice::AlpacaGetDeviceState(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/observingconditions/0/devicestate - ClientID=<15725> - ClientTransactionID=<4>
+ 357 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+ 358 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": [{"Name":"CloudCover","Value":2.640000},{"Name":"DewPoint","Value":3.640000},{"Name":"Humidity","Value":4.640000},{"Name":"Pressure","Value":4.640000},{"Name":"RainRate","Value":6.640000},{"Name":"SkyBrightness","Value":7.640000},{"Name":"SkyQuality","Value":8.640000},{"Name":"SkyTemperature","Value":9.640000},{"Name":"StarFwhm","Value":10.640000},{"Name":"Temperature","Value":11.640000},{"Name":"WindDirection","Value":2.640000},{"Name":"WindGuest","Value":3.640000},{"Name":"windSpeed","Value":4.640000}], "ClientTransactionID": 4, "ServerTransactionID": 42, "ErrorNumber": 0, "ErrorMessage": ""}
+
+ 359 [     INFO] void AlpacaObservingConditions::_alpacaGetAveragePeriod(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/observingconditions/0/averageperiod - ClientID=<15725> - ClientTransactionID=<5>
+ 360 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, double):   Respond(with double value)
+ 361 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": 0.000000, "ClientTransactionID": 5, "ServerTransactionID": 43, "ErrorNumber": 0, "ErrorMessage": ""}
+
+ 362 [     INFO] void AlpacaDevice::AlpacaGetDescription(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/observingconditions/0/description - ClientID=<15725> - ClientTransactionID=<6>
+ 363 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+ 364 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": "Alpaca ObservingConditions Template", "ClientTransactionID": 6, "ServerTransactionID": 44, "ErrorNumber": 0, "ErrorMessage": ""}
+
+ 365 [     INFO] void AlpacaDevice::AlpacaGetDriverInfo(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/observingconditions/0/driverinfo - ClientID=<15725> - ClientTransactionID=<7>
+ 366 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+ 367 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": "ESP32 ObservingConditions driver by BigPet", "ClientTransactionID": 7, "ServerTransactionID": 45, "ErrorNumber": 0, "ErrorMessage": ""}
+
+ 368 [     INFO] void AlpacaDevice::AlpacaGetDriverVersion(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/observingconditions/0/driverversion - ClientID=<15725> - ClientTransactionID=<8>
+ 369 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+ 370 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": "-/4.2.1", "ClientTransactionID": 8, "ServerTransactionID": 46, "ErrorNumber": 0, "ErrorMessage": ""}
+

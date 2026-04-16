@@ -1,0 +1,238 @@
+----------------------------------------------------------------------
+--------------N.I.N.A. - Nighttime Imaging 'N' Astronomy--------------
+--------------------------Version 3.2.0.2008--------------------------
+-------------------------2025-09-09T05:16:42--------------------------
+----------------------------------------------------------------------
+---------------------Microsoft Windows 10.0.26100---------------------
+-------------------------OS Architecture X64--------------------------
+-----------------------Process Architecture X64-----------------------
+-----------------------------.NET 8.0.19------------------------------
+----------------------------------------------------------------------
+--------------------------Processor Count 32--------------------------
+--------------------Total Physical Memory 63.93 GB--------------------
+----------------------------------------------------------------------
+DATE|LEVEL|SOURCE|MEMBER|LINE|MESSAGE
+2025-09-09T05:16:42.0321|INFO|CameraChooserVM.cs|GetEquipment|69|Found 0 ASI Cameras
+2025-09-09T05:16:42.0322|TRACE|FilterWheelChooserVM.cs|GetEquipment|56|Adding FLI filter wheels
+2025-09-09T05:16:42.0587|DEBUG|DllLoader.cs|LoadDll|571|Successfully loaded C:\Program Files\N.I.N.A. - Nighttime Imaging 'N' Astronomy\External\x64\FTDI\ftd2xx.dll
+2025-09-09T05:16:42.0992|DEBUG|DllLoader.cs|LoadDll|571|Successfully loaded C:\Program Files\N.I.N.A. - Nighttime Imaging 'N' Astronomy\External\x64\MGEN\MG3lib.dll
+2025-09-09T05:16:42.1036|DEBUG|FLIFilterWheels.cs|GetFilterWheels|28|FLI: Found 0 filter wheel(s)
+2025-09-09T05:16:42.1037|TRACE|FilterWheelChooserVM.cs|GetEquipment|75|Adding Atik EFW filter wheels
+2025-09-09T05:16:42.1092|TRACE|FilterWheelChooserVM.cs|GetEquipment|89|Adding Atik internal filter wheels
+2025-09-09T05:16:42.1095|INFO|CameraChooserVM.cs|GetEquipment|84|Found 0 Altair Cameras
+2025-09-09T05:16:42.1225|TRACE|AtikCameraDll.cs|GetDevicesCount|40|Number of Atik Cameras: 0
+2025-09-09T05:16:42.1225|TRACE|AtikCameraDll.cs|GetDevicesCount|40|Number of Atik Cameras: 0
+2025-09-09T05:16:42.1226|INFO|CameraChooserVM.cs|GetEquipment|96|Found 0 Atik Cameras
+2025-09-09T05:16:42.1227|TRACE|FilterWheelChooserVM.cs|GetEquipment|91|Cameras found: 0
+2025-09-09T05:16:42.1229|DEBUG|FLICameras.cs|GetCameras|28|FLI: Found 0 camera(s)
+2025-09-09T05:16:42.1229|INFO|CameraChooserVM.cs|GetEquipment|110|Found 0 FLI Cameras
+2025-09-09T05:16:42.1233|TRACE|QhyccdSdk.cs|.ctor|42|QhyccdSdk: Loading QHY SDK, refCount=0, sdkIsInitialized=False
+2025-09-09T05:16:42.1258|TRACE|FilterWheelChooserVM.cs|GetEquipment|108|Adding QHY integrated/4-pin filter wheels
+2025-09-09T05:16:42.1261|TRACE|QhyccdSdk.cs|InitSdk|51|QhyccdSdk: Initializing QHY SDK, refCount=0, sdkIsInitialized=False
+2025-09-09T05:16:42.6572|INFO|PluginLoader.cs|LoadPlugin|402|Successfully loaded plugin Connector version 2.1.0.2 by Stefan Berg @isbeorn
+2025-09-09T05:16:42.6645|INFO|PluginLoader.cs|LoadPlugin|402|Successfully loaded plugin Device Actions and Commands version 2.0.0.0 by Dale Ghent
+2025-09-09T05:16:42.6649|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Ground Station\BouncyCastle.Crypto.dll does not reference NINA.Plugin
+2025-09-09T05:16:42.7219|DEBUG|GroundStation.cs|Initialize|55|Init completed
+2025-09-09T05:16:42.7220|INFO|PluginLoader.cs|LoadPlugin|402|Successfully loaded plugin Ground Station version 2.4.1.0 by Dale Ghent
+2025-09-09T05:16:42.7225|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Ground Station\MailKit.dll does not reference NINA.Plugin
+2025-09-09T05:16:42.7228|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Ground Station\MimeKit.dll does not reference NINA.Plugin
+2025-09-09T05:16:42.7231|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Ground Station\MQTTnet.dll does not reference NINA.Plugin
+2025-09-09T05:16:42.7235|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Ground Station\NetCoreAudio.dll does not reference NINA.Plugin
+2025-09-09T05:16:42.7238|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Ground Station\System.Speech.dll does not reference NINA.Plugin
+2025-09-09T05:16:42.7241|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Ground Station\Telegram.Bot.dll does not reference NINA.Plugin
+2025-09-09T05:16:42.7244|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Sequencer Powerups\ExtendedNumerics.BigDecimal.dll does not reference NINA.Plugin
+2025-09-09T05:16:42.7247|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Sequencer Powerups\Microsoft.Extensions.Logging.Abstractions.dll does not reference NINA.Plugin
+2025-09-09T05:16:42.7250|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Sequencer Powerups\Microsoft.Extensions.Logging.Configuration.dll does not reference NINA.Plugin
+2025-09-09T05:16:42.7253|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Sequencer Powerups\Microsoft.Extensions.Logging.Console.dll does not reference NINA.Plugin
+2025-09-09T05:16:42.7256|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Sequencer Powerups\Microsoft.Extensions.Logging.dll does not reference NINA.Plugin
+2025-09-09T05:16:42.7258|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Sequencer Powerups\Microsoft.Extensions.Logging.TraceSource.dll does not reference NINA.Plugin
+2025-09-09T05:16:42.7261|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Sequencer Powerups\Microsoft.Extensions.Options.dll does not reference NINA.Plugin
+2025-09-09T05:16:42.7264|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Sequencer Powerups\NCalc.Core.dll does not reference NINA.Plugin
+2025-09-09T05:16:42.7267|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Sequencer Powerups\NCalc.Sync.dll does not reference NINA.Plugin
+2025-09-09T05:16:42.7270|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Sequencer Powerups\Parlot.dll does not reference NINA.Plugin
+2025-09-09T05:16:42.7781|WARNING|When.cs|GetRunningItem|143|Can't get running items: SequencerNavigation not initialized yet!
+2025-09-09T05:16:42.7785|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-09T05:16:42.7786|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-09T05:16:42.7786|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-09T05:16:42.7786|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-09T05:16:42.7796|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 55.852226022707875
+2025-09-09T05:16:42.7800|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9753655844148226
+2025-09-09T05:16:42.7800|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -39.965207194577594
+2025-09-09T05:16:42.7800|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 83.15081577379277
+2025-09-09T05:16:42.7801|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 2.5073933121280634
+2025-09-09T05:16:42.7808|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 1
+2025-09-09T05:16:42.7809|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-09T05:16:42.7810|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-09T05:16:42.8587|INFO|PluginLoader.cs|LoadPlugin|402|Successfully loaded plugin Sequencer Powerups version 3.28.4.1 by Marc Blank
+2025-09-09T05:16:42.8628|INFO|PluginFetcher.cs|RequestAll|43|Fetching plugin manifests from https://nighttime-imaging.eu/wp-json/nina/v1/plugins/manifests
+2025-09-09T05:16:43.1335|TRACE|QhyccdSdk.cs|InitSdk|51|QhyccdSdk: Initializing QHY SDK, refCount=0, sdkIsInitialized=True
+2025-09-09T05:16:43.1336|DEBUG|QHYFilterWheels.cs|GetFilterWheels|62|QHYCFW: Found 0 filter wheel(s)
+2025-09-09T05:16:43.1336|TRACE|QHYCameras.cs|Count|35|QHYCamera - found 0 camera(s)
+2025-09-09T05:16:43.1337|TRACE|FilterWheelChooserVM.cs|GetEquipment|127|Adding ZWOptical filter wheels
+2025-09-09T05:16:43.1337|INFO|CameraChooserVM.cs|GetEquipment|130|Found 0 QHYCCD Cameras
+2025-09-09T05:16:43.1590|TRACE|FilterWheelChooserVM.cs|GetEquipment|142|Adding PlayerOne filter wheels
+2025-09-09T05:16:43.1621|DEBUG|SBIGFilterWheelProvider.cs|GetEquipment|40|Getting SBIG Filter Wheels
+2025-09-09T05:16:43.1633|TRACE|SbigSharp.cs|.cctor|29|SBIGSDK: Loading SBIG SDK dll
+2025-09-09T05:16:43.1655|TRACE|SbigSdk.cs|Create|80|SBIGSDK: New driver instance 0 is the same as the already active one. Relinquishing ownership
+2025-09-09T05:16:43.1767|INFO|CameraChooserVM.cs|GetEquipment|158|Found 0 ToupTek Cameras
+2025-09-09T05:16:43.1961|INFO|CameraChooserVM.cs|GetEquipment|173|Found 0 Ogma Cameras
+2025-09-09T05:16:43.2039|INFO|CameraChooserVM.cs|GetEquipment|188|Found 0 Omegon Cameras
+2025-09-09T05:16:43.2466|INFO|CameraChooserVM.cs|GetEquipment|203|Found 0 RisingCam Cameras
+2025-09-09T05:16:43.2527|INFO|CameraChooserVM.cs|GetEquipment|218|Found 0 MallinCam Cameras
+2025-09-09T05:16:43.2554|INFO|CameraChooserVM.cs|GetEquipment|243|Found 0 SVBony Cameras
+2025-09-09T05:16:43.2556|DEBUG|SBIGCameraProvider.cs|GetEquipment|45|Getting SBIG Cameras
+2025-09-09T05:16:43.2562|TRACE|SbigSdk.cs|Create|83|SBIGSDK: Created driver instance 1
+2025-09-09T05:16:43.2564|TRACE|SbigSdk.cs|Dispose|103|SBIGSDK: Closing driver instance 1
+2025-09-09T05:16:43.2564|TRACE|SbigSdk.cs|Dispose|109|SBIGSDK: Restoring previous handle 0
+2025-09-09T05:16:43.2564|INFO|CameraChooserVM.cs|GetEquipment|259|Found 0 SBIG Cameras
+2025-09-09T05:16:43.3800|INFO|PluginFetcher.cs|RequestAll|57|Found 58 valid plugins at https://nighttime-imaging.eu/wp-json/nina/v1/plugins/manifests
+2025-09-09T05:16:43.4168|INFO|ApplicationVM.cs|CheckDiskInfo|100|Available Space on Drive C:\: 327.46 GB
+2025-09-09T05:16:43.4169|INFO|ApplicationVM.cs|CheckDiskInfo|100|Available Space on Drive D:\: 378.92 GB
+2025-09-09T05:16:43.4170|INFO|ApplicationVM.cs|CheckDiskInfo|100|Available Space on Drive E:\: 88.32 GB
+2025-09-09T05:16:43.4171|INFO|ApplicationVM.cs|CheckDiskInfo|100|Available Space on Drive G:\: 3814.43 GB
+2025-09-09T05:16:43.4188|INFO|ApplicationVM.cs|CheckASCOMPlatformVersion|81|ASCOM Platform 6.6.2.4294 installed
+2025-09-09T05:16:43.4197|INFO|ApplicationVM.cs|CheckDiskInfo|102|Drive I:\ is not ready
+2025-09-09T05:16:43.4198|INFO|ApplicationVM.cs|CheckDiskInfo|100|Available Space on Drive T:\: 7191.19 GB
+2025-09-09T05:16:43.4199|INFO|ApplicationVM.cs|CheckDiskInfo|100|Available Space on Drive U:\: 459.18 GB
+2025-09-09T05:16:43.4215|INFO|ApplicationVM.cs|CheckDiskInfo|100|Available Space on Drive X:\: 14825.72 GB
+2025-09-09T05:16:43.4235|INFO|ApplicationVM.cs|CheckDiskInfo|100|Available Space on Drive Y:\: 14825.72 GB
+2025-09-09T05:16:43.4247|INFO|ApplicationVM.cs|CheckDiskInfo|100|Available Space on Drive Z:\: 14825.72 GB
+2025-09-09T05:16:43.7285|TRACE|FocuserChooserVM.cs|GetEquipment|57|Adding ZWOptical Focusers
+2025-09-09T05:16:43.7288|DEBUG|SVBonyProvider.cs|GetEquipment|49|Getting SVBony Cameras
+2025-09-09T05:16:43.7319|INFO|CameraChooserVM.cs|GetEquipment|279|Found 0 SVBony Cameras
+2025-09-09T05:16:43.7321|DEBUG|PlayerOneProvider.cs|GetEquipment|47|Getting Player One cameras
+2025-09-09T05:16:43.7347|INFO|CameraChooserVM.cs|GetEquipment|279|Found 0 PlayerOne Cameras
+2025-09-09T05:16:43.7348|DEBUG|ASTPANProvider.cs|GetEquipment|37|Getting ASTPAN Cameras
+2025-09-09T05:16:43.7365|INFO|CameraChooserVM.cs|GetEquipment|279|Found 0 ASTPAN Cameras
+2025-09-09T05:16:43.7370|TRACE|ASCOMInteraction.cs|GetCameras|48|Adding Camera V3 simulator (ASCOM)
+2025-09-09T05:16:43.7370|TRACE|ASCOMInteraction.cs|GetCameras|48|Adding Simulator (ASCOM)
+2025-09-09T05:16:43.7370|INFO|CameraChooserVM.cs|GetEquipment|293|Found 2 ASCOM Cameras
+2025-09-09T05:16:45.7360|INFO|SafetyMonitorChooserVM.cs|GetEquipment|71|Found 0 Alpaca Safety Monitors
+2025-09-09T05:16:45.7362|INFO|TelescopeChooserVM.cs|GetEquipment|69|Found 0 Alpaca Telescopes
+2025-09-09T05:16:45.7362|INFO|AlpacaInteraction.cs|GetWeatherDataSources|263|Discovered Alpaca Device observingconditions-0 - observingconditions-5C013B95EF3C00 @ 192.168.178.157 192.168.178.157:80 #0
+2025-09-09T05:16:45.7361|INFO|FlatDeviceChooserVM.cs|GetEquipment|67|Found 0 Alpaca Cover Calibrators
+2025-09-09T05:16:45.7361|INFO|RotatorChooserVM.cs|GetEquipment|68|Found 0 Alpaca Rotators
+2025-09-09T05:16:45.7362|INFO|FilterWheelChooserVM.cs|GetEquipment|193|Found 0 Alpaca Filter Wheels
+2025-09-09T05:16:45.7360|INFO|DomeChooserVM.cs|GetEquipment|67|Found 0 Alpaca Domes
+2025-09-09T05:16:45.7362|INFO|AlpacaInteraction.cs|GetSwitches|191|Discovered Alpaca Device switch-0 - switch-5C013B95EF3C00 @ 192.168.178.157 192.168.178.157:80 #0
+2025-09-09T05:16:45.7365|INFO|WeatherDataChooserVM.cs|GetEquipment|69|Found 1 Alpaca Observing Conditions
+2025-09-09T05:16:45.7366|INFO|SwitchChooserVM.cs|GetEquipment|71|Found 1 Alpaca Switch Hubs
+2025-09-09T05:16:45.7373|INFO|CameraChooserVM.cs|GetEquipment|305|Found 0 Alpaca Cameras
+2025-09-09T05:16:45.7386|INFO|CameraChooserVM.cs|GetEquipment|318|Found 0 Canon Cameras
+2025-09-09T05:16:45.7550|INFO|FocuserChooserVM.cs|GetEquipment|84|Found 0 Alpaca Focusers
+2025-09-09T05:16:47.7949|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-09T05:16:47.7950|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-09T05:16:47.7950|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-09T05:16:47.7951|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-09T05:16:47.7954|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 55.83180430784952
+2025-09-09T05:16:47.7954|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.97536416539242
+2025-09-09T05:16:47.7954|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -39.94444929037896
+2025-09-09T05:16:47.7955|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 83.15293283125591
+2025-09-09T05:16:47.7955|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 2.508790187189093
+2025-09-09T05:16:47.7956|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 6
+2025-09-09T05:16:47.7956|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-09T05:16:47.7956|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-09T05:16:48.7965|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 09.09.2025 03:16:48.796; Stopped: 09.09.2025 03:16:48.796; Elapsed: 00:00:00.0000706
+2025-09-09T05:16:50.2706|INFO|SwitchVM.cs|Disconnect|309|Disconnected Switch
+2025-09-09T05:16:50.2720|TRACE|AscomDevice.cs|Connect|266|switch-0 - Calling PreConnect
+2025-09-09T05:16:50.2726|TRACE|AscomDevice.cs|Connect|269|switch-0 - Creating instance for switch-5C013B95EF3C00
+2025-09-09T05:16:50.2751|TRACE|AscomDevice.cs|Connect|273|switch-0 - Calling Connect for switch-5C013B95EF3C00
+2025-09-09T05:16:50.2753|DEBUG|AscomDevice.cs|Connected|177|SET switch-0 Connected to True
+2025-09-09T05:16:50.4818|TRACE|AscomDevice.cs|GetProperty|485|GET AlpacaSwitch.Connected: True
+2025-09-09T05:16:50.4819|TRACE|AscomDevice.cs|Connect|278|switch-0 - Calling PostConnect
+2025-09-09T05:16:50.6721|TRACE|AscomSwitchHub.cs|ScanForSwitches|42|Scanning for Ascom Switches
+2025-09-09T05:16:50.8241|TRACE|AscomSwitchHub.cs|ScanForSwitches|49|Writable Switch found for index 0
+2025-09-09T05:16:51.3578|TRACE|AscomSwitchHub.cs|ScanForSwitches|53|Readable Switch found for index 1
+2025-09-09T05:16:51.6854|TRACE|AscomSwitchHub.cs|ScanForSwitches|53|Readable Switch found for index 2
+2025-09-09T05:16:51.9983|TRACE|AscomSwitchHub.cs|ScanForSwitches|49|Writable Switch found for index 3
+2025-09-09T05:16:52.5327|TRACE|AscomDevice.cs|GetProperty|485|GET AlpacaSwitch.Connected: True
+2025-09-09T05:16:52.5335|TRACE|AscomDevice.cs|GetProperty|485|GET AlpacaSwitch.Connected: True
+2025-09-09T05:16:52.5337|TRACE|AscomDevice.cs|GetProperty|485|GET AlpacaSwitch.Connected: True
+2025-09-09T05:16:52.5346|TRACE|AscomDevice.cs|GetProperty|485|GET AlpacaSwitch.Connected: True
+2025-09-09T05:16:52.5347|TRACE|AscomDevice.cs|GetProperty|485|GET AlpacaSwitch.Connected: True
+2025-09-09T05:16:52.7958|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-09T05:16:52.7959|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-09T05:16:52.7959|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-09T05:16:52.7960|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-09T05:16:52.7963|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 55.811443848848754
+2025-09-09T05:16:52.7963|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9753627504253083
+2025-09-09T05:16:52.7963|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -39.92375771226869
+2025-09-09T05:16:52.7963|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 83.15504093823472
+2025-09-09T05:16:52.7963|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 2.5101831511926886
+2025-09-09T05:16:52.7964|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 11
+2025-09-09T05:16:52.7964|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-09T05:16:52.7964|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-09T05:16:52.8976|INFO|SwitchVM.cs|Connect|264|Successfully connected Switch. Id: switch-5C013B95EF3C00 Name: switch-0 DisplayName: switch-0 @ 192.168.178.157 #0 Driver Version: -/4.2.1
+2025-09-09T05:16:53.7926|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 09.09.2025 03:16:53.792; Stopped: 09.09.2025 03:16:53.792; Elapsed: 00:00:00.0000531
+2025-09-09T05:16:55.0831|TRACE|AscomDevice.cs|GetProperty|485|GET AlpacaSwitch.Connected: True
+2025-09-09T05:16:55.2287|TRACE|AscomSwitch.cs|Poll|49|Retrieved values for switch id 0: 0
+2025-09-09T05:16:55.3880|TRACE|AscomSwitch.cs|Poll|49|Retrieved values for switch id 1: 11.5
+2025-09-09T05:16:55.5316|TRACE|AscomSwitch.cs|Poll|49|Retrieved values for switch id 2: 0
+2025-09-09T05:16:55.6865|TRACE|AscomSwitch.cs|Poll|49|Retrieved values for switch id 3: 0
+2025-09-09T05:16:55.6874|TRACE|DeviceUpdateTimer.cs|Run|109|Switch values have been updated. Poll start: 2025-09-09T03:16:54.8427608+00:00; Update start: 2025-09-09T03:16:55.6866528+00:00; Update end: 2025-09-09T03:16:55.6869049+00:00; Poll duration 00:00:00.8438920; Update duration 00:00:00.0002521; Overall duration 00:00:00.8441441
+2025-09-09T05:16:56.9248|TRACE|AscomDevice.cs|GetProperty|485|GET AlpacaSwitch.Connected: True
+2025-09-09T05:16:57.0670|TRACE|AscomSwitch.cs|Poll|49|Retrieved values for switch id 0: 0
+2025-09-09T05:16:57.2316|TRACE|AscomSwitch.cs|Poll|49|Retrieved values for switch id 1: 11.2
+2025-09-09T05:16:57.3666|TRACE|AscomSwitch.cs|Poll|49|Retrieved values for switch id 2: 0
+2025-09-09T05:16:57.5344|TRACE|AscomSwitch.cs|Poll|49|Retrieved values for switch id 3: 0
+2025-09-09T05:16:57.5345|TRACE|DeviceUpdateTimer.cs|Run|109|Switch values have been updated. Poll start: 2025-09-09T03:16:56.8374571+00:00; Update start: 2025-09-09T03:16:57.5345570+00:00; Update end: 2025-09-09T03:16:57.5345694+00:00; Poll duration 00:00:00.6970999; Update duration 00:00:00.0000124; Overall duration 00:00:00.6971123
+2025-09-09T05:16:57.8066|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-09T05:16:57.8066|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-09T05:16:57.8066|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-09T05:16:57.8067|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-09T05:16:57.8070|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 55.79104259791162
+2025-09-09T05:16:57.8071|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9753613324217856
+2025-09-09T05:16:57.8071|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -39.903028752973725
+2025-09-09T05:16:57.8071|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 83.15715066782562
+2025-09-09T05:16:57.8071|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 2.5115789056068984
+2025-09-09T05:16:57.8072|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 16
+2025-09-09T05:16:57.8072|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-09T05:16:57.8072|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-09T05:16:58.7990|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 09.09.2025 03:16:58.799; Stopped: 09.09.2025 03:16:58.799; Elapsed: 00:00:00.0000146
+2025-09-09T05:16:58.9744|TRACE|AscomDevice.cs|GetProperty|485|GET AlpacaSwitch.Connected: True
+2025-09-09T05:16:59.1089|TRACE|AscomSwitch.cs|Poll|49|Retrieved values for switch id 0: 0
+2025-09-09T05:16:59.2927|TRACE|AscomSwitch.cs|Poll|49|Retrieved values for switch id 1: 11.3
+2025-09-09T05:16:59.4519|TRACE|AscomSwitch.cs|Poll|49|Retrieved values for switch id 2: 0
+2025-09-09T05:16:59.6003|TRACE|AscomSwitch.cs|Poll|49|Retrieved values for switch id 3: 0
+2025-09-09T05:16:59.6004|TRACE|DeviceUpdateTimer.cs|Run|109|Switch values have been updated. Poll start: 2025-09-09T03:16:58.8457357+00:00; Update start: 2025-09-09T03:16:59.6004387+00:00; Update end: 2025-09-09T03:16:59.6004505+00:00; Poll duration 00:00:00.7547030; Update duration 00:00:00.0000118; Overall duration 00:00:00.7547148
+2025-09-09T05:17:00.4012|INFO|AscomDevice.cs|Disconnect|378|Disconnecting from switch-5C013B95EF3C00 switch-0
+2025-09-09T05:17:00.4013|TRACE|AscomDevice.cs|Disconnect|379|switch-0 - Calling PreDisconnect
+2025-09-09T05:17:00.4013|DEBUG|AscomDevice.cs|Connected|177|SET switch-0 Connected to False
+2025-09-09T05:17:00.6227|TRACE|AscomDevice.cs|Disconnect|391|switch-0 - Calling PostDisconnect
+2025-09-09T05:17:00.6229|TRACE|AscomDevice.cs|Dispose|414|switch-0 - Disposing device
+2025-09-09T05:17:00.6240|INFO|SwitchVM.cs|Disconnect|309|Disconnected Switch
+2025-09-09T05:17:02.8183|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-09T05:17:02.8184|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-09T05:17:02.8184|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-09T05:17:02.8184|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-09T05:17:02.8187|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 55.7706413416706
+2025-09-09T05:17:02.8188|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9753599142160301
+2025-09-09T05:17:02.8188|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -39.88229137732275
+2025-09-09T05:17:02.8188|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 83.15925906739567
+2025-09-09T05:17:02.8188|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 2.5129746600211096
+2025-09-09T05:17:02.8188|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 21
+2025-09-09T05:17:02.8189|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-09T05:17:02.8189|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-09T05:17:03.6072|INFO|ApplicationVM.cs|Exit|244|Shutting down application - requested by user
+2025-09-09T05:17:03.6156|INFO|ApplicationVM.cs|Closing|289|Application shutting down
+2025-09-09T05:17:03.6157|DEBUG|ApplicationVM.cs|Closing|292|Saving dock layout
+2025-09-09T05:17:03.6159|DEBUG|ApplicationVM.cs|Closing|296|Disconnecting equipment
+2025-09-09T05:17:03.6228|INFO|DomeVM.cs|Disconnect|355|Disconnected Dome Device
+2025-09-09T05:17:03.6240|INFO|FlatDeviceVM.cs|Disconnect|289|Disconnected Flat Device
+2025-09-09T05:17:03.6273|INFO|CameraVM.cs|Disconnect|680|Disconnected Camera
+2025-09-09T05:17:03.6308|INFO|TelescopeVM.cs|Disconnect|741|Disconnected mount
+2025-09-09T05:17:03.6315|INFO|FilterWheelVM.cs|Disconnect|332|Disconnected Filter Wheel
+2025-09-09T05:17:03.6324|INFO|FocuserVM.cs|Disconnect|441|Disconnected Focuser
+2025-09-09T05:17:03.6336|INFO|RotatorVM.cs|Disconnect|447|Disconnected Rotator
+2025-09-09T05:17:03.6342|INFO|SwitchVM.cs|Disconnect|309|Disconnected Switch
+2025-09-09T05:17:03.6352|INFO|WeatherDataVM.cs|Disconnect|305|Disconnected Weather Device
+2025-09-09T05:17:03.6360|INFO|SafetyMonitorVM.cs|Disconnect|221|Disconnected Safety Monitor
+2025-09-09T05:17:03.8054|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 09.09.2025 03:17:03.805; Stopped: 09.09.2025 03:17:03.805; Elapsed: 00:00:00.0000117
+2025-09-09T05:17:04.2880|DEBUG|ApplicationVM.cs|Closing|300|Releasing profile
+2025-09-09T05:17:04.2884|DEBUG|ApplicationVM.cs|Closing|304|Saving user.settings
+2025-09-09T05:17:04.2885|DEBUG|ApplicationVM.cs|Closing|309|Shutting down ImageSaveMediator
+2025-09-09T05:17:04.2901|DEBUG|ApplicationVM.cs|Closing|314|Closing NOVAS Ephem
+2025-09-09T05:17:04.2903|DEBUG|ApplicationVM.cs|Closing|322|Tearing down plugin Connector
+2025-09-09T05:17:04.2904|DEBUG|ApplicationVM.cs|Closing|322|Tearing down plugin Device Actions and Commands
+2025-09-09T05:17:04.2905|DEBUG|ApplicationVM.cs|Closing|322|Tearing down plugin Ground Station
+2025-09-09T05:17:04.2908|DEBUG|ApplicationVM.cs|Closing|322|Tearing down plugin Sequencer Powerups

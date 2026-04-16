@@ -1,0 +1,244 @@
+2906 [     INFO] virtual void AlpacaDevice::AlpacaPutConnected(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_PUT /api/v1/switch/0/connected - Connected=<True> - ClientID=<59824> - ClientTransactionID=<1>
+2907 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&):   Respond(without value)
+2908 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "ClientTransactionID": 1, "ServerTransactionID": 880, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2909 [     INFO] virtual void AlpacaDevice::AlpacaGetConnected(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/connected - ClientID=<59824> - ClientTransactionID=<2>
+2910 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, bool):   Respond(with bool value)
+2911 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": true, "ClientTransactionID": 2, "ServerTransactionID": 881, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2912 [     INFO] void AlpacaDevice::AlpacaGetInterfaceVersion(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/interfaceversion - ClientID=<59824> - ClientTransactionID=<3>
+2913 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, int32_t):   Respond(with int32_t value)
+2914 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": 3, "ClientTransactionID": 3, "ServerTransactionID": 882, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2915 [     INFO] void AlpacaDevice::AlpacaGetDeviceState(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/devicestate - ClientID=<59824> - ClientTransactionID=<4>
+2916 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+2917 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": [{"Name":"GetSwitchValue0","Value":0.000000},{"Name":"StateChangeComplete0","Value":true},{"Name":"GetSwitchValue1","Value":11.400000},{"Name":"StateChangeComplete1","Value":true},{"Name":"GetSwitch2","Value":true},{"Name":"StateChangeComplete2","Value":true},{"Name":"GetSwitchValue3","Value":0.000000},{"Name":"StateChangeComplete3","Value":true}], "ClientTransactionID": 4, "ServerTransactionID": 883, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2918 [     INFO] void AlpacaSwitch::_alpacaGetMaxSwitch(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/maxswitch - ClientID=<59824> - ClientTransactionID=<5>
+2919 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, int32_t):   Respond(with int32_t value)
+2920 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": 4, "ClientTransactionID": 5, "ServerTransactionID": 884, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2921 [     INFO] void AlpacaSwitch::_alpacaGetCanWrite(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/canwrite - ClientID=<59824> - ClientTransactionID=<6> - Id=<0>
+2922 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, bool):   Respond(with bool value)
+2923 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": true, "ClientTransactionID": 6, "ServerTransactionID": 885, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2924 [     INFO] void AlpacaSwitch::_alpacaGetSwitchName(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchname - ClientID=<59824> - ClientTransactionID=<7> - Id=<0>
+2925 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+2926 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": "Switch-0", "ClientTransactionID": 7, "ServerTransactionID": 886, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2927 [     INFO] void AlpacaSwitch::_alpacaGetSwitchDescription(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchdescription - ClientID=<59824> - ClientTransactionID=<8> - Id=<0>
+2928 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+2929 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": "Relay 0 (read/write)", "ClientTransactionID": 8, "ServerTransactionID": 887, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2930 [     INFO] void AlpacaSwitch::_alpacaGetSwitchValue(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchvalue - ClientID=<59824> - ClientTransactionID=<9> - Id=<0>
+2931 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, double):   Respond(with double value)
+2932 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": 0.000000, "ClientTransactionID": 9, "ServerTransactionID": 888, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2933 [     INFO] void AlpacaSwitch::_alpacaGetMaxSwitchValue(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/maxswitchvalue - ClientID=<59824> - ClientTransactionID=<10> - Id=<0>
+2934 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, double):   Respond(with double value)
+2935 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": 10.000000, "ClientTransactionID": 10, "ServerTransactionID": 889, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2936 [     INFO] void AlpacaSwitch::_alpacaGetMinSwitchValue(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/minswitchvalue - ClientID=<59824> - ClientTransactionID=<11> - Id=<0>
+2937 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, double):   Respond(with double value)
+2938 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": 0.000000, "ClientTransactionID": 11, "ServerTransactionID": 890, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2939 [     INFO] void AlpacaSwitch::_alpacaGetSwitchStep(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/switchstep - ClientID=<59824> - ClientTransactionID=<12> - Id=<0>
+2940 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, double):   Respond(with double value)
+2941 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": 1.000000, "ClientTransactionID": 12, "ServerTransactionID": 891, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2942 [     INFO] void AlpacaSwitch::_alpacaGetCanWrite(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/canwrite - ClientID=<59824> - ClientTransactionID=<13> - Id=<1>
+2943 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, bool):   Respond(with bool value)
+2944 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": false, "ClientTransactionID": 13, "ServerTransactionID": 892, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2945 [     INFO] void AlpacaSwitch::_alpacaGetSwitchName(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchname - ClientID=<59824> - ClientTransactionID=<14> - Id=<1>
+2946 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+2947 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": "Switch-1", "ClientTransactionID": 14, "ServerTransactionID": 893, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2948 [     INFO] void AlpacaSwitch::_alpacaGetSwitchDescription(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchdescription - ClientID=<59824> - ClientTransactionID=<15> - Id=<1>
+2949 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+2950 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": "Temperature (read only)", "ClientTransactionID": 15, "ServerTransactionID": 894, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2951 [     INFO] void AlpacaSwitch::_alpacaGetSwitchValue(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchvalue - ClientID=<59824> - ClientTransactionID=<16> - Id=<1>
+2952 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, double):   Respond(with double value)
+2953 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": 11.300000, "ClientTransactionID": 16, "ServerTransactionID": 895, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2954 [     INFO] void AlpacaSwitch::_alpacaGetCanWrite(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/canwrite - ClientID=<59824> - ClientTransactionID=<17> - Id=<2>
+2955 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, bool):   Respond(with bool value)
+2956 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": false, "ClientTransactionID": 17, "ServerTransactionID": 896, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2957 [     INFO] void AlpacaSwitch::_alpacaGetSwitchName(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchname - ClientID=<59824> - ClientTransactionID=<18> - Id=<2>
+2958 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+2959 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": "Switch 2", "ClientTransactionID": 18, "ServerTransactionID": 897, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2960 [     INFO] void AlpacaSwitch::_alpacaGetSwitchDescription(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchdescription - ClientID=<59824> - ClientTransactionID=<19> - Id=<2>
+2961 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+2962 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": "Door closed (read only) - fixed init", "ClientTransactionID": 19, "ServerTransactionID": 898, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2963 [     INFO] void AlpacaSwitch::_alpacaGetSwitchValue(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchvalue - ClientID=<59824> - ClientTransactionID=<20> - Id=<2>
+2964 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, double):   Respond(with double value)
+2965 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": 1.000000, "ClientTransactionID": 20, "ServerTransactionID": 899, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2966 [     INFO] void AlpacaSwitch::_alpacaGetCanWrite(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/canwrite - ClientID=<59824> - ClientTransactionID=<21> - Id=<3>
+2967 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, bool):   Respond(with bool value)
+2968 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": true, "ClientTransactionID": 21, "ServerTransactionID": 900, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2969 [     INFO] void AlpacaSwitch::_alpacaGetSwitchName(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchname - ClientID=<59824> - ClientTransactionID=<22> - Id=<3>
+2970 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+2971 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": "Switch-3", "ClientTransactionID": 22, "ServerTransactionID": 901, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2972 [     INFO] void AlpacaSwitch::_alpacaGetSwitchDescription(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchdescription - ClientID=<59824> - ClientTransactionID=<23> - Id=<3>
+2973 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+2974 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": "Heater (read/write) - fixed init", "ClientTransactionID": 23, "ServerTransactionID": 902, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2975 [     INFO] void AlpacaSwitch::_alpacaGetSwitchValue(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchvalue - ClientID=<59824> - ClientTransactionID=<24> - Id=<3>
+2976 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, double):   Respond(with double value)
+2977 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": 0.000000, "ClientTransactionID": 24, "ServerTransactionID": 903, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2978 [     INFO] void AlpacaSwitch::_alpacaGetMaxSwitchValue(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/maxswitchvalue - ClientID=<59824> - ClientTransactionID=<25> - Id=<3>
+2979 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, double):   Respond(with double value)
+2980 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": 100.000000, "ClientTransactionID": 25, "ServerTransactionID": 904, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2981 [     INFO] void AlpacaSwitch::_alpacaGetMinSwitchValue(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/minswitchvalue - ClientID=<59824> - ClientTransactionID=<26> - Id=<3>
+2982 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, double):   Respond(with double value)
+2983 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": 0.000000, "ClientTransactionID": 26, "ServerTransactionID": 905, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2984 [     INFO] void AlpacaSwitch::_alpacaGetSwitchStep(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/switchstep - ClientID=<59824> - ClientTransactionID=<27> - Id=<3>
+2985 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, double):   Respond(with double value)
+2986 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": 0.500000, "ClientTransactionID": 27, "ServerTransactionID": 906, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2987 [     INFO] virtual void AlpacaDevice::AlpacaGetConnected(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/connected - ClientID=<59824> - ClientTransactionID=<28>
+2988 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, bool):   Respond(with bool value)
+2989 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": true, "ClientTransactionID": 28, "ServerTransactionID": 907, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2990 [     INFO] void AlpacaDevice::AlpacaGetDescription(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/description - ClientID=<59824> - ClientTransactionID=<29>
+2991 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+2992 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": "Alpaca Switch Template", "ClientTransactionID": 29, "ServerTransactionID": 908, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2993 [     INFO] void AlpacaDevice::AlpacaGetDriverInfo(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/driverinfo - ClientID=<59824> - ClientTransactionID=<30>
+2994 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+2995 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": "ESP32 Switch driver by BigPet", "ClientTransactionID": 30, "ServerTransactionID": 909, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2996 [     INFO] void AlpacaDevice::AlpacaGetDriverVersion(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/driverversion - ClientID=<59824> - ClientTransactionID=<31>
+2997 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+2998 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": "-/4.2.1", "ClientTransactionID": 31, "ServerTransactionID": 910, "ErrorNumber": 0, "ErrorMessage": ""}
+
+2999 [     INFO] void AlpacaDevice::AlpacaGetSupportedActions(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/supportedactions - ClientID=<59824> - ClientTransactionID=<32>
+3000 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+3001 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": [], "ClientTransactionID": 32, "ServerTransactionID": 911, "ErrorNumber": 0, "ErrorMessage": ""}
+
+3002 [     INFO] void AlpacaDevice::AlpacaGetDriverVersion(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/driverversion - ClientID=<59824> - ClientTransactionID=<33>
+3003 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+3004 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": "-/4.2.1", "ClientTransactionID": 33, "ServerTransactionID": 912, "ErrorNumber": 0, "ErrorMessage": ""}
+
+3005 [     INFO] virtual void AlpacaDevice::AlpacaGetConnected(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/connected - ClientID=<59824> - ClientTransactionID=<34>
+3006 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, bool):   Respond(with bool value)
+3007 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": true, "ClientTransactionID": 34, "ServerTransactionID": 913, "ErrorNumber": 0, "ErrorMessage": ""}
+
+3008 [     INFO] void AlpacaSwitch::_alpacaGetSwitchName(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchname - ClientID=<59824> - ClientTransactionID=<35> - Id=<0>
+3009 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+3010 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": "Switch-0", "ClientTransactionID": 35, "ServerTransactionID": 914, "ErrorNumber": 0, "ErrorMessage": ""}
+
+3011 [     INFO] void AlpacaSwitch::_alpacaGetSwitchValue(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchvalue - ClientID=<59824> - ClientTransactionID=<36> - Id=<0>
+3012 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, double):   Respond(with double value)
+3013 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": 0.000000, "ClientTransactionID": 36, "ServerTransactionID": 915, "ErrorNumber": 0, "ErrorMessage": ""}
+
+3014 [     INFO] void AlpacaSwitch::_alpacaGetSwitchName(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchname - ClientID=<59824> - ClientTransactionID=<37> - Id=<1>
+3015 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+3016 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": "Switch-1", "ClientTransactionID": 37, "ServerTransactionID": 916, "ErrorNumber": 0, "ErrorMessage": ""}
+
+3017 [     INFO] void AlpacaSwitch::_alpacaGetSwitchValue(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchvalue - ClientID=<59824> - ClientTransactionID=<38> - Id=<1>
+3018 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, double):   Respond(with double value)
+3019 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": 11.500000, "ClientTransactionID": 38, "ServerTransactionID": 917, "ErrorNumber": 0, "ErrorMessage": ""}
+
+3020 [     INFO] void AlpacaSwitch::_alpacaGetSwitchName(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchname - ClientID=<59824> - ClientTransactionID=<39> - Id=<2>
+3021 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+3022 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": "Switch 2", "ClientTransactionID": 39, "ServerTransactionID": 918, "ErrorNumber": 0, "ErrorMessage": ""}
+
+3023 [     INFO] void AlpacaSwitch::_alpacaGetSwitchValue(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchvalue - ClientID=<59824> - ClientTransactionID=<40> - Id=<2>
+3024 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, double):   Respond(with double value)
+3025 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": 0.000000, "ClientTransactionID": 40, "ServerTransactionID": 919, "ErrorNumber": 0, "ErrorMessage": ""}
+
+3026 [     INFO] void AlpacaSwitch::_alpacaGetSwitchName(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchname - ClientID=<59824> - ClientTransactionID=<41> - Id=<3>
+3027 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+3028 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": "Switch-3", "ClientTransactionID": 41, "ServerTransactionID": 920, "ErrorNumber": 0, "ErrorMessage": ""}
+
+3029 [     INFO] void AlpacaSwitch::_alpacaGetSwitchValue(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchvalue - ClientID=<59824> - ClientTransactionID=<42> - Id=<3>
+3030 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, double):   Respond(with double value)
+3031 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": 0.000000, "ClientTransactionID": 42, "ServerTransactionID": 921, "ErrorNumber": 0, "ErrorMessage": ""}
+
+3032 [     INFO] virtual void AlpacaDevice::AlpacaGetConnected(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/connected - ClientID=<59824> - ClientTransactionID=<43>
+3033 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, bool):   Respond(with bool value)
+3034 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": true, "ClientTransactionID": 43, "ServerTransactionID": 922, "ErrorNumber": 0, "ErrorMessage": ""}
+
+3035 [     INFO] void AlpacaSwitch::_alpacaGetSwitchName(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchname - ClientID=<59824> - ClientTransactionID=<44> - Id=<0>
+3036 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+3037 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": "Switch-0", "ClientTransactionID": 44, "ServerTransactionID": 923, "ErrorNumber": 0, "ErrorMessage": ""}
+
+3038 [     INFO] void AlpacaSwitch::_alpacaGetSwitchValue(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchvalue - ClientID=<59824> - ClientTransactionID=<45> - Id=<0>
+3039 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, double):   Respond(with double value)
+3040 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": 0.000000, "ClientTransactionID": 45, "ServerTransactionID": 924, "ErrorNumber": 0, "ErrorMessage": ""}
+
+3041 [     INFO] void AlpacaSwitch::_alpacaGetSwitchName(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchname - ClientID=<59824> - ClientTransactionID=<46> - Id=<1>
+3042 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+3043 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": "Switch-1", "ClientTransactionID": 46, "ServerTransactionID": 925, "ErrorNumber": 0, "ErrorMessage": ""}
+
+3044 [     INFO] void AlpacaSwitch::_alpacaGetSwitchValue(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchvalue - ClientID=<59824> - ClientTransactionID=<47> - Id=<1>
+3045 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, double):   Respond(with double value)
+3046 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": 11.200000, "ClientTransactionID": 47, "ServerTransactionID": 926, "ErrorNumber": 0, "ErrorMessage": ""}
+
+3047 [     INFO] void AlpacaSwitch::_alpacaGetSwitchName(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchname - ClientID=<59824> - ClientTransactionID=<48> - Id=<2>
+3048 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+3049 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": "Switch 2", "ClientTransactionID": 48, "ServerTransactionID": 927, "ErrorNumber": 0, "ErrorMessage": ""}
+
+3050 [     INFO] void AlpacaSwitch::_alpacaGetSwitchValue(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchvalue - ClientID=<59824> - ClientTransactionID=<49> - Id=<2>
+3051 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, double):   Respond(with double value)
+3052 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": 0.000000, "ClientTransactionID": 49, "ServerTransactionID": 928, "ErrorNumber": 0, "ErrorMessage": ""}
+
+3053 [     INFO] void AlpacaSwitch::_alpacaGetSwitchName(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchname - ClientID=<59824> - ClientTransactionID=<50> - Id=<3>
+3054 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+3055 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": "Switch-3", "ClientTransactionID": 50, "ServerTransactionID": 929, "ErrorNumber": 0, "ErrorMessage": ""}
+
+3056 [     INFO] void AlpacaSwitch::_alpacaGetSwitchValue(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchvalue - ClientID=<59824> - ClientTransactionID=<51> - Id=<3>
+3057 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, double):   Respond(with double value)
+3058 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": 0.000000, "ClientTransactionID": 51, "ServerTransactionID": 930, "ErrorNumber": 0, "ErrorMessage": ""}
+
+3059 [     INFO] virtual void AlpacaDevice::AlpacaGetConnected(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/connected - ClientID=<59824> - ClientTransactionID=<52>
+3060 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, bool):   Respond(with bool value)
+3061 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": true, "ClientTransactionID": 52, "ServerTransactionID": 931, "ErrorNumber": 0, "ErrorMessage": ""}
+
+3062 [     INFO] void AlpacaSwitch::_alpacaGetSwitchName(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchname - ClientID=<59824> - ClientTransactionID=<53> - Id=<0>
+3063 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+3064 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": "Switch-0", "ClientTransactionID": 53, "ServerTransactionID": 932, "ErrorNumber": 0, "ErrorMessage": ""}
+
+3065 [     INFO] void AlpacaSwitch::_alpacaGetSwitchValue(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchvalue - ClientID=<59824> - ClientTransactionID=<54> - Id=<0>
+3066 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, double):   Respond(with double value)
+3067 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": 0.000000, "ClientTransactionID": 54, "ServerTransactionID": 933, "ErrorNumber": 0, "ErrorMessage": ""}
+
+3068 [     INFO] void AlpacaSwitch::_alpacaGetSwitchName(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchname - ClientID=<59824> - ClientTransactionID=<55> - Id=<1>
+3069 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+3070 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": "Switch-1", "ClientTransactionID": 55, "ServerTransactionID": 934, "ErrorNumber": 0, "ErrorMessage": ""}
+
+3071 [     INFO] void AlpacaSwitch::_alpacaGetSwitchValue(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchvalue - ClientID=<59824> - ClientTransactionID=<56> - Id=<1>
+3072 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, double):   Respond(with double value)
+3073 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": 11.300000, "ClientTransactionID": 56, "ServerTransactionID": 935, "ErrorNumber": 0, "ErrorMessage": ""}
+
+3074 [     INFO] void AlpacaSwitch::_alpacaGetSwitchName(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchname - ClientID=<59824> - ClientTransactionID=<57> - Id=<2>
+3075 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+3076 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": "Switch 2", "ClientTransactionID": 57, "ServerTransactionID": 936, "ErrorNumber": 0, "ErrorMessage": ""}
+
+3077 [     INFO] void AlpacaSwitch::_alpacaGetSwitchValue(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchvalue - ClientID=<59824> - ClientTransactionID=<58> - Id=<2>
+3078 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, double):   Respond(with double value)
+3079 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": 0.000000, "ClientTransactionID": 58, "ServerTransactionID": 937, "ErrorNumber": 0, "ErrorMessage": ""}
+
+3080 [     INFO] void AlpacaSwitch::_alpacaGetSwitchName(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchname - ClientID=<59824> - ClientTransactionID=<59> - Id=<3>
+3081 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Respond(with with optional  quoted string value)
+3082 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": "Switch-3", "ClientTransactionID": 59, "ServerTransactionID": 938, "ErrorNumber": 0, "ErrorMessage": ""}
+
+3083 [     INFO] void AlpacaSwitch::_alpacaGetSwitchValue(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_GET /api/v1/switch/0/getswitchvalue - ClientID=<59824> - ClientTransactionID=<60> - Id=<3>
+3084 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, double):   Respond(with double value)
+3085 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "Value": 0.000000, "ClientTransactionID": 60, "ServerTransactionID": 939, "ErrorNumber": 0, "ErrorMessage": ""}
+
+3086 [     INFO] virtual void AlpacaDevice::AlpacaPutConnected(AsyncWebServerRequest*):   Alpaca REQ (192.168.178.30) HTTP_PUT /api/v1/switch/0/connected - Connected=<False> - ClientID=<59824> - ClientTransactionID=<61>
+3087 [    DEBUG] void AlpacaServer::Respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&):   Respond(without value)
+3088 [     INFO] void AlpacaServer::_respond(AsyncWebServerRequest*, AlpacaClient_t&, AlpacaRspStatus_t&, const char*, JsonValue_t):   Alpaca RSP 200 { "ClientTransactionID": 61, "ServerTransactionID": 940, "ErrorNumber": 0, "ErrorMessage": ""}
+

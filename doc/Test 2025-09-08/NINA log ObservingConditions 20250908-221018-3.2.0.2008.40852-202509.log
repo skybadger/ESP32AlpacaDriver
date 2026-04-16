@@ -1,0 +1,930 @@
+----------------------------------------------------------------------
+--------------N.I.N.A. - Nighttime Imaging 'N' Astronomy--------------
+--------------------------Version 3.2.0.2008--------------------------
+-------------------------2025-09-08T22:10:19--------------------------
+----------------------------------------------------------------------
+---------------------Microsoft Windows 10.0.26100---------------------
+-------------------------OS Architecture X64--------------------------
+-----------------------Process Architecture X64-----------------------
+-----------------------------.NET 8.0.19------------------------------
+----------------------------------------------------------------------
+--------------------------Processor Count 32--------------------------
+--------------------Total Physical Memory 63.93 GB--------------------
+----------------------------------------------------------------------
+DATE|LEVEL|SOURCE|MEMBER|LINE|MESSAGE
+2025-09-08T22:10:19.0982|TRACE|FilterWheelChooserVM.cs|GetEquipment|56|Adding FLI filter wheels
+2025-09-08T22:10:19.0964|INFO|CameraChooserVM.cs|GetEquipment|69|Found 0 ASI Cameras
+2025-09-08T22:10:19.1230|DEBUG|DllLoader.cs|LoadDll|571|Successfully loaded C:\Program Files\N.I.N.A. - Nighttime Imaging 'N' Astronomy\External\x64\FTDI\ftd2xx.dll
+2025-09-08T22:10:19.1523|DEBUG|DllLoader.cs|LoadDll|571|Successfully loaded C:\Program Files\N.I.N.A. - Nighttime Imaging 'N' Astronomy\External\x64\MGEN\MG3lib.dll
+2025-09-08T22:10:19.1568|DEBUG|FLIFilterWheels.cs|GetFilterWheels|28|FLI: Found 0 filter wheel(s)
+2025-09-08T22:10:19.1569|TRACE|FilterWheelChooserVM.cs|GetEquipment|75|Adding Atik EFW filter wheels
+2025-09-08T22:10:19.1624|TRACE|FilterWheelChooserVM.cs|GetEquipment|89|Adding Atik internal filter wheels
+2025-09-08T22:10:19.1628|INFO|CameraChooserVM.cs|GetEquipment|84|Found 0 Altair Cameras
+2025-09-08T22:10:19.1730|TRACE|AtikCameraDll.cs|GetDevicesCount|40|Number of Atik Cameras: 0
+2025-09-08T22:10:19.1730|TRACE|AtikCameraDll.cs|GetDevicesCount|40|Number of Atik Cameras: 0
+2025-09-08T22:10:19.1731|TRACE|FilterWheelChooserVM.cs|GetEquipment|91|Cameras found: 0
+2025-09-08T22:10:19.1731|INFO|CameraChooserVM.cs|GetEquipment|96|Found 0 Atik Cameras
+2025-09-08T22:10:19.1734|DEBUG|FLICameras.cs|GetCameras|28|FLI: Found 0 camera(s)
+2025-09-08T22:10:19.1734|INFO|CameraChooserVM.cs|GetEquipment|110|Found 0 FLI Cameras
+2025-09-08T22:10:19.1735|TRACE|QhyccdSdk.cs|.ctor|42|QhyccdSdk: Loading QHY SDK, refCount=0, sdkIsInitialized=False
+2025-09-08T22:10:19.1753|TRACE|FilterWheelChooserVM.cs|GetEquipment|108|Adding QHY integrated/4-pin filter wheels
+2025-09-08T22:10:19.1756|TRACE|QhyccdSdk.cs|InitSdk|51|QhyccdSdk: Initializing QHY SDK, refCount=0, sdkIsInitialized=False
+2025-09-08T22:10:19.7133|INFO|PluginLoader.cs|LoadPlugin|402|Successfully loaded plugin Connector version 2.1.0.2 by Stefan Berg @isbeorn
+2025-09-08T22:10:19.7203|INFO|PluginLoader.cs|LoadPlugin|402|Successfully loaded plugin Device Actions and Commands version 2.0.0.0 by Dale Ghent
+2025-09-08T22:10:19.7206|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Ground Station\BouncyCastle.Crypto.dll does not reference NINA.Plugin
+2025-09-08T22:10:19.7765|DEBUG|GroundStation.cs|Initialize|55|Init completed
+2025-09-08T22:10:19.7765|INFO|PluginLoader.cs|LoadPlugin|402|Successfully loaded plugin Ground Station version 2.4.1.0 by Dale Ghent
+2025-09-08T22:10:19.7769|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Ground Station\MailKit.dll does not reference NINA.Plugin
+2025-09-08T22:10:19.7773|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Ground Station\MimeKit.dll does not reference NINA.Plugin
+2025-09-08T22:10:19.7776|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Ground Station\MQTTnet.dll does not reference NINA.Plugin
+2025-09-08T22:10:19.7779|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Ground Station\NetCoreAudio.dll does not reference NINA.Plugin
+2025-09-08T22:10:19.7782|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Ground Station\System.Speech.dll does not reference NINA.Plugin
+2025-09-08T22:10:19.7785|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Ground Station\Telegram.Bot.dll does not reference NINA.Plugin
+2025-09-08T22:10:19.7789|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Sequencer Powerups\ExtendedNumerics.BigDecimal.dll does not reference NINA.Plugin
+2025-09-08T22:10:19.7792|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Sequencer Powerups\Microsoft.Extensions.Logging.Abstractions.dll does not reference NINA.Plugin
+2025-09-08T22:10:19.7795|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Sequencer Powerups\Microsoft.Extensions.Logging.Configuration.dll does not reference NINA.Plugin
+2025-09-08T22:10:19.7798|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Sequencer Powerups\Microsoft.Extensions.Logging.Console.dll does not reference NINA.Plugin
+2025-09-08T22:10:19.7802|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Sequencer Powerups\Microsoft.Extensions.Logging.dll does not reference NINA.Plugin
+2025-09-08T22:10:19.7804|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Sequencer Powerups\Microsoft.Extensions.Logging.TraceSource.dll does not reference NINA.Plugin
+2025-09-08T22:10:19.7807|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Sequencer Powerups\Microsoft.Extensions.Options.dll does not reference NINA.Plugin
+2025-09-08T22:10:19.7810|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Sequencer Powerups\NCalc.Core.dll does not reference NINA.Plugin
+2025-09-08T22:10:19.7813|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Sequencer Powerups\NCalc.Sync.dll does not reference NINA.Plugin
+2025-09-08T22:10:19.7816|TRACE|PluginLoader.cs|LoadPlugin|452|The dll C:\Users\bigpe\AppData\Local\NINA\Plugins\3.0.0\Sequencer Powerups\Parlot.dll does not reference NINA.Plugin
+2025-09-08T22:10:19.8288|WARNING|When.cs|GetRunningItem|143|Can't get running items: SequencerNavigation not initialized yet!
+2025-09-08T22:10:19.8294|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:10:19.8294|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:10:19.8294|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:10:19.8294|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:10:19.8306|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.378251731088724
+2025-09-08T22:10:19.8311|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9821434887232163
+2025-09-08T22:10:19.8311|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.05138459206479
+2025-09-08T22:10:19.8311|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.39399526679705
+2025-09-08T22:10:19.8312|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.381562733210945
+2025-09-08T22:10:19.8318|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 1
+2025-09-08T22:10:19.8319|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:10:19.8319|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:10:19.9047|INFO|PluginLoader.cs|LoadPlugin|402|Successfully loaded plugin Sequencer Powerups version 3.28.4.1 by Marc Blank
+2025-09-08T22:10:19.9094|INFO|PluginFetcher.cs|RequestAll|43|Fetching plugin manifests from https://nighttime-imaging.eu/wp-json/nina/v1/plugins/manifests
+2025-09-08T22:10:20.1911|TRACE|QhyccdSdk.cs|InitSdk|51|QhyccdSdk: Initializing QHY SDK, refCount=0, sdkIsInitialized=True
+2025-09-08T22:10:20.1912|TRACE|QHYCameras.cs|Count|35|QHYCamera - found 0 camera(s)
+2025-09-08T22:10:20.1912|DEBUG|QHYFilterWheels.cs|GetFilterWheels|62|QHYCFW: Found 0 filter wheel(s)
+2025-09-08T22:10:20.1912|INFO|CameraChooserVM.cs|GetEquipment|130|Found 0 QHYCCD Cameras
+2025-09-08T22:10:20.1913|TRACE|FilterWheelChooserVM.cs|GetEquipment|127|Adding ZWOptical filter wheels
+2025-09-08T22:10:20.2444|TRACE|FilterWheelChooserVM.cs|GetEquipment|142|Adding PlayerOne filter wheels
+2025-09-08T22:10:20.2446|INFO|CameraChooserVM.cs|GetEquipment|158|Found 0 ToupTek Cameras
+2025-09-08T22:10:20.2486|INFO|CameraChooserVM.cs|GetEquipment|173|Found 0 Ogma Cameras
+2025-09-08T22:10:20.2490|DEBUG|SBIGFilterWheelProvider.cs|GetEquipment|40|Getting SBIG Filter Wheels
+2025-09-08T22:10:20.2501|TRACE|SbigSharp.cs|.cctor|29|SBIGSDK: Loading SBIG SDK dll
+2025-09-08T22:10:20.2522|TRACE|SbigSdk.cs|Create|80|SBIGSDK: New driver instance 0 is the same as the already active one. Relinquishing ownership
+2025-09-08T22:10:20.2543|INFO|CameraChooserVM.cs|GetEquipment|188|Found 0 Omegon Cameras
+2025-09-08T22:10:20.2968|INFO|CameraChooserVM.cs|GetEquipment|203|Found 0 RisingCam Cameras
+2025-09-08T22:10:20.3162|INFO|CameraChooserVM.cs|GetEquipment|218|Found 0 MallinCam Cameras
+2025-09-08T22:10:20.3196|INFO|CameraChooserVM.cs|GetEquipment|243|Found 0 SVBony Cameras
+2025-09-08T22:10:20.3198|DEBUG|SBIGCameraProvider.cs|GetEquipment|45|Getting SBIG Cameras
+2025-09-08T22:10:20.3206|TRACE|SbigSdk.cs|Create|83|SBIGSDK: Created driver instance 1
+2025-09-08T22:10:20.3207|TRACE|SbigSdk.cs|Dispose|103|SBIGSDK: Closing driver instance 1
+2025-09-08T22:10:20.3208|TRACE|SbigSdk.cs|Dispose|109|SBIGSDK: Restoring previous handle 0
+2025-09-08T22:10:20.3208|INFO|CameraChooserVM.cs|GetEquipment|259|Found 0 SBIG Cameras
+2025-09-08T22:10:20.3889|INFO|PluginFetcher.cs|RequestAll|57|Found 58 valid plugins at https://nighttime-imaging.eu/wp-json/nina/v1/plugins/manifests
+2025-09-08T22:10:20.4609|INFO|ApplicationVM.cs|CheckDiskInfo|100|Available Space on Drive C:\: 327.78 GB
+2025-09-08T22:10:20.4610|INFO|ApplicationVM.cs|CheckDiskInfo|100|Available Space on Drive D:\: 378.92 GB
+2025-09-08T22:10:20.4611|INFO|ApplicationVM.cs|CheckDiskInfo|100|Available Space on Drive E:\: 88.32 GB
+2025-09-08T22:10:20.4612|INFO|ApplicationVM.cs|CheckDiskInfo|100|Available Space on Drive G:\: 3814.44 GB
+2025-09-08T22:10:20.4633|INFO|ApplicationVM.cs|CheckASCOMPlatformVersion|81|ASCOM Platform 6.6.2.4294 installed
+2025-09-08T22:10:20.4637|INFO|ApplicationVM.cs|CheckDiskInfo|102|Drive I:\ is not ready
+2025-09-08T22:10:20.4638|INFO|ApplicationVM.cs|CheckDiskInfo|100|Available Space on Drive T:\: 7191.29 GB
+2025-09-08T22:10:20.4639|INFO|ApplicationVM.cs|CheckDiskInfo|100|Available Space on Drive U:\: 459.18 GB
+2025-09-08T22:10:20.4751|INFO|ApplicationVM.cs|CheckDiskInfo|100|Available Space on Drive X:\: 14827.03 GB
+2025-09-08T22:10:20.4771|INFO|ApplicationVM.cs|CheckDiskInfo|100|Available Space on Drive Y:\: 14827.03 GB
+2025-09-08T22:10:20.4780|INFO|ApplicationVM.cs|CheckDiskInfo|100|Available Space on Drive Z:\: 14827.03 GB
+2025-09-08T22:10:20.7672|TRACE|FocuserChooserVM.cs|GetEquipment|57|Adding ZWOptical Focusers
+2025-09-08T22:10:20.7676|DEBUG|SVBonyProvider.cs|GetEquipment|49|Getting SVBony Cameras
+2025-09-08T22:10:20.7704|INFO|CameraChooserVM.cs|GetEquipment|279|Found 0 SVBony Cameras
+2025-09-08T22:10:20.7706|DEBUG|PlayerOneProvider.cs|GetEquipment|47|Getting Player One cameras
+2025-09-08T22:10:20.7729|INFO|CameraChooserVM.cs|GetEquipment|279|Found 0 PlayerOne Cameras
+2025-09-08T22:10:20.7730|DEBUG|ASTPANProvider.cs|GetEquipment|37|Getting ASTPAN Cameras
+2025-09-08T22:10:20.7749|INFO|CameraChooserVM.cs|GetEquipment|279|Found 0 ASTPAN Cameras
+2025-09-08T22:10:20.7754|TRACE|ASCOMInteraction.cs|GetCameras|48|Adding Camera V3 simulator (ASCOM)
+2025-09-08T22:10:20.7754|TRACE|ASCOMInteraction.cs|GetCameras|48|Adding Simulator (ASCOM)
+2025-09-08T22:10:20.7754|INFO|CameraChooserVM.cs|GetEquipment|293|Found 2 ASCOM Cameras
+2025-09-08T22:10:22.7744|INFO|FilterWheelChooserVM.cs|GetEquipment|193|Found 0 Alpaca Filter Wheels
+2025-09-08T22:10:22.7744|INFO|TelescopeChooserVM.cs|GetEquipment|69|Found 0 Alpaca Telescopes
+2025-09-08T22:10:22.7744|INFO|SafetyMonitorChooserVM.cs|GetEquipment|71|Found 0 Alpaca Safety Monitors
+2025-09-08T22:10:22.7744|INFO|RotatorChooserVM.cs|GetEquipment|68|Found 0 Alpaca Rotators
+2025-09-08T22:10:22.7744|INFO|SwitchChooserVM.cs|GetEquipment|71|Found 0 Alpaca Switch Hubs
+2025-09-08T22:10:22.7744|INFO|WeatherDataChooserVM.cs|GetEquipment|69|Found 0 Alpaca Observing Conditions
+2025-09-08T22:10:22.7744|INFO|DomeChooserVM.cs|GetEquipment|67|Found 0 Alpaca Domes
+2025-09-08T22:10:22.7745|INFO|AlpacaInteraction.cs|GetCoverCalibrators|239|Discovered Alpaca Device covercalibrator-0 - covercalibrator-5C013B95EF3C00 @ 192.168.178.157 192.168.178.157:80 #0
+2025-09-08T22:10:22.7750|INFO|FlatDeviceChooserVM.cs|GetEquipment|67|Found 1 Alpaca Cover Calibrators
+2025-09-08T22:10:22.7756|INFO|CameraChooserVM.cs|GetEquipment|305|Found 0 Alpaca Cameras
+2025-09-08T22:10:22.7769|INFO|CameraChooserVM.cs|GetEquipment|318|Found 0 Canon Cameras
+2025-09-08T22:10:22.7931|INFO|FocuserChooserVM.cs|GetEquipment|84|Found 0 Alpaca Focusers
+2025-09-08T22:10:24.8450|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:10:24.8452|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:10:24.8452|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:10:24.8452|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:10:24.8456|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.398570743382543
+2025-09-08T22:10:24.8456|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.982141908539563
+2025-09-08T22:10:24.8457|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.07216043960369
+2025-09-08T22:10:24.8457|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.39548470696275
+2025-09-08T22:10:24.8457|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.3829593169012
+2025-09-08T22:10:24.8458|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 6
+2025-09-08T22:10:24.8458|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:10:24.8458|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:10:25.8313|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:10:25.831; Stopped: 08.09.2025 08:10:25.831; Elapsed: 00:00:00.0000603
+2025-09-08T22:10:29.8559|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:10:29.8560|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:10:29.8560|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:10:29.8560|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:10:29.8563|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.418873724676367
+2025-09-08T22:10:29.8564|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9821403294657379
+2025-09-08T22:10:29.8564|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.092915563752534
+2025-09-08T22:10:29.8564|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.3969742115869
+2025-09-08T22:10:29.8564|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.38435507131289
+2025-09-08T22:10:29.8565|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 11
+2025-09-08T22:10:29.8565|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:10:29.8565|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:10:30.8302|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:10:30.830; Stopped: 08.09.2025 08:10:30.830; Elapsed: 00:00:00.0000408
+2025-09-08T22:10:34.8558|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:10:34.8559|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:10:34.8559|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:10:34.8560|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:10:34.8563|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.439132310381353
+2025-09-08T22:10:34.8563|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9821387540240161
+2025-09-08T22:10:34.8563|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.11362513502476
+2025-09-08T22:10:34.8563|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.3984619928382
+2025-09-08T22:10:34.8563|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.38574776635877
+2025-09-08T22:10:34.8564|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 16
+2025-09-08T22:10:34.8564|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:10:34.8564|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:10:35.1054|INFO|AlpacaInteraction.cs|GetWeatherDataSources|263|Discovered Alpaca Device observingconditions-0 - observingconditions-5C013B95EF3C00 @ 192.168.178.157 192.168.178.157:80 #0
+2025-09-08T22:10:35.1055|INFO|WeatherDataChooserVM.cs|GetEquipment|69|Found 1 Alpaca Observing Conditions
+2025-09-08T22:10:35.8358|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:10:35.835; Stopped: 08.09.2025 08:10:35.835; Elapsed: 00:00:00.0000134
+2025-09-08T22:10:39.8591|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:10:39.8592|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:10:39.8592|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:10:39.8592|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:10:39.8596|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.459403065679197
+2025-09-08T22:10:39.8596|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9821371778150898
+2025-09-08T22:10:39.8596|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.13434697818225
+2025-09-08T22:10:39.8596|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.39995220262927
+2025-09-08T22:10:39.8597|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.387141290683214
+2025-09-08T22:10:39.8597|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 21
+2025-09-08T22:10:39.8597|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:10:39.8597|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:10:40.8330|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:10:40.833; Stopped: 08.09.2025 08:10:40.833; Elapsed: 00:00:00.0000132
+2025-09-08T22:10:44.4946|INFO|WeatherDataChooserVM.cs|GetEquipment|69|Found 0 Alpaca Observing Conditions
+2025-09-08T22:10:44.8628|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:10:44.8628|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:10:44.8628|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:10:44.8629|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:10:44.8632|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.479678003004555
+2025-09-08T22:10:44.8632|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9821356014602673
+2025-09-08T22:10:44.8632|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.155068928276776
+2025-09-08T22:10:44.8632|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.4014439689986
+2025-09-08T22:10:44.8632|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.388535095169427
+2025-09-08T22:10:44.8633|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 26
+2025-09-08T22:10:44.8633|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:10:44.8634|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:10:45.8401|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:10:45.840; Stopped: 08.09.2025 08:10:45.840; Elapsed: 00:00:00.0000137
+2025-09-08T22:10:49.8763|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:10:49.8763|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:10:49.8763|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:10:49.8763|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:10:49.8767|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.49998956255818
+2025-09-08T22:10:49.8767|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9821340224379089
+2025-09-08T22:10:49.8767|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.175836144697165
+2025-09-08T22:10:49.8767|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.4029405495489
+2025-09-08T22:10:49.8767|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.389931409904573
+2025-09-08T22:10:49.8768|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 31
+2025-09-08T22:10:49.8768|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:10:49.8768|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:10:50.8289|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:10:50.828; Stopped: 08.09.2025 08:10:50.828; Elapsed: 00:00:00.0000118
+2025-09-08T22:10:52.0402|INFO|AlpacaInteraction.cs|GetWeatherDataSources|263|Discovered Alpaca Device observingconditions-0 - observingconditions-5C013B95EF3C00 @ 192.168.178.157 192.168.178.157:80 #0
+2025-09-08T22:10:52.0403|INFO|WeatherDataChooserVM.cs|GetEquipment|69|Found 1 Alpaca Observing Conditions
+2025-09-08T22:10:54.8787|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:10:54.8787|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:10:54.8787|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:10:54.8787|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:10:54.8791|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.520260637980734
+2025-09-08T22:10:54.8791|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9821324467422053
+2025-09-08T22:10:54.8791|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.1965538090393
+2025-09-08T22:10:54.8792|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.40443511225186
+2025-09-08T22:10:54.8792|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.391324934229022
+2025-09-08T22:10:54.8792|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 36
+2025-09-08T22:10:54.8792|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:10:54.8792|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:10:55.8357|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:10:55.835; Stopped: 08.09.2025 08:10:55.835; Elapsed: 00:00:00.0000122
+2025-09-08T22:10:59.8872|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:10:59.8873|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:10:59.8873|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:10:59.8873|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:10:59.8878|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.54055219719055
+2025-09-08T22:10:59.8878|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9821308696337953
+2025-09-08T22:10:59.8878|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.21730024203951
+2025-09-08T22:10:59.8878|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.4059333062969
+2025-09-08T22:10:59.8878|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.392719859362057
+2025-09-08T22:10:59.8879|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 41
+2025-09-08T22:10:59.8880|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:10:59.8880|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:11:00.8333|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:11:00.833; Stopped: 08.09.2025 08:11:00.833; Elapsed: 00:00:00.0000129
+2025-09-08T22:11:02.1353|INFO|WeatherDataVM.cs|Disconnect|305|Disconnected Weather Device
+2025-09-08T22:11:02.1367|TRACE|AscomDevice.cs|Connect|266|observingconditions-0 - Calling PreConnect
+2025-09-08T22:11:02.1367|TRACE|AscomDevice.cs|Connect|269|observingconditions-0 - Creating instance for observingconditions-5C013B95EF3C00
+2025-09-08T22:11:02.1391|TRACE|AscomDevice.cs|Connect|273|observingconditions-0 - Calling Connect for observingconditions-5C013B95EF3C00
+2025-09-08T22:11:02.1393|DEBUG|AscomDevice.cs|Connected|177|SET observingconditions-0 Connected to True
+2025-09-08T22:11:02.4672|TRACE|AscomDevice.cs|GetProperty|485|GET AlpacaObservingConditions.Connected: True
+2025-09-08T22:11:02.4673|TRACE|AscomDevice.cs|Connect|278|observingconditions-0 - Calling PostConnect
+2025-09-08T22:11:02.6816|TRACE|AscomDevice.cs|GetProperty|485|GET AlpacaObservingConditions.Connected: True
+2025-09-08T22:11:02.6975|TRACE|AscomDevice.cs|GetProperty|485|GET AlpacaObservingConditions.Connected: True
+2025-09-08T22:11:02.6977|TRACE|AscomDevice.cs|GetProperty|485|GET AlpacaObservingConditions.Connected: True
+2025-09-08T22:11:02.7598|TRACE|AscomDevice.cs|GetProperty|485|GET AlpacaObservingConditions.AveragePeriod: 0
+2025-09-08T22:11:02.7601|TRACE|AscomDevice.cs|GetProperty|461|GET AlpacaObservingConditions.CloudCover: 2.64
+2025-09-08T22:11:02.7602|TRACE|AscomDevice.cs|GetProperty|461|GET AlpacaObservingConditions.DewPoint: 3.64
+2025-09-08T22:11:02.7603|TRACE|AscomDevice.cs|GetProperty|461|GET AlpacaObservingConditions.Humidity: 4.64
+2025-09-08T22:11:02.7603|TRACE|AscomDevice.cs|GetProperty|461|GET AlpacaObservingConditions.Pressure: 4.64
+2025-09-08T22:11:02.7604|TRACE|AscomDevice.cs|GetProperty|461|GET AlpacaObservingConditions.RainRate: 6.64
+2025-09-08T22:11:02.7604|TRACE|AscomDevice.cs|GetProperty|461|GET AlpacaObservingConditions.SkyBrightness: 7.64
+2025-09-08T22:11:02.7605|TRACE|AscomDevice.cs|GetProperty|461|GET AlpacaObservingConditions.SkyQuality: 8.64
+2025-09-08T22:11:02.7605|TRACE|AscomDevice.cs|GetProperty|461|GET AlpacaObservingConditions.SkyTemperature: 9.64
+2025-09-08T22:11:02.7614|ERROR|WeatherDataVM.cs|ChooseWeatherData|163
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at NINA.Equipment.Equipment.AscomDevice`1.GetProperty[PropT](String propertyName, PropT defaultValue, Nullable`1 cacheInterval, Boolean rethrow, Boolean useLastKnownValueOnError, PropT errorValue) in D:\a\nina\nina\NINA.Equipment\Equipment\AscomDevice.cs:line 460
+   at NINA.Equipment.Equipment.MyWeatherData.AscomObservingConditions.get_StarFWHM() in D:\a\nina\nina\NINA.Equipment\Equipment\MyWeatherData\AscomObservingConditions.cs:line 48
+   at NINA.WPF.Base.ViewModel.Equipment.WeatherData.WeatherDataVM.ChooseWeatherData() in D:\a\nina\nina\NINA.WPF.Base\ViewModel\Equipment\WeatherData\WeatherDataVM.cs:line 117
+2025-09-08T22:11:04.8897|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:11:04.8897|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:11:04.8897|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:11:04.8898|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:11:04.8901|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.560823485871506
+2025-09-08T22:11:04.8901|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9821292942801911
+2025-09-08T22:11:04.8902|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.23801761976992
+2025-09-08T22:11:04.8902|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.40743095742766
+2025-09-08T22:11:04.8902|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.394113383686502
+2025-09-08T22:11:04.8902|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 46
+2025-09-08T22:11:04.8902|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:11:04.8902|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:11:05.8304|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:11:05.830; Stopped: 08.09.2025 08:11:05.830; Elapsed: 00:00:00.0000152
+2025-09-08T22:11:09.8927|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:11:09.8927|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:11:09.8927|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:11:09.8927|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:11:09.8931|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.58109488109633
+2025-09-08T22:11:09.8931|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9821277190975573
+2025-09-08T22:11:09.8932|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.25873927003257
+2025-09-08T22:11:09.8932|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.4089304736136
+2025-09-08T22:11:09.8932|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.39550690801104
+2025-09-08T22:11:09.8932|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 51
+2025-09-08T22:11:09.8932|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:11:09.8932|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:11:10.8387|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:11:10.838; Stopped: 08.09.2025 08:11:10.838; Elapsed: 00:00:00.0000134
+2025-09-08T22:11:14.8973|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:11:14.8974|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:11:14.8974|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:11:14.8974|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:11:14.8976|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.60137062136621
+2025-09-08T22:11:14.8977|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9821261437566045
+2025-09-08T22:11:14.8977|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.27946902538002
+2025-09-08T22:11:14.8977|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.4104321350997
+2025-09-08T22:11:14.8977|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.396900723703734
+2025-09-08T22:11:14.8977|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 56
+2025-09-08T22:11:14.8977|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:11:14.8977|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:11:15.8362|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:11:15.836; Stopped: 08.09.2025 08:11:15.836; Elapsed: 00:00:00.0000188
+2025-09-08T22:11:19.9069|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:11:19.9069|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:11:19.9069|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:11:19.9069|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:11:19.9073|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.621670595282204
+2025-09-08T22:11:19.9073|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.982124566712439
+2025-09-08T22:11:19.9073|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.30021938345041
+2025-09-08T22:11:19.9073|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.4119368519677
+2025-09-08T22:11:19.9073|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.398296197953655
+2025-09-08T22:11:19.9074|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 61
+2025-09-08T22:11:19.9074|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:11:19.9074|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:11:20.8350|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:11:20.834; Stopped: 08.09.2025 08:11:20.834; Elapsed: 00:00:00.0000124
+2025-09-08T22:11:24.9073|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:11:24.9073|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:11:24.9073|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:11:24.9073|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:11:24.9077|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.641930083533225
+2025-09-08T22:11:24.9077|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.98212299299271
+2025-09-08T22:11:24.9077|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.32092818850282
+2025-09-08T22:11:24.9077|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.4134401161272
+2025-09-08T22:11:24.9077|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.399688881793054
+2025-09-08T22:11:24.9078|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 66
+2025-09-08T22:11:24.9078|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:11:24.9078|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:11:25.8362|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:11:25.836; Stopped: 08.09.2025 08:11:25.836; Elapsed: 00:00:00.0000186
+2025-09-08T22:11:29.9205|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:11:29.9205|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:11:29.9206|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:11:29.9206|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:11:29.9209|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.662242497467954
+2025-09-08T22:11:29.9209|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9821214153415527
+2025-09-08T22:11:29.9209|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.34169092336996
+2025-09-08T22:11:29.9209|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.4149488616527
+2025-09-08T22:11:29.9209|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.401085196528115
+2025-09-08T22:11:29.9210|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 71
+2025-09-08T22:11:29.9211|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:11:29.9211|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:11:30.8364|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:11:30.836; Stopped: 08.09.2025 08:11:30.836; Elapsed: 00:00:00.0000133
+2025-09-08T22:11:34.9240|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:11:34.9241|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:11:34.9241|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:11:34.9241|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:11:34.9245|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.68251850097939
+2025-09-08T22:11:34.9246|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9821198406978586
+2025-09-08T22:11:34.9246|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.36241627112231
+2025-09-08T22:11:34.9246|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.41645645629745
+2025-09-08T22:11:34.9246|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.40247900101433
+2025-09-08T22:11:34.9246|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 76
+2025-09-08T22:11:34.9247|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:11:34.9247|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:11:35.8401|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:11:35.840; Stopped: 08.09.2025 08:11:35.840; Elapsed: 00:00:00.0000154
+2025-09-08T22:11:39.9349|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:11:39.9350|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:11:39.9350|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:11:39.9350|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:11:39.9353|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.70282297719335
+2025-09-08T22:11:39.9354|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.982118264022672
+2025-09-08T22:11:39.9354|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.383170552837655
+2025-09-08T22:11:39.9354|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.41796772492916
+2025-09-08T22:11:39.9354|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.40387475542602
+2025-09-08T22:11:39.9355|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 81
+2025-09-08T22:11:39.9355|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:11:39.9355|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:11:40.8330|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:11:40.833; Stopped: 08.09.2025 08:11:40.833; Elapsed: 00:00:00.0000132
+2025-09-08T22:11:44.9388|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:11:44.9388|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:11:44.9389|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:11:44.9389|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:11:44.9392|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.723099356759942
+2025-09-08T22:11:44.9392|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9821166897086975
+2025-09-08T22:11:44.9392|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.4038959561404
+2025-09-08T22:11:44.9392|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.41947846464075
+2025-09-08T22:11:44.9393|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.405268571118718
+2025-09-08T22:11:44.9393|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 86
+2025-09-08T22:11:44.9393|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:11:44.9393|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:11:45.8354|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:11:45.835; Stopped: 08.09.2025 08:11:45.835; Elapsed: 00:00:00.0000141
+2025-09-08T22:11:49.9435|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:11:49.9436|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:11:49.9436|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:11:49.9436|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:11:49.9441|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.743379592336485
+2025-09-08T22:11:49.9441|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.982115115274723
+2025-09-08T22:11:49.9441|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.424621111652364
+2025-09-08T22:11:49.9441|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.42099074473043
+2025-09-08T22:11:49.9441|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.406662644560143
+2025-09-08T22:11:49.9442|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 91
+2025-09-08T22:11:49.9442|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:11:49.9442|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:11:50.8431|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:11:50.843; Stopped: 08.09.2025 08:11:50.843; Elapsed: 00:00:00.0000377
+2025-09-08T22:11:54.9483|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:11:54.9484|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:11:54.9484|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:11:54.9484|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:11:54.9488|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.763656184717785
+2025-09-08T22:11:54.9488|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.982113541302944
+2025-09-08T22:11:54.9488|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.445350382421715
+2025-09-08T22:11:54.9488|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.42250490142203
+2025-09-08T22:11:54.9488|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.40805646025275
+2025-09-08T22:11:54.9489|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 96
+2025-09-08T22:11:54.9489|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:11:54.9489|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:11:55.8395|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:11:55.839; Stopped: 08.09.2025 08:11:55.839; Elapsed: 00:00:00.0000132
+2025-09-08T22:11:59.9514|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:11:59.9515|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:11:59.9515|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:11:59.9515|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:11:59.9518|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.783928644739657
+2025-09-08T22:11:59.9518|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.982111967831226
+2025-09-08T22:11:59.9518|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.46607126062032
+2025-09-08T22:11:59.9519|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.42402001683587
+2025-09-08T22:11:59.9519|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.409449984577293
+2025-09-08T22:11:59.9520|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 101
+2025-09-08T22:11:59.9520|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:11:59.9520|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:12:00.8311|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:12:00.831; Stopped: 08.09.2025 08:12:00.831; Elapsed: 00:00:00.0000126
+2025-09-08T22:12:04.9645|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:12:04.9646|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:12:04.9646|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:12:04.9646|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:12:04.9650|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.804245717894897
+2025-09-08T22:12:04.9651|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9821103910766655
+2025-09-08T22:12:04.9651|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.486833569451164
+2025-09-08T22:12:04.9651|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.42553973935503
+2025-09-08T22:12:04.9651|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.41084656826764
+2025-09-08T22:12:04.9652|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 106
+2025-09-08T22:12:04.9653|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:12:04.9653|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:12:05.8334|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:12:05.833; Stopped: 08.09.2025 08:12:05.833; Elapsed: 00:00:00.0000140
+2025-09-08T22:12:09.9765|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:12:09.9766|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:12:09.9766|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:12:09.9766|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:12:09.9771|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.824554909343846
+2025-09-08T22:12:09.9771|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9821088151137403
+2025-09-08T22:12:09.9771|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.50759165121991
+2025-09-08T22:12:09.9771|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.4270607327925
+2025-09-08T22:12:09.9771|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.412242602841015
+2025-09-08T22:12:09.9772|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 111
+2025-09-08T22:12:09.9772|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:12:09.9772|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:12:10.8313|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:12:10.831; Stopped: 08.09.2025 08:12:10.831; Elapsed: 00:00:00.0000133
+2025-09-08T22:12:14.9787|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:12:14.9788|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:12:14.9788|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:12:14.9788|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:12:14.9791|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.844823775881853
+2025-09-08T22:12:14.9792|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9821072424593459
+2025-09-08T22:12:14.9792|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.52830818035849
+2025-09-08T22:12:14.9793|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.4285802585312
+2025-09-08T22:12:14.9793|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.413635858210263
+2025-09-08T22:12:14.9793|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 116
+2025-09-08T22:12:14.9793|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:12:14.9794|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:12:15.8385|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:12:15.838; Stopped: 08.09.2025 08:12:15.838; Elapsed: 00:00:00.0000139
+2025-09-08T22:12:19.9874|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:12:19.9874|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:12:19.9874|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:12:19.9875|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:12:19.9878|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.865116877240002
+2025-09-08T22:12:19.9878|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9821056681041125
+2025-09-08T22:12:19.9879|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.549053642202715
+2025-09-08T22:12:19.9879|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.4301034866647
+2025-09-08T22:12:19.9879|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.415030772136824
+2025-09-08T22:12:19.9879|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 121
+2025-09-08T22:12:19.9879|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:12:19.9879|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:12:20.8379|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:12:20.837; Stopped: 08.09.2025 08:12:20.837; Elapsed: 00:00:00.0000111
+2025-09-08T22:12:24.9943|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:12:24.9944|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:12:24.9944|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:12:24.9944|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:12:24.9947|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.885406172243545
+2025-09-08T22:12:24.9947|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9821040942237587
+2025-09-08T22:12:24.9947|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.569790877745774
+2025-09-08T22:12:24.9947|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.4316276927175
+2025-09-08T22:12:24.9947|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.416425417108087
+2025-09-08T22:12:24.9948|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 126
+2025-09-08T22:12:24.9948|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:12:24.9948|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:12:25.8306|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:12:25.830; Stopped: 08.09.2025 08:12:25.830; Elapsed: 00:00:00.0000152
+2025-09-08T22:12:30.0003|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:12:30.0004|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:12:30.0004|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:12:30.0004|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:12:30.0007|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.905691497780282
+2025-09-08T22:12:30.0008|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9821025208308378
+2025-09-08T22:12:30.0008|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.59052388610595
+2025-09-08T22:12:30.0008|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.4331531707508
+2025-09-08T22:12:30.0008|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.41781978191776
+2025-09-08T22:12:30.0008|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 131
+2025-09-08T22:12:30.0008|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:12:30.0008|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:12:30.8356|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:12:30.835; Stopped: 08.09.2025 08:12:30.835; Elapsed: 00:00:00.0000135
+2025-09-08T22:12:35.0003|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:12:35.0004|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:12:35.0004|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:12:35.0004|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:12:35.0007|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.92595247452813
+2025-09-08T22:12:35.0007|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9821009495056519
+2025-09-08T22:12:35.0007|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.61123183851599
+2025-09-08T22:12:35.0007|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.4346783864352
+2025-09-08T22:12:35.0007|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.419212465757077
+2025-09-08T22:12:35.0008|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 136
+2025-09-08T22:12:35.0008|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:12:35.0008|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:12:35.8346|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:12:35.834; Stopped: 08.09.2025 08:12:35.834; Elapsed: 00:00:00.0000191
+2025-09-08T22:12:40.0139|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:12:40.0140|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:12:40.0140|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:12:40.0140|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:12:40.0143|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.946270456395315
+2025-09-08T22:12:40.0144|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9820993739392958
+2025-09-08T22:12:40.0144|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.6319978831551
+2025-09-08T22:12:40.0144|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.43620946927626
+2025-09-08T22:12:40.0144|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.42060906065391
+2025-09-08T22:12:40.0145|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 141
+2025-09-08T22:12:40.0145|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:12:40.0145|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:12:40.8436|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:12:40.843; Stopped: 08.09.2025 08:12:40.843; Elapsed: 00:00:00.0000145
+2025-09-08T22:12:45.0278|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:12:45.0278|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:12:45.0279|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:12:45.0279|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:12:45.0284|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.966588544850133
+2025-09-08T22:12:45.0284|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9820977985447543
+2025-09-08T22:12:45.0284|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.65276387617722
+2025-09-08T22:12:45.0284|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.43774214585653
+2025-09-08T22:12:45.0284|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.422005655550734
+2025-09-08T22:12:45.0285|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 146
+2025-09-08T22:12:45.0285|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:12:45.0285|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:12:45.8442|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:12:45.844; Stopped: 08.09.2025 08:12:45.844; Elapsed: 00:00:00.0000238
+2025-09-08T22:12:50.0352|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:12:50.0352|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:12:50.0352|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:12:50.0353|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:12:50.0356|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 19.986878208493714
+2025-09-08T22:12:50.0357|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9820962255338646
+2025-09-08T22:12:50.0357|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.67350062690409
+2025-09-08T22:12:50.0357|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.4392742439613
+2025-09-08T22:12:50.0357|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.423400289315524
+2025-09-08T22:12:50.0358|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 151
+2025-09-08T22:12:50.0358|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:12:50.0358|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:12:50.8381|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:12:50.838; Stopped: 08.09.2025 08:12:50.838; Elapsed: 00:00:00.0000145
+2025-09-08T22:12:55.0365|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:12:55.0365|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:12:55.0365|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:12:55.0365|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:12:55.0370|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 20.007143848866985
+2025-09-08T22:12:55.0370|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9820946542487539
+2025-09-08T22:12:55.0370|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.69421266510755
+2025-09-08T22:12:55.0370|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.44080610955643
+2025-09-08T22:12:55.0371|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.42479354468486
+2025-09-08T22:12:55.0371|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 156
+2025-09-08T22:12:55.0371|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:12:55.0371|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:12:55.8387|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:12:55.838; Stopped: 08.09.2025 08:12:55.838; Elapsed: 00:00:00.0000259
+2025-09-08T22:13:00.0417|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:13:00.0418|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:13:00.0418|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:13:00.0418|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:13:00.0423|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 20.027429811929682
+2025-09-08T22:13:00.0423|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.982093082199549
+2025-09-08T22:13:00.0424|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.71494531356448
+2025-09-08T22:13:00.0424|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.44234109581384
+2025-09-08T22:13:00.0424|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.426187629332766
+2025-09-08T22:13:00.0424|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 161
+2025-09-08T22:13:00.0424|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:13:00.0424|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:13:00.8305|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:13:00.830; Stopped: 08.09.2025 08:13:00.830; Elapsed: 00:00:00.0000127
+2025-09-08T22:13:05.0547|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:13:05.0548|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:13:05.0548|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:13:05.0548|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:13:05.0552|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 20.047744249922577
+2025-09-08T22:13:05.0552|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9820915078071868
+2025-09-08T22:13:05.0552|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.73570270704709
+2025-09-08T22:13:05.0552|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.4438794997012
+2025-09-08T22:13:05.0552|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.427583944067823
+2025-09-08T22:13:05.0553|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 166
+2025-09-08T22:13:05.0553|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:13:05.0553|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:13:05.8419|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:13:05.841; Stopped: 08.09.2025 08:13:05.841; Elapsed: 00:00:00.0000135
+2025-09-08T22:13:10.0563|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:13:10.0563|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:13:10.0564|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:13:10.0564|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:13:10.0567|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 20.068010045441877
+2025-09-08T22:13:10.0568|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9820899373640348
+2025-09-08T22:13:10.0568|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.756418558602796
+2025-09-08T22:13:10.0568|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.4454164240184
+2025-09-08T22:13:10.0568|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.42897690806891
+2025-09-08T22:13:10.0569|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 171
+2025-09-08T22:13:10.0569|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:13:10.0569|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:13:10.8339|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:13:10.833; Stopped: 08.09.2025 08:13:10.833; Elapsed: 00:00:00.0000129
+2025-09-08T22:13:15.0586|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:13:15.0587|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:13:15.0587|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:13:15.0587|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:13:15.0591|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 20.088284098889346
+2025-09-08T22:13:15.0591|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9820883664602111
+2025-09-08T22:13:15.0591|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.777134348150874
+2025-09-08T22:13:15.0591|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.44695493764095
+2025-09-08T22:13:15.0591|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.430370432393364
+2025-09-08T22:13:15.0592|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 176
+2025-09-08T22:13:15.0592|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:13:15.0592|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:13:15.8337|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:13:15.833; Stopped: 08.09.2025 08:13:15.833; Elapsed: 00:00:00.0000137
+2025-09-08T22:13:20.0695|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:13:20.0696|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:13:20.0696|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:13:20.0696|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:13:20.0700|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 20.10858679056018
+2025-09-08T22:13:20.0700|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9820867932139253
+2025-09-08T22:13:20.0700|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.7978875663129
+2025-09-08T22:13:20.0700|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.44849783079815
+2025-09-08T22:13:20.0701|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.43176618680506
+2025-09-08T22:13:20.0701|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 181
+2025-09-08T22:13:20.0701|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:13:20.0701|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:13:20.8430|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:13:20.843; Stopped: 08.09.2025 08:13:20.843; Elapsed: 00:00:00.0000129
+2025-09-08T22:13:25.0784|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:13:25.0784|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:13:25.0784|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:13:25.0784|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:13:25.0788|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 20.12888534936127
+2025-09-08T22:13:25.0788|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9820852210738533
+2025-09-08T22:13:25.0788|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.81863222421447
+2025-09-08T22:13:25.0788|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.4500416893727
+2025-09-08T22:13:25.0788|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.433161111938098
+2025-09-08T22:13:25.0788|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 186
+2025-09-08T22:13:25.0789|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:13:25.0789|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:13:25.8396|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:13:25.839; Stopped: 08.09.2025 08:13:25.839; Elapsed: 00:00:00.0000137
+2025-09-08T22:13:30.0820|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:13:30.0821|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:13:30.0821|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:13:30.0821|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:13:30.0825|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 20.149163796972054
+2025-09-08T22:13:30.0826|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9820836503680277
+2025-09-08T22:13:30.0826|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.839356158275166
+2025-09-08T22:13:30.0826|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.45158560631285
+2025-09-08T22:13:30.0826|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.43455491642432
+2025-09-08T22:13:30.0826|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 191
+2025-09-08T22:13:30.0826|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:13:30.0827|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:13:30.8334|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:13:30.833; Stopped: 08.09.2025 08:13:30.833; Elapsed: 00:00:00.0000175
+2025-09-08T22:13:35.0887|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:13:35.0888|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:13:35.0888|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:13:35.0888|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:13:35.0892|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 20.169454578815053
+2025-09-08T22:13:35.0893|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9820820788863509
+2025-09-08T22:13:35.0893|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.86008836114979
+2025-09-08T22:13:35.0893|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.4531317416841
+2025-09-08T22:13:35.0893|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.435949561395592
+2025-09-08T22:13:35.0894|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 196
+2025-09-08T22:13:35.0894|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:13:35.0894|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:13:35.8387|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:13:35.838; Stopped: 08.09.2025 08:13:35.838; Elapsed: 00:00:00.0000130
+2025-09-08T22:13:40.0958|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:13:40.0959|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:13:40.0959|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:13:40.0959|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:13:40.0963|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 20.189745303654572
+2025-09-08T22:13:40.0963|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9820805075886772
+2025-09-08T22:13:40.0963|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.880828676271264
+2025-09-08T22:13:40.0963|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.4546800926186
+2025-09-08T22:13:40.0963|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.43734419516047
+2025-09-08T22:13:40.0964|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 201
+2025-09-08T22:13:40.0964|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:13:40.0964|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:13:40.8425|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:13:40.842; Stopped: 08.09.2025 08:13:40.842; Elapsed: 00:00:00.0000159
+2025-09-08T22:13:45.1037|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:13:45.1037|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:13:45.1037|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:13:45.1038|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:13:45.1041|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 20.21004037369295
+2025-09-08T22:13:45.1042|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9820789361341448
+2025-09-08T22:13:45.1042|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.901564909388064
+2025-09-08T22:13:45.1042|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.45622973484063
+2025-09-08T22:13:45.1042|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.438739120293512
+2025-09-08T22:13:45.1042|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 206
+2025-09-08T22:13:45.1042|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:13:45.1042|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:13:45.8435|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:13:45.843; Stopped: 08.09.2025 08:13:45.843; Elapsed: 00:00:00.0000151
+2025-09-08T22:13:50.1170|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:13:50.1171|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:13:50.1171|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:13:50.1171|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:13:50.1173|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 20.230355767547287
+2025-09-08T22:13:50.1173|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.98207736328586
+2025-09-08T22:13:50.1173|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.92233008230744
+2025-09-08T22:13:50.1174|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.4577831565771
+2025-09-08T22:13:50.1174|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.440135435028573
+2025-09-08T22:13:50.1174|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 211
+2025-09-08T22:13:50.1174|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:13:50.1174|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:13:50.8426|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:13:50.842; Stopped: 08.09.2025 08:13:50.842; Elapsed: 00:00:00.0000140
+2025-09-08T22:13:55.1267|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:13:55.1267|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:13:55.1267|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:13:55.1267|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:13:55.1271|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 20.25065903906148
+2025-09-08T22:13:55.1271|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9820757915559551
+2025-09-08T22:13:55.1271|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.94307436454853
+2025-09-08T22:13:55.1272|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.45933662726276
+2025-09-08T22:13:55.1272|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.44153090927859
+2025-09-08T22:13:55.1272|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 216
+2025-09-08T22:13:55.1272|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:13:55.1272|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:13:55.8388|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:13:55.838; Stopped: 08.09.2025 08:13:55.838; Elapsed: 00:00:00.0000134
+2025-09-08T22:14:00.1405|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:14:00.1406|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:14:00.1406|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:14:00.1406|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:14:00.1409|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 20.27097464527183
+2025-09-08T22:14:00.1409|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9820742190511528
+2025-09-08T22:14:00.1410|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.963839411550225
+2025-09-08T22:14:00.1410|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.4608932679184
+2025-09-08T22:14:00.1410|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.442927492968938
+2025-09-08T22:14:00.1411|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 221
+2025-09-08T22:14:00.1411|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:14:00.1411|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:14:00.8339|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:14:00.833; Stopped: 08.09.2025 08:14:00.833; Elapsed: 00:00:00.0000120
+2025-09-08T22:14:05.1491|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:14:05.1492|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:14:05.1492|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:14:05.1492|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:14:05.1496|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 20.291274052738707
+2025-09-08T22:14:05.1496|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9820726479799962
+2025-09-08T22:14:05.1496|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -33.984583567840204
+2025-09-08T22:14:05.1496|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.462449957447
+2025-09-08T22:14:05.1496|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.444322418101894
+2025-09-08T22:14:05.1497|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 226
+2025-09-08T22:14:05.1497|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:14:05.1497|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:14:05.8286|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:14:05.828; Stopped: 08.09.2025 08:14:05.828; Elapsed: 00:00:00.0000166
+2025-09-08T22:14:10.1570|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:14:10.1571|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:14:10.1571|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:14:10.1571|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:14:10.1574|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 20.311569652986407
+2025-09-08T22:14:10.1575|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9820710773831733
+2025-09-08T22:14:10.1575|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -34.005323662178
+2025-09-08T22:14:10.1575|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.46400795740357
+2025-09-08T22:14:10.1575|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.44571734323494
+2025-09-08T22:14:10.1575|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 231
+2025-09-08T22:14:10.1575|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:14:10.1575|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:14:10.8367|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:14:10.836; Stopped: 08.09.2025 08:14:10.836; Elapsed: 00:00:00.0000121
+2025-09-08T22:14:15.1648|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:14:15.1648|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:14:15.1648|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:14:15.1648|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:14:15.1652|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 20.331865196102008
+2025-09-08T22:14:15.1653|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9820695069704315
+2025-09-08T22:14:15.1653|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -34.02606353698462
+2025-09-08T22:14:15.1653|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.4655675628679
+2025-09-08T22:14:15.1653|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.447112257161496
+2025-09-08T22:14:15.1653|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 236
+2025-09-08T22:14:15.1653|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:14:15.1653|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:14:15.8373|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:14:15.837; Stopped: 08.09.2025 08:14:15.837; Elapsed: 00:00:00.0000137
+2025-09-08T22:14:20.1725|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:14:20.1725|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:14:20.1725|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:14:20.1725|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:14:20.1729|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 20.352156931865153
+2025-09-08T22:14:20.1729|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9820679370318894
+2025-09-08T22:14:20.1729|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -34.046799329305074
+2025-09-08T22:14:20.1729|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.46712846844514
+2025-09-08T22:14:20.1729|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.44850690213286
+2025-09-08T22:14:20.1729|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 241
+2025-09-08T22:14:20.1729|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:14:20.1729|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:14:20.8395|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:14:20.839; Stopped: 08.09.2025 08:14:20.839; Elapsed: 00:00:00.0000134
+2025-09-08T22:14:25.1780|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:14:25.1780|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:14:25.1780|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:14:25.1781|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:14:25.1784|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 20.372444534094278
+2025-09-08T22:14:25.1784|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9820663675926957
+2025-09-08T22:14:25.1784|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -34.06753073649201
+2025-09-08T22:14:25.1784|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.468690667974
+2025-09-08T22:14:25.1785|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.44990125573597
+2025-09-08T22:14:25.1785|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 246
+2025-09-08T22:14:25.1785|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:14:25.1785|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:14:25.8300|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:14:25.830; Stopped: 08.09.2025 08:14:25.830; Elapsed: 00:00:00.0000100
+2025-09-08T22:14:30.1807|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:14:30.1808|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:14:30.1808|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:14:30.1808|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:14:30.1812|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 20.39272033918205
+2025-09-08T22:14:30.1812|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9820647992454734
+2025-09-08T22:14:30.1812|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -34.08824575177326
+2025-09-08T22:14:30.1812|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.4702532505289
+2025-09-08T22:14:30.1812|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.45129479126699
+2025-09-08T22:14:30.1812|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 251
+2025-09-08T22:14:30.1812|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:14:30.1812|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:14:30.8436|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:14:30.843; Stopped: 08.09.2025 08:14:30.843; Elapsed: 00:00:00.0000105
+2025-09-08T22:14:35.1825|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:14:35.1825|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:14:35.1826|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:14:35.1826|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:14:35.1829|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 20.412987934114064
+2025-09-08T22:14:35.1829|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9820632317125031
+2025-09-08T22:14:35.1829|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -34.10896053714192
+2025-09-08T22:14:35.1829|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.4718174349051
+2025-09-08T22:14:35.1830|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.452688035429766
+2025-09-08T22:14:35.1831|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 256
+2025-09-08T22:14:35.1831|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:14:35.1831|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:14:35.8308|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:14:35.830; Stopped: 08.09.2025 08:14:35.830; Elapsed: 00:00:00.0000129
+2025-09-08T22:14:40.1905|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:14:40.1905|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:14:40.1905|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:14:40.1906|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:14:40.1909|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 20.433284169200196
+2025-09-08T22:14:40.1909|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9820616621439888
+2025-09-08T22:14:40.1909|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -34.129700251725836
+2025-09-08T22:14:40.1909|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.47338512538994
+2025-09-08T22:14:40.1910|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.454082960562804
+2025-09-08T22:14:40.1910|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 261
+2025-09-08T22:14:40.1910|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:14:40.1910|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:14:40.8403|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:14:40.840; Stopped: 08.09.2025 08:14:40.840; Elapsed: 00:00:00.0000123
+2025-09-08T22:14:45.1949|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:14:45.1950|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:14:45.1950|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:14:45.1950|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:14:45.1954|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 20.453568280865763
+2025-09-08T22:14:45.1954|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9820600936925157
+2025-09-08T22:14:45.1954|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -34.15042740644557
+2025-09-08T22:14:45.1954|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.4749534912942
+2025-09-08T22:14:45.1954|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.455476765049028
+2025-09-08T22:14:45.1955|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 266
+2025-09-08T22:14:45.1955|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:14:45.1955|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:14:45.8291|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:14:45.829; Stopped: 08.09.2025 08:14:45.829; Elapsed: 00:00:00.0000140
+2025-09-08T22:14:50.2003|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:14:50.2003|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:14:50.2003|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:14:50.2003|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:14:50.2006|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 20.473852498158838
+2025-09-08T22:14:50.2006|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9820585254123204
+2025-09-08T22:14:50.2006|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -34.17115449755022
+2025-09-08T22:14:50.2006|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.4765234783059
+2025-09-08T22:14:50.2007|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.456870849696937
+2025-09-08T22:14:50.2007|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 271
+2025-09-08T22:14:50.2007|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:14:50.2007|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:14:50.8344|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:14:50.834; Stopped: 08.09.2025 08:14:50.834; Elapsed: 00:00:00.0000132
+2025-09-08T22:14:55.2003|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:14:55.2004|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:14:55.2004|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:14:55.2004|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:14:55.2007|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 20.494116438845246
+2025-09-08T22:14:55.2008|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.98205695887899
+2025-09-08T22:14:55.2008|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -34.191860697997264
+2025-09-08T22:14:55.2008|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.4780935080176
+2025-09-08T22:14:55.2008|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.458263533536346
+2025-09-08T22:14:55.2008|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 276
+2025-09-08T22:14:55.2008|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:14:55.2008|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:14:55.8349|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:14:55.834; Stopped: 08.09.2025 08:14:55.834; Elapsed: 00:00:00.0000125
+2025-09-08T22:15:00.2008|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:15:00.2009|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:15:00.2009|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:15:00.2009|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:15:00.2013|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 20.514384724422083
+2025-09-08T22:15:00.2014|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9820553921889161
+2025-09-08T22:15:00.2014|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -34.21257117699677
+2025-09-08T22:15:00.2014|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.479665493872
+2025-09-08T22:15:00.2014|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.45965650874383
+2025-09-08T22:15:00.2015|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 281
+2025-09-08T22:15:00.2015|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:15:00.2015|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:15:00.8327|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:15:00.832; Stopped: 08.09.2025 08:15:00.832; Elapsed: 00:00:00.0000137
+2025-09-08T22:15:05.2014|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:15:05.2015|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:15:05.2015|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:15:05.2015|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:15:05.2018|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 20.534649038906835
+2025-09-08T22:15:05.2019|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9820538259849075
+2025-09-08T22:15:05.2019|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -34.23327740645648
+2025-09-08T22:15:05.2019|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.4812387741432
+2025-09-08T22:15:05.2019|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.46104920378972
+2025-09-08T22:15:05.2019|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 286
+2025-09-08T22:15:05.2019|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:15:05.2019|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:15:05.8354|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:15:05.835; Stopped: 08.09.2025 08:15:05.835; Elapsed: 00:00:00.0000138
+2025-09-08T22:15:10.2129|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:15:10.2130|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:15:10.2130|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:15:10.2130|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:15:10.2133|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 20.554961887599312
+2025-09-08T22:15:10.2133|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9820522562094761
+2025-09-08T22:15:10.2133|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -34.25403306672407
+2025-09-08T22:15:10.2133|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.482817450535
+2025-09-08T22:15:10.2133|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.462445227156618
+2025-09-08T22:15:10.2134|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 291
+2025-09-08T22:15:10.2134|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:15:10.2134|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:15:10.8438|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:15:10.843; Stopped: 08.09.2025 08:15:10.843; Elapsed: 00:00:00.0000118
+2025-09-08T22:15:15.2164|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:15:15.2164|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:15:15.2165|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:15:15.2165|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:15:15.2168|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 20.57523864254012
+2025-09-08T22:15:15.2168|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9820506894028354
+2025-09-08T22:15:15.2168|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -34.274751674557315
+2025-09-08T22:15:15.2169|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.48439494287135
+2025-09-08T22:15:15.2169|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.463838762687644
+2025-09-08T22:15:15.2169|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 296
+2025-09-08T22:15:15.2169|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:15:15.2169|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:15:15.8360|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:15:15.835; Stopped: 08.09.2025 08:15:15.836; Elapsed: 00:00:00.0000131
+2025-09-08T22:15:20.2188|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetValid with value 0
+2025-09-08T22:15:20.2189|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetRA with value 0
+2025-09-08T22:15:20.2189|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetDec with value 0
+2025-09-08T22:15:20.2189|TRACE|Symbol.cs|AddSymbol|797|Adding key TargetName with value 
+2025-09-08T22:15:20.2192|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonAltitude with value 20.595515339821787
+2025-09-08T22:15:20.2193|TRACE|Symbol.cs|AddSymbol|797|Adding key MoonIllumination with value 0.9820491227799526
+2025-09-08T22:15:20.2193|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAltitude with value -34.2954700619294
+2025-09-08T22:15:20.2193|TRACE|Symbol.cs|AddSymbol|797|Adding key SunAzimuth with value 276.4859740580735
+2025-09-08T22:15:20.2193|TRACE|Symbol.cs|AddSymbol|797|Adding key LocalSiderealTime with value 19.465232287012096
+2025-09-08T22:15:20.2193|TRACE|Symbol.cs|AddSymbol|797|Adding key TIME with value 301
+2025-09-08T22:15:20.2193|TRACE|Symbol.cs|AddSymbol|797|Adding key EXITCODE with value 0
+2025-09-08T22:15:20.2193|TRACE|Symbol.cs|AddSymbol|797|Adding key IsSafe with value False
+2025-09-08T22:15:20.8380|TRACE|Sequence2VM.cs|RunBackgroundValidationTimer|39|Start: 08.09.2025 08:15:20.838; Stopped: 08.09.2025 08:15:20.838; Elapsed: 00:00:00.0000136
