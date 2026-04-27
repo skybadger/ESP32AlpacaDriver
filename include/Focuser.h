@@ -8,18 +8,15 @@
 **************************************************************************************************/
 #pragma once
 #include <AlpacaFocuser.h>
-#include "focuser/motor.h"
-#define DIRN_CW LOW
-#define DIRN_CCW HIGH
+#include <device.h>
+#include <motor.h>
 
 class Focuser : public AlpacaFocuser
 {
   public:
-
+  enum FocuserMode{ FOCUSER_MODE_ABSOLUTE, FOCUSER_MODE_RELATIVE };
   enum FocuserStates {  FOCUSER_INIT=0,  FOCUSER_IDLE, FOCUSER_MOVING,  FOCUSER_STOPPED,  FOCUSER_STOPPING };
-  static String sFocuserState[4] = {"INIT", "IDLE", "MOVING", "STOPPED", "STOPPING"};
-
-
+  
   private:
   pinmap_t *_pins;
   size_t _num_pins; 
@@ -48,7 +45,9 @@ class Focuser : public AlpacaFocuser
 
   FocuserStates _focuserState = FocuserStates::FOCUSER_INIT;
   FocuserStates _targetFocuserState = FocuserStates::FOCUSER_INIT;
-  enum FocuserMode{ FOCUSER_MODE_ABSOLUTE, FOCUSER_MODE_RELATIVE } _focuser_mode = FOCUSER_MODE_ABSOLUTE;
+
+  FocuserMode _focuser_mode = FOCUSER_MODE_ABSOLUTE;
+  
   const int32_t _base_absolute_count = 0;
 
   int32_t _max_motor_step = k_motor_step_default; // Max. motor position / steps
@@ -87,6 +86,7 @@ class Focuser : public AlpacaFocuser
   String _mqtt_function_topic;
   volatile bool _callbackFlag = false;
 
+  static char* FocuserState[][] = {"INIT", "IDLE", "MOVING", "STOPPED", "STOPPING"};
   // Alpaca command handlers
   void AlpacaReadJson(JsonObject &root);
   void AlpacaWriteJson(JsonObject &root);
@@ -101,7 +101,7 @@ class Focuser : public AlpacaFocuser
   const bool _putCommandBool(const char *const command, const char *const raw, bool &bool_response) { return false; };
   const bool _putCommandString(const char *const command_str, const char *const raw, char *string_response, size_t string_response_size) { return false; };
 
-  const bool _getAbsolut() { return _absolut; };
+  const bool _getAbsolute() { return _focuser_mode; };
   const bool _getIsMoving() { return _is_moving; };
   const int32_t _getMaxIncrement() { return _max_increment; };
   const int32_t _getMaxStep() { return _max_motor_step; };
@@ -112,7 +112,7 @@ class Focuser : public AlpacaFocuser
   const double _getTemperature() { return _temperature; };
 
   //Extra functions to manage focuser state and configuration
-  const bool setReverse(bool reverse) { _reverse=reverse; return _reverse };
+  const bool setReverse(bool reverse) { _reverse = reverse; return _reverse };
   const bool _setBacklashEnabled( bool backlash_enabled ) {  _backlash_comp = backlash_enabled; return true; };
   const int32_t _setBacklashSize( int32_t backlash_size) { _backlash_size = backlash_size; };
   const int32_t _setBacklashDirection( int32_t backlash_direction) { _backlashDirection = backlash_direction; return _backlashDirection; };
@@ -123,7 +123,7 @@ class Focuser : public AlpacaFocuser
   public:
   Focuser();
   // Override constructor to pass pin configuration for specific focuser implementation; e.g. for stepper motor driver  
-  Focuser(pinmap_t *pins, size_t num_pins): super(), _pins(pins), _num_pins(num_pins) {};
+  Focuser(pinmap_t *pins, size_t num_pins): _pins(pins), _num_pins(num_pins) {super(); };
 
   void setMQTT( String mqtt_server, uint16_t mqtt_port, String mqtt_user, String mqtt_pwd, String health_topic, String function_topic ) 
   : _mqtt_server(mqtt_server), _mqtt_port(mqtt_port), _mqtt_user(mqtt_user), _mqtt_pwd(mqtt_pwd), _mqtt_health_topic(health_topic), _mqtt_function_topic(function_topic) {} ;

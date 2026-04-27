@@ -12,9 +12,10 @@
  *  Copyright 2024-2025
  * */
 //#include <ESP32.h>
-
-  //Basic Focuser info - update based on your Focuser
+#define DIRN_CW LOW
+#define DIRN_CCW HIGH
   
+//Basic Focuser info - update based on your Focuser 
  class Motor {
   public:
   enum EnableModes { ENABLE_NONE, ENABLE_LOW, ENABLE_HIGH };
@@ -39,7 +40,7 @@
   
   public: 
   
-  Motor::Motor(int step_pin, int dir_pin, int enable_pin, int enable_mode) : _stepPin(step_pin), _dirPin(dir_pin), _enPin(enable_pin), _enableMode(enable_mode), _init() {};
+  Motor(int step_pin, int dir_pin, int enable_pin, int enable_mode) : _stepPin(step_pin), _dirPin(dir_pin), _enPin(enable_pin), _enableMode(enable_mode), _init() {};
   
   //Re-allocate the assigned pins. 
   void setPins(int step_pin, int dir_pin, int enable_pin, int enable_mode)
