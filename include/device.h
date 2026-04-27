@@ -1,6 +1,6 @@
 //File to hold common device-specific details. 
 #pragma once
-typedef struct { int pin; char* name } pinmap_t; 
+typedef struct { int pin; const char* name; } pinmap_t; 
 #if defined WEMOS_D1_MINI32
 pinmap_t pins[] = {
   { 0, "GPIO0" },

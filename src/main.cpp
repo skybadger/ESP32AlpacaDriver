@@ -51,7 +51,7 @@ Focuser focuser2;
 
 #include <time.h>
 //Timer interrupts
-hw_timer_t * timer2 = nullptr;
+hw_timer_t * timer1 = nullptr;
 hw_timer_t * timer2 = nullptr;
 volatile bool timer1_flag = false;
 volatile bool timer2_flag = false;
@@ -64,27 +64,6 @@ IRAM_ATTR void onTimer2()
 {
   timer2_flag = true;   
 }
-
-typedef struct { int pin; char* name } pinmap_t; 
-pinmap_t pins[] = {
-  { 0, "GPIO0" },
-  { 1, "GPIO1" },
-  { 2, "GPIO2" },
-  { 3, "GPIO3" },
-  { 4, "GPIO4" },
-  { 5, "GPIO5" },
-  { 6, "GPIO6" },
-  { 7, "GPIO7" },
-  { 8, "GPIO8" },
-  { 9, "GPIO9" },
-  {10, "GPIO10"},
-  {11, "GPIO11"},
-  {12, "GPIO12"},
-  {13, "GPIO13"},
-  {14, "GPIO14"},
-  {15, "GPIO15"},
-};
-
 
 // ASCOM Alpaca server with discovery
 AlpacaServer alpaca_server(ALPACA_MNG_SERVER_NAME, ALPACA_MNG_MANUFACTURE, ALPACA_MNG_MANUFACTURE_VERSION, ALPACA_MNG_LOCATION);
@@ -174,9 +153,10 @@ void setup()
 #endif
 
 #ifdef TEST_FOCUSER
-  focuser1.Begin();
-  focuser2.Begin();
+  focuser1.Begin(  );
   alpaca_server.AddDevice(&focuser1);
+  
+  focuser2.Begin(  );
   alpaca_server.AddDevice(&focuser2);
 #endif
 

@@ -6,6 +6,7 @@
 
   Copyright 2024-2025 peter_n@gmx.de. All rights reserved.
 **************************************************************************************************/
+#include <debug_internal.h>
 #include <Focuser.h>
 #include <PubSubClient.h>
 
@@ -25,7 +26,7 @@ Focuser::Focuser() : AlpacaFocuser()
 {
 }
 
-void Focuser::Begin()
+void Focuser::Begin( )
 {
     // init Focuser
 
@@ -56,7 +57,7 @@ void Focuser::Begin()
 void Focuser::Loop()
 {   
     if( _focuserState == FocuserStates::FOCUSER_MOVING )
-      debugV( "focuser position : %d", _position_steps ); 
+      debugV( "focuser position : %d", _position ); 
     
     manageFocuserState( targetFocuserState );
 
@@ -78,7 +79,7 @@ void Focuser::Loop()
  * InitTimer - Initialize ESP32 hardware timer for focuser time-based operations
  * Timer runs at 100ms intervals (10 Hz) to drive stepper motor control
  */
-void Focuser::InitTimer()
+void Focuser::InitTimer( hw_timer_t* timer )
 {
     // Set this instance as the global reference for the static callback
     g_focuser_instance = this;
@@ -87,19 +88,19 @@ void Focuser::InitTimer()
     // - Timer ID: 0 (first timer)
     // - Divider: 80 (prescaler to get 1 MHz from 80 MHz clock)
     // - Count up mode: true
-    _focuser_timer = timerBegin(0, _TIMER_DIVIDER, true);
+    timer = timerBegin(0, _TIMER_DIVIDER, true);
     
-    if (_focuser_timer != nullptr)
+    if ( timer != nullptr)
     {
         // Attach the interrupt handler
-        timerAttachInterrupt(_focuser_timer, &_timerInterruptStatic, true);
+        timerAttachInterrupt( timer, &_timerInterruptStatic, true);
         
         // Set the timer to interrupt at _TIMER_INTERVAL_US microseconds
         // The true parameter sets it to repeat (auto-reload)
-        timerAlarmWrite(_focuser_timer, _TIMER_INTERVAL_US, true);
+        timerAlarmWrite(timer , _TIMER_INTERVAL_US, true);
         
         // Enable the alarm
-        timerAlarmEnable(_focuser_timer);
+        timerAlarmEnable( timer);
         
         SLOG_PRINTF(SLOG_INFO, "Focuser timer initialized: %u us interval\n", _TIMER_INTERVAL_US);
     }
@@ -110,11 +111,11 @@ void Focuser::InitTimer()
 }
 
 //Do this when we want to start moving the focuser - e.g. from idle to moving state.
-void StartTimer()
+void StartTimer( hw_timer_t* timer )
 {
-    if (_focuser_timer != nullptr)
+    if ( timer != nullptr)
     {
-        timerAlarmEnable(_focuser_timer);
+        timerAlarmEnable( timer);
         SLOG_PRINTF(SLOG_INFO, "Focuser timer started\n");
     }
 }   
@@ -124,12 +125,12 @@ void StartTimer()
  */
 void Focuser::StopTimer()
 {
-    if (_focuser_timer != nullptr)
+    if ( timer != nullptr)
     {
-        timerAlarmDisable(_focuser_timer);
-        timerDetachInterrupt(_focuser_timer);
-        timerEnd(_focuser_timer);
-        _focuser_timer = nullptr;
+        timerAlarmDisable(timer);
+        timerDetachInterrupt(timer);
+        timerEnd(timer);
+        timer = nullptr;
         SLOG_PRINTF(SLOG_INFO, "Focuser timer stopped\n");
     }
 }
@@ -164,15 +165,15 @@ void Focuser::ProcessTimerInterrupt()
     _timer_interrupt_flag = false;
     
     // Run the state machine every 100ms
-    _simMachine();
+    manageFocuserState( _targetFocuserState );
 }
 
 //Function to manage focuser states
- int manageFocuserState( FocuserStates targetFocuserState )
+ int Focuser::manageFocuserState( FocuserStates targetFocuserState )
  {
   String msg = "";
   //need a targetFocuserState.
-  if ( _focuserState == _targetFocuserState ) 
+  if ( _focuserState == targetFocuserState ) 
     return 0;
    
   switch( _focuserState )
@@ -299,8 +300,8 @@ void Focuser::AlpacaWriteJson(JsonObject &root)
     // #add # for read only
     JsonObject obj_states = root["#States"].to<JsonObject>();
     obj_states["IsMoving"] = _is_moving;
-    obj_states["Position"] = _position_steps;
-    obj_states["TargetPos"] = _sim_target_position_steps;
+    obj_states["Position"] = _position;
+    obj_states["TargetPos"] = _target_position;
     obj_states["Temperature"] = _temperature;
     obj_states["StepSize"] = _step_size;
     obj_states["MaxIncrement"] = _max_increment;
@@ -336,7 +337,7 @@ const bool Focuser::_putMove(int32_t target_position)
              _target_position <= k_motor_step_max ) 
         {
             _target_position = target_position;
-            step();
+            _myMotor.step();
             StartTimer();
             result = true;
         }
@@ -355,7 +356,7 @@ const bool Focuser::_putHalt()
     if ( _focuserState == FocuserStates::FOCUSER_MOVING || _focuserState == FocuserStates::FOCUSER_STOPPING)
     {
         StopTimer();
-        _focuserState = FocuserStates::FOCUSER_HALTED;
+        _focuserState = FocuserStates::FOCUSER_STOPPED;
         result = true;
     }
     else 

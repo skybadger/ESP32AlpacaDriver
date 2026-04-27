@@ -27,7 +27,7 @@
   int _enPin = 0;
   int _enableMode = EnableModes::ENABLE_NONE;
       
-  void _init(void) 
+  void init(void) 
   {
       //Setup hardware
       pinMode(_dirPin, OUTPUT);
@@ -40,7 +40,7 @@
   
   public: 
   
-  Motor(int step_pin, int dir_pin, int enable_pin, int enable_mode) : _stepPin(step_pin), _dirPin(dir_pin), _enPin(enable_pin), _enableMode(enable_mode), _init() {};
+  Motor(int step_pin, int dir_pin, int enable_pin, int enable_mode) : _stepPin(step_pin), _dirPin(dir_pin), _enPin(enable_pin), _enableMode(enable_mode){ init();};
   
   //Re-allocate the assigned pins. 
   void setPins(int step_pin, int dir_pin, int enable_pin, int enable_mode)
@@ -49,7 +49,7 @@
     _dirPin = dir_pin;
     _enPin = enable_pin;
     _enableMode = enable_mode;
-    _init();
+    init();
   }
 
   void stepMotor()

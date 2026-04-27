@@ -15,13 +15,15 @@ class Focuser : public AlpacaFocuser
 {
   public:
   enum FocuserMode{ FOCUSER_MODE_ABSOLUTE, FOCUSER_MODE_RELATIVE };
+  static const char* FocuserModech[2][] = { {"ABSOLUTE"}, {"RELATIVE"} };
   enum FocuserStates {  FOCUSER_INIT=0,  FOCUSER_IDLE, FOCUSER_MOVING,  FOCUSER_STOPPED,  FOCUSER_STOPPING };
-  
+  static const char* FocuserStateCh[5][] = { {"INIT"}, {"IDLE"}, {"MOVING"}, {"STOPPED"}, {"STOPPING"} };
+
   private:
   pinmap_t *_pins;
   size_t _num_pins; 
   void moveFocuser();
-  Motor myMotor();
+  Motor _myMotor();
 
   //Position defaults and limits. 
   const bool _k_temp_comp_available = false;
@@ -43,9 +45,10 @@ class Focuser : public AlpacaFocuser
   const double k_step_size_max = 100.0;
   const double k_step_size_default = k_step_size_min;
 
+  //FocuserStates tracks our current and requested focuser operational state. 
+  //start with init at start for both
   FocuserStates _focuserState = FocuserStates::FOCUSER_INIT;
   FocuserStates _targetFocuserState = FocuserStates::FOCUSER_INIT;
-
   FocuserMode _focuser_mode = FOCUSER_MODE_ABSOLUTE;
   
   const int32_t _base_absolute_count = 0;
@@ -55,7 +58,7 @@ class Focuser : public AlpacaFocuser
   double _step_size = k_focuser_mm_default / _max_motor_step;
   
   //Backlash compensation parameters
-  int32_t _backlash_comp = 0;
+  bool _backlash_comp = 0;
   bool  _backlashDirection = true; // true = outward, false = inward
   bool _reverse = false;
   int32_t _backlash_size = 0;
@@ -66,27 +69,24 @@ class Focuser : public AlpacaFocuser
   double _temperature = 99.0;
 
   bool _is_moving = false;
-  int32_t _position_steps = 0;
-
-  int32_t _target_position = _position;
   uint32_t _position = 0;
-  
+  uint32_t _target_position = _position;
+    
   // Timer interrupt handling for time-based operations
-  hw_timer_t* _step_timer = nullptr;
+  hw_timer_t* _timer = nullptr;
   volatile bool _timer_interrupt_flag = false;
   const uint32_t _TIMER_DIVIDER = 80;  // 80 MHz / 80 = 1 MHz resolution
   const uint32_t _TIMER_INTERVAL_US = 100000; // 100ms interrupt interval (10 Hz)
   
   //MQTT parameters 
   String _mqtt_server;
-  uint16_t _mqtt_port;
+  unsigned int  _mqtt_port;
   String _mqtt_user;
   String _mqtt_pwd;
   String _mqtt_health_topic;
   String _mqtt_function_topic;
   volatile bool _callbackFlag = false;
 
-  static char* FocuserState[][] = {"INIT", "IDLE", "MOVING", "STOPPED", "STOPPING"};
   // Alpaca command handlers
   void AlpacaReadJson(JsonObject &root);
   void AlpacaWriteJson(JsonObject &root);
@@ -101,38 +101,42 @@ class Focuser : public AlpacaFocuser
   const bool _putCommandBool(const char *const command, const char *const raw, bool &bool_response) { return false; };
   const bool _putCommandString(const char *const command_str, const char *const raw, char *string_response, size_t string_response_size) { return false; };
 
-  const bool _getAbsolute() { return _focuser_mode; };
+  const bool _getAbsolute() { return _focuser_mode == FocuserMode::FOCUSER_MODE_ABSOLUTE; };
   const bool _getIsMoving() { return _is_moving; };
   const int32_t _getMaxIncrement() { return _max_increment; };
   const int32_t _getMaxStep() { return _max_motor_step; };
-  const int32_t _getPosition() { return _position_steps; };
+  const int32_t _getPosition() { return _position; };
   const double _getStepSize() { return _step_size; };
   const bool _getTempComp() { return _temp_comp; };
   const bool _getTempCompAvailable() { return _temp_comp_available; };
   const double _getTemperature() { return _temperature; };
 
   //Extra functions to manage focuser state and configuration
-  const bool setReverse(bool reverse) { _reverse = reverse; return _reverse };
+  const bool setReverse(bool reverse) { _reverse = reverse; return _reverse; };
   const bool _setBacklashEnabled( bool backlash_enabled ) {  _backlash_comp = backlash_enabled; return true; };
-  const int32_t _setBacklashSize( int32_t backlash_size) { _backlash_size = backlash_size; };
-  const int32_t _setBacklashDirection( int32_t backlash_direction) { _backlashDirection = backlash_direction; return _backlashDirection; };
-  const int32_t _getBacklashEnabled() { return _backlash_comp; };
+  const bool _setBacklashSize( int32_t backlash_size) { _backlash_size = backlash_size; };
+  const bool _setBacklashDirection( int32_t backlash_direction) { _backlashDirection = backlash_direction; return _backlashDirection; };
+  const bool _getBacklashEnabled() { return _backlash_comp; };
   const int32_t _getBacklashSize() { return _backlash_size; };  
   const int32_t _getBacklashDirection() { return _backlashDirection; };
+
+
+  int Focuser::manageFocuserState( FocuserStates targetFocuserState );
 
   public:
   Focuser();
   // Override constructor to pass pin configuration for specific focuser implementation; e.g. for stepper motor driver  
-  Focuser(pinmap_t *pins, size_t num_pins): _pins(pins), _num_pins(num_pins) {super(); };
+  Focuser(pinmap_t *pins, size_t num_pins): _pins(pins), _num_pins(num_pins) {  };
 
-  void setMQTT( String mqtt_server, uint16_t mqtt_port, String mqtt_user, String mqtt_pwd, String health_topic, String function_topic ) 
-  : _mqtt_server(mqtt_server), _mqtt_port(mqtt_port), _mqtt_user(mqtt_user), _mqtt_pwd(mqtt_pwd), _mqtt_health_topic(health_topic), _mqtt_function_topic(function_topic) {} ;
+  void setMQTT( String mqtt_server, uint16_t mqtt_port, String mqtt_user, String mqtt_pwd, String health_topic, String function_topic ) : _mqtt_server(mqtt_server), _mqtt_port(mqtt_port), _mqtt_user(mqtt_user), _mqtt_pwd(mqtt_pwd), _mqtt_health_topic(health_topic), _mqtt_function_topic(function_topic) {} ;
   void Begin();
   void Loop();
   
   // Static callback bridge for timer interrupt
   static void IRAM_ATTR _timerInterruptStatic();
   void IRAM_ATTR _timerInterruptHandler();
+
+  
   
   // Timer management methods
   void InitTimer();
