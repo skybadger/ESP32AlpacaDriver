@@ -16,8 +16,8 @@ class Focuser : public AlpacaFocuser
   public:
   enum FocuserMode{ FOCUSER_MODE_ABSOLUTE, FOCUSER_MODE_RELATIVE };
   static const char* FocuserModech[2][] = { {"ABSOLUTE"}, {"RELATIVE"} };
-  enum FocuserStates {  FOCUSER_INIT=0,  FOCUSER_IDLE, FOCUSER_MOVING,  FOCUSER_STOPPED,  FOCUSER_STOPPING };
-  static const char* FocuserStateCh[5][] = { {"INIT"}, {"IDLE"}, {"MOVING"}, {"STOPPED"}, {"STOPPING"} };
+  enum FocuserStates {  FOCUSER_INIT=0,  FOCUSER_IDLE, FOCUSER_MOVING,  FOCUSER_HALTED,  FOCUSER_STOPPING };
+  static const char* FocuserStateCh[5][] = { {"INIT"}, {"IDLE"}, {"MOVING"}, {"HALTED"}, {"STOPPING"} };
 
   private:
   pinmap_t *_pins;
@@ -26,46 +26,47 @@ class Focuser : public AlpacaFocuser
   Motor _myMotor();
 
   //Position defaults and limits. 
-  const bool _k_temp_comp_available = false;
-  const int32_t k_motor_step_min = 1;
-  const int32_t k_motor_step_max = 1000000;
-  const int32_t k_motor_step_default = k_motor_step_min;
-  
+  const int32_t _motor_step_min_limit = 1;//system limit
+  const int32_t _motor_step_min_default = 1;//system default 
+  const int32_t _motor_step_max_limit = (int32_t) ( ( 2<<31)  - 1) ; //system limit
+  const int32_t _motor_step_max_default = 100000; //system default 
+  int32_t _motor_step_min = _motor_step_min_limit; //user specified 
+  int32_t _motor_step_max = _motor_step_max_default; //user specified
+    
   // Increment defaults and limits.
-  const int32_t k_increment_min = k_motor_step_min;
-  const int32_t k_increment_max = k_motor_step_max;
-  const int32_t k_increment_default = k_motor_step_default;
+  const int32_t _increment_min = _motor_step_min_default;
+  const int32_t _increment_max = _increment_min +( ( _motor_step_max_default - _motor_step_min_default ) /64 ) *64 ;
+  const int32_t _increment_default = _motor_step_min_default;
 
   //Not sure I care for mm. 
-  const int32_t k_focuser_mm_min = 0;
-  const int32_t k_focuser_mm_max = 100;
-  const int32_t k_focuser_mm_default = k_focuser_mm_min;
-  
-  const double k_step_size_min = 0.1;
-  const double k_step_size_max = 100.0;
-  const double k_step_size_default = k_step_size_min;
-
+  const int32_t _focuser_mm_min_limit = 0;
+  const int32_t _focuser_mm_max_limit = 100;
+  int32_t _focuser_mm_min = 0;
+  int32_t _focuser_mm_max = 100;
+    
   //FocuserStates tracks our current and requested focuser operational state. 
   //start with init at start for both
   FocuserStates _focuserState = FocuserStates::FOCUSER_INIT;
   FocuserStates _targetFocuserState = FocuserStates::FOCUSER_INIT;
   FocuserMode _focuser_mode = FOCUSER_MODE_ABSOLUTE;
   
-  const int32_t _base_absolute_count = 0;
-
-  int32_t _max_motor_step = k_motor_step_default; // Max. motor position / steps
-  int32_t _max_increment = k_increment_default;
-  double _step_size = k_focuser_mm_default / _max_motor_step;
-  
+  //Absolute vs relative 
+  int32_t _base_absolute_count = 0;
+  bool _absolute_mode = true;
+ 
   //Backlash compensation parameters
-  bool _backlash_comp = 0;
-  bool  _backlashDirection = true; // true = outward, false = inward
-  bool _reverse = false;
+  const bool _backlash_comp_default = false;
+  const bool _backlash_comp_default = DIRN_CW;
+  const bool _outrack_direction_default = DIRN_CW;
+  bool _backlash_comp = _backlash_comp_default;
+  bool _backlashDirection = _backlash_comp_default; // true = outward, false = inward
+  bool _outrack_direction = _outrack_direction_default;
   int32_t _backlash_size = 0;
 
   //Temperature and dew monitoring for temp compensation
-  bool _temp_comp = false;
-  const bool _temp_comp_available = false;
+  const bool _k_temp_comp_available = false;
+  int32_t** _temp_comp = nullptr; //Sorted list of temp compensation values for different temperatures; to be defined by specific implementation if temp comp is supported.
+  bool _temp_compen_enabled = false;
   double _temperature = 99.0;
 
   bool _is_moving = false;
@@ -78,7 +79,7 @@ class Focuser : public AlpacaFocuser
   const uint32_t _TIMER_DIVIDER = 80;  // 80 MHz / 80 = 1 MHz resolution
   const uint32_t _TIMER_INTERVAL_US = 100000; // 100ms interrupt interval (10 Hz)
   
-  //MQTT parameters 
+  //MQTT parameters and flags
   String _mqtt_server;
   unsigned int  _mqtt_port;
   String _mqtt_user;

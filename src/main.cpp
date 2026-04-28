@@ -51,10 +51,18 @@ Focuser focuser2;
 
 #include <time.h>
 //Timer interrupts
-hw_timer_t * timer1 = nullptr;
+hw_timer_t loop_timer = nullptr; //Used to trigger the main loop at a regular interval (e.g., 100 ms)
+hw_timer_t * timer1 = nullptr;   //Used to drive the focuser motors stepping or driving at a regular interval (e.g., 10 Hz)
 hw_timer_t * timer2 = nullptr;
+volatile bool loop_timer_flag = false;
 volatile bool timer1_flag = false;
 volatile bool timer2_flag = false;
+
+IRAM_ATTR void onloop_timer() 
+{
+  loop_timer_flag = true;
+}
+
 IRAM_ATTR void onTimer1() 
 {
   timer1_flag = true;
@@ -197,20 +205,16 @@ void loop()
 
 #ifdef TEST_FOCUSER
     focuser1.Loop();
-    focuser1.Loop();  
+    focuser2.Loop();
 #endif
     timer1_flag = false;
   }
 
+  /* Check - should move to focuser code, we need this to be more responsive and capable of higher rates. 
   if ( timer2_flag ) 
   { 
 #ifdef TEST_FOCUSER
     // Process focuser timer-based operations (stepper control at 10 Hz)
-    if (focuser1.IsTimerInterruptFlagged())
-    {
-      focuser1.ProcessTimerInterrupt();
-      focuser1.ClearTimerInterruptFlag();
-    }
     if (focuser2.IsTimerInterruptFlagged())
     {
       focuser2.ProcessTimerInterrupt();
@@ -219,4 +223,5 @@ void loop()
 #endif
     timer2_flag = false;
   }
+  */
 }

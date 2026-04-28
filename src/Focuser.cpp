@@ -135,22 +135,20 @@ void Focuser::StopTimer()
     }
 }
 
-
-
 /**
  * _timerInterruptHandler - ISR-level handler for timer interrupts
  * Sets flag for main loop processing (actual work is done in ProcessTimerInterrupt)
  */
 void IRAM_ATTR Focuser::_timerInterruptHandler()
 {
-    _timer_interrupt_flag = true;
     _myMotor.step(); 
     _position = _position + ( _direction ? 1 : -1 );
     if ( _position == _target_position )
     {
       StopTimer();
-      _focuserState = FocuserStates::FOCUSER_STOPPED;
+      _focuserState = FocuserStates::FOCUSER_HALTED;
     }
+    _timer_interrupt_flag = true;
 }
 
 /**
@@ -232,11 +230,11 @@ void Focuser::ProcessTimerInterrupt()
           switch( targetFocuserState )
           {
             case FocuserStates::FOCUSER_MOVING:
-              debugD("targetFocuserState set to MOVING from HALTED - position : %d", position );
+              debugD("targetFocuserState set to MOVING from HALTED - position : %d", _position );
               focuserState = FocuserStates::FOCUSER_MOVING;
               break;
             case FocuserStates::FOCUSER_HALTED:
-              debugD("targetFocuserState set to Halted from HALTED, Focuser status is: %d ", Focuser.Status() );
+              debugD("targetFocuserState set to Halted from HALTED, Focuser status is: %d ", _focuserState );
               break;
             case FocuserStates::FOCUSER_IDLE:
               debugD("targetFocuserState set to IDLE from HALTED, position is %d ", position );
@@ -328,7 +326,7 @@ const bool Focuser::_putMove(int32_t target_position)
 {
     bool result = false;
 
-    if ( _focuserState == FocuserStates::FOCUSER_STOPPED || 
+    if ( _focuserState == FocuserStates::FOCUSER_HALTED || 
         _focuserState == FocuserStates::FOCUSER_STOPPING || 
         _focuserState == FocuserStates::FOCUSER_IDLE )
     {
@@ -356,7 +354,7 @@ const bool Focuser::_putHalt()
     if ( _focuserState == FocuserStates::FOCUSER_MOVING || _focuserState == FocuserStates::FOCUSER_STOPPING)
     {
         StopTimer();
-        _focuserState = FocuserStates::FOCUSER_STOPPED;
+        _focuserState = FocuserStates::FOCUSER_HALTED;
         result = true;
     }
     else 
