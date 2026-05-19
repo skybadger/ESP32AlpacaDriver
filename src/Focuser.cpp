@@ -57,9 +57,9 @@ void Focuser::Begin( )
 void Focuser::Loop()
 {   
     if( _focuserState == FocuserStates::FOCUSER_MOVING )
-      debugV( "focuser position : %d", _position ); 
+      SLOG_PRINTF(SLOG_DEBUG, "focuser position : %d\n", _position); 
     
-    manageFocuserState( targetFocuserState );
+    manageFocuserState( _targetFocuserState );
 
     //TODO manage MQTT client loop and reconnect if needed
     if ( /*client.connected()*/ false ) 
@@ -79,28 +79,24 @@ void Focuser::Loop()
  * InitTimer - Initialize ESP32 hardware timer for focuser time-based operations
  * Timer runs at 100ms intervals (10 Hz) to drive stepper motor control
  */
-void Focuser::InitTimer( hw_timer_t* timer )
+void Focuser::InitTimer()
 {
     // Set this instance as the global reference for the static callback
     g_focuser_instance = this;
     
-    // Create a timer with:
-    // - Timer ID: 0 (first timer)
-    // - Divider: 80 (prescaler to get 1 MHz from 80 MHz clock)
-    // - Count up mode: true
-    timer = timerBegin(0, _TIMER_DIVIDER, true);
+    // Create a 1 MHz timer. Arduino ESP32 3.x uses frequency rather than timer ID/divider.
+    _timer = timerBegin(1000000);
     
-    if ( timer != nullptr)
+    if ( _timer != nullptr)
     {
         // Attach the interrupt handler
-        timerAttachInterrupt( timer, &_timerInterruptStatic, true);
+        timerAttachInterrupt( _timer, &_timerInterruptStatic);
         
         // Set the timer to interrupt at _TIMER_INTERVAL_US microseconds
-        // The true parameter sets it to repeat (auto-reload)
-        timerAlarmWrite(timer , _TIMER_INTERVAL_US, true);
+        // The true parameter sets it to repeat (auto-reload), 0 means unlimited reloads.
+        timerAlarm(_timer, _TIMER_INTERVAL_US, true, 0);
         
-        // Enable the alarm
-        timerAlarmEnable( timer);
+        timerStop(_timer);
         
         SLOG_PRINTF(SLOG_INFO, "Focuser timer initialized: %u us interval\n", _TIMER_INTERVAL_US);
     }
@@ -111,11 +107,12 @@ void Focuser::InitTimer( hw_timer_t* timer )
 }
 
 //Do this when we want to start moving the focuser - e.g. from idle to moving state.
-void StartTimer( hw_timer_t* timer )
+void Focuser::StartTimer()
 {
-    if ( timer != nullptr)
+    if ( _timer != nullptr)
     {
-        timerAlarmEnable( timer);
+        timerRestart(_timer);
+        timerStart(_timer);
         SLOG_PRINTF(SLOG_INFO, "Focuser timer started\n");
     }
 }   
@@ -125,12 +122,9 @@ void StartTimer( hw_timer_t* timer )
  */
 void Focuser::StopTimer()
 {
-    if ( timer != nullptr)
+    if ( _timer != nullptr)
     {
-        timerAlarmDisable(timer);
-        timerDetachInterrupt(timer);
-        timerEnd(timer);
-        timer = nullptr;
+        timerStop(_timer);
         SLOG_PRINTF(SLOG_INFO, "Focuser timer stopped\n");
     }
 }
@@ -141,8 +135,9 @@ void Focuser::StopTimer()
  */
 void IRAM_ATTR Focuser::_timerInterruptHandler()
 {
-    _myMotor.step(); 
-    _position = _position + ( _direction ? 1 : -1 );
+    const bool moving_out = _target_position > _position;
+    _myMotor.step(moving_out ? _focuser_direction : !_focuser_direction); 
+    _position = moving_out ? _position + 1 : _position - 1;
     if ( _position == _target_position )
     {
       StopTimer();
@@ -183,22 +178,22 @@ void Focuser::ProcessTimerInterrupt()
           {
             //If we change these target states while moving, the timer handler managing movement will respond automatically
             case FocuserStates::FOCUSER_IDLE:
-                  debugD("Still moving  - %s to %s", focuserStateCh[focuserState], focuserStateCh[targetFocuserState] );
+                  SLOG_PRINTF(SLOG_DEBUG, "Still moving  - %s to %s\n", FocuserStateCh[_focuserState], FocuserStateCh[targetFocuserState] );
                   //No change
                   break;
             case FocuserStates::FOCUSER_HALTED:
-                  debugD( "Change of state requested from Moving to Halted - halting Focuser if not already stopped");
+                  SLOG_PRINTF(SLOG_DEBUG, "Change of state requested from Moving to Halted - halting Focuser if not already stopped\n");
                   //Stop the motor interrupt timer handler.   
                   StopTimer();
                   _focuserState = FocuserStates::FOCUSER_HALTED;
                   break;
             case FocuserStates::FOCUSER_MOVING:
-                  debugD( "Change of state requested from Moving to Halted - halting Focuser if not already stopped");
+                  SLOG_PRINTF(SLOG_DEBUG, "Change of state requested from Moving to Halted - halting Focuser if not already stopped\n");
                   StopTimer();
                   _focuserState = FocuserStates::FOCUSER_HALTED;
                   break;
             default:
-                  debugW("Requested target state of %s while moving - does it make sense ?", focuserStateCh[targetFocuserState] ); 
+                  SLOG_PRINTF(SLOG_WARNING, "Requested target state of %s while moving - does it make sense ?\n", FocuserStateCh[targetFocuserState] ); 
                   break;
           }
           break;
@@ -207,22 +202,23 @@ void Focuser::ProcessTimerInterrupt()
           switch( targetFocuserState )
           {
             case FocuserStates::FOCUSER_IDLE:
-                 debugD("targetFocuserState changed to IDLE from IDLE");
+                 SLOG_PRINTF(SLOG_DEBUG, "targetFocuserState changed to IDLE from IDLE\n");
                  break;
             case FocuserStates::FOCUSER_MOVING:
-                 debugD("targetFocuserState changed to MOVING from IDLE. Starting Focuser");
+                 SLOG_PRINTF(SLOG_DEBUG, "targetFocuserState changed to MOVING from IDLE. Starting Focuser\n");
                  //TODO - need to manage the position and direction of movement here.
-                 _moveFocuser();
+                 
+                 //_moveFocuser();
                  
                  //turn on the timer to move the servo smoothly
-                 StartTimer( &FocuserStateFlag );
+                 //StartTimer( &FocuserStateFlag );
                  _focuserState = FocuserStates::FOCUSER_MOVING;
                  break;
             case FocuserStates::FOCUSER_HALTED:
                  //Already idle. 
                  _putHalt();
             default:
-                 debugW("Unexpected targetFocuserState %s from IDLE", focuserStateCh[ targetFocuserState ] );
+                 SLOG_PRINTF(SLOG_WARNING, "Unexpected targetFocuserState %s from IDLE\n", FocuserStateCh[ targetFocuserState ] );
               break;
           }
           break;
@@ -230,18 +226,18 @@ void Focuser::ProcessTimerInterrupt()
           switch( targetFocuserState )
           {
             case FocuserStates::FOCUSER_MOVING:
-              debugD("targetFocuserState set to MOVING from HALTED - position : %d", _position );
-              focuserState = FocuserStates::FOCUSER_MOVING;
+              SLOG_PRINTF(SLOG_DEBUG, "targetFocuserState set to MOVING from HALTED - position : %d\n", _position );
+              _focuserState = FocuserStates::FOCUSER_MOVING;
               break;
             case FocuserStates::FOCUSER_HALTED:
-              debugD("targetFocuserState set to Halted from HALTED, Focuser status is: %d ", _focuserState );
+              SLOG_PRINTF(SLOG_DEBUG, "targetFocuserState set to Halted from HALTED, Focuser status is: %d\n", _focuserState );
               break;
             case FocuserStates::FOCUSER_IDLE:
-              debugD("targetFocuserState set to IDLE from HALTED, position is %d ", position );
-              focuserState = FocuserStates::FOCUSER_IDLE;
+              SLOG_PRINTF(SLOG_DEBUG, "targetFocuserState set to IDLE from HALTED, position is %d\n", _position );
+              _focuserState = FocuserStates::FOCUSER_IDLE;
               break;
             default:
-              debugW("unexpected targetFocuserState from Open %s", focuserStateCh[targetFocuserState]);
+              SLOG_PRINTF(SLOG_WARNING, "unexpected targetFocuserState from Open %s\n", FocuserStateCh[targetFocuserState]);
               break;
           }
       default:
@@ -258,17 +254,21 @@ void Focuser::AlpacaReadJson(JsonObject &root)
     AlpacaFocuser::AlpacaReadJson(root);
     if (JsonObject obj_config = root["FocuserConfiguration"])
     {
-        _max_motor_step = obj_config["MaxMotor"] | _max_motor_step;
-        _step_size = (double)_max_focuser_mm / (double)_max_motor_step;
         _position = obj_config["Position"] | _position;
-        _target_position = obj_config["TargetPosition"] | _target_position;
-        _step_increment = obj_config["StepIncrement"] | _step_increment;
+        _absolute_mode = obj_config["MovementMode"] | _absolute_mode;
+        _focuser_direction = obj_config["OutboundDirection"] | _focuser_direction;
 
-        _backlash_comp = obj_config["BacklashComp"] | _backlash_comp;
+        _motor_step_max = obj_config["UserMaxLimit"] | _motor_step_max;
+        _motor_step_min = obj_config["UserMinLimit"] | _motor_step_min;
+        _motor_step_increment = obj_config["UserStepSize"] | _motor_step_increment;
+        
+       
+        _backlash_comp_available = obj_config["BacklashCompAvailable"] | _backlash_comp_available;
+        _backlash_comp_enabled = obj_config["BacklashCompEnabled"] | _backlash_comp_enabled;
         _backlash_size = obj_config["BacklashSize"] | _backlash_size;
-        _backlashDirection = obj_config["BacklashDirection"] | _backlashDirection;
+        _backlash_direction = obj_config["BacklashDirection"] | _backlash_direction;
 
-        _temp_comp = obj_config["TempComp"] | _temp_comp;
+        _temp_comp_enabled = obj_config["TempComp"] | _temp_comp_enabled;
         _temp_comp_available = obj_config["TempCompAvailable"] | _temp_comp_available;
 
         _mqtt_server = obj_config["MQTTHost"] | _mqtt_server;
@@ -293,29 +293,38 @@ void Focuser::AlpacaWriteJson(JsonObject &root)
 
     // Config
     JsonObject obj_config = root["FocuserConfiguration"].to<JsonObject>();
-    obj_config["MaxMotor"] = _max_motor_step;
 
     // #add # for read only
     JsonObject obj_states = root["#States"].to<JsonObject>();
-    obj_states["IsMoving"] = _is_moving;
+    //current static states
     obj_states["Position"] = _position;
-    obj_states["TargetPos"] = _target_position;
-    obj_states["Temperature"] = _temperature;
-    obj_states["StepSize"] = _step_size;
-    obj_states["MaxIncrement"] = _max_increment;
-    
+    obj_states["AbsolutePosition"] = _position;
+    obj_states["MovementMode"] =  _absolute_mode;
+;
+    //Motor positions
+    obj_states["UserStepSize"] = _motor_step_increment;
+    obj_states["UserMaxLimit"] = _motor_step_max; 
+    obj_states["UserMinLimit"] = _motor_step_min;
+    obj_states["OutboundDirection"] = _focuser_direction; 
+    obj_states["MinDrawDistance"] = _focuser_mm_min; 
+    obj_states["MaxDrawDistance"] = _focuser_mm_max; 
+   
+    //Temp compensation
     obj_states["TempCompAvailable"] = _temp_comp_available;
-    obj_states["TempComp"] = _temp_comp;
+    obj_states["TempCompEnabled"] = _temp_comp_enabled;
+    //obj_states["TempComp"] = new JsonObject(); Handkle arrays of temperature compensation offsets later. 
     
-    obj_states["BacklashComp"] = _backlash_comp;
+    //Backlash Compensation
+    obj_states["BacklashCompAvailable"] = _backlash_comp_available;
+    obj_states["BacklashCompEnabled"] = _backlash_comp_enabled;
     obj_states["BacklashSize"] = _backlash_size;
-    obj_states["BacklashDirection"] = _backlashDirection;   
+    obj_states["BacklashDirection"] = _backlash_direction;   
 
+    //MQTT interface
     obj_states["MQTTHost"] = _mqtt_server;
     obj_states["MQTTPort"] = _mqtt_port;
     obj_states["MQTTUser"] = _mqtt_user;
     obj_states["MQTTPwd"] = _mqtt_pwd;
-
     obj_states["MQTTHealthTopic"] = _mqtt_health_topic;
     obj_states["MQTTFunctionTopic"] = _mqtt_function_topic; 
 
@@ -330,13 +339,14 @@ const bool Focuser::_putMove(int32_t target_position)
         _focuserState == FocuserStates::FOCUSER_STOPPING || 
         _focuserState == FocuserStates::FOCUSER_IDLE )
     {
-        if ( abs(_target_position - _position >= 0 ) && 
-             _target_position > k_motor_step_min && 
-             _target_position <= k_motor_step_max ) 
+        if ( target_position >= _motor_step_min && 
+             target_position <= _motor_step_max ) 
         {
             _target_position = target_position;
-            _myMotor.step();
+            const bool moving_out = _target_position > _position;
+            _myMotor.step(moving_out ? _focuser_direction : !_focuser_direction);
             StartTimer();
+            _focuserState = FocuserStates::FOCUSER_MOVING;
             result = true;
         }
         else

@@ -51,7 +51,7 @@ Focuser focuser2;
 
 #include <time.h>
 //Timer interrupts
-hw_timer_t loop_timer = nullptr; //Used to trigger the main loop at a regular interval (e.g., 100 ms)
+hw_timer_t * loop_timer = nullptr; //Used to trigger the main loop at a regular interval (e.g., 100 ms)
 hw_timer_t * timer1 = nullptr;   //Used to drive the focuser motors stepping or driving at a regular interval (e.g., 10 Hz)
 hw_timer_t * timer2 = nullptr;
 volatile bool loop_timer_flag = false;
