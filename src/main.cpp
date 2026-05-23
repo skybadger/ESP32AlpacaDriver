@@ -6,24 +6,13 @@
 
 // commend/uncommend to enable/disable device testsing with templates
 //#define TEST_COVER_CALIBRATOR     // create CoverCalibrator device
-//#define TEST_SWITCH               // create Switch device
+#define TEST_SWITCH               // create Switch device
 //#define TEST_OBSERVING_CONDITIONS // create ObservingConditions device
 #define TEST_FOCUSER              // create Focuser device
 
 // #define TEST_RESTART              // only for testing
 
-// add your WIFI credentials and uncommend
-// #define DEFAULT_SSID "my_ssid"
-// #define DEFAULT_PWD "my_pwd"
-
-#define DEFAULT_SSID "your_ssid"
-#define DEFAULT_PWD "your_pwd"
-#define HOSTNAME "ESP32AlpFoc1"
-
-#ifndef DEFAULT_SSID 
-#include "Credentials.h"
-#endif
-
+#include "../include/UserConfig.h"
 #include <SLog.h>
 #include <AlpacaDebug.h>
 #include <AlpacaServer.h>
@@ -45,33 +34,13 @@ ObservingConditions observingConditions;
 
 #ifdef TEST_FOCUSER
 #include <Focuser.h>
-Focuser focuser1;
-Focuser focuser2;
+Focuser focuser1(0);
+Focuser focuser2(1);
 #endif
 
 #include <time.h>
-//Timer interrupts
-hw_timer_t * loop_timer = nullptr; //Used to trigger the main loop at a regular interval (e.g., 100 ms)
-hw_timer_t * timer1 = nullptr;   //Used to drive the focuser motors stepping or driving at a regular interval (e.g., 10 Hz)
-hw_timer_t * timer2 = nullptr;
-volatile bool loop_timer_flag = false;
-volatile bool timer1_flag = false;
-volatile bool timer2_flag = false;
-
-IRAM_ATTR void onloop_timer() 
-{
-  loop_timer_flag = true;
-}
-
-IRAM_ATTR void onTimer1() 
-{
-  timer1_flag = true;
-}
-
-IRAM_ATTR void onTimer2() 
-{
-  timer2_flag = true;   
-}
+static constexpr uint32_t LOOP_INTERVAL_MS = 100;
+static uint32_t last_loop_run_ms = 0;
 
 // ASCOM Alpaca server with discovery
 AlpacaServer alpaca_server(ALPACA_MNG_SERVER_NAME, ALPACA_MNG_MANUFACTURE, ALPACA_MNG_MANUFACTURE_VERSION, ALPACA_MNG_LOCATION);
@@ -113,10 +82,48 @@ void checkForRestart()
 }
 #endif
 
+/*
+MQTT registration is per-device not per driver soince only one port is available for receiving call backs. 
+Let the server handle the callbacks and then dish them out to the devices via a new device::reportHealth() function
+
+*/
+void registerMQTT(void )
+{
+    //setup MQTT client - driver specific
+/*
+    WiFiClient espClient;
+    PubSubClient client(espClient);
+    client.setServer( _mqtt_server, _mqtt_port );
+    client.connect( thisID, _mqtt_user, _mqtt_pwd ); 
+    String lastWillTopic = _mqtt_health_topic; 
+    lastWillTopic.concat( myHostname );
+    client.connect( thisID, _mqtt_user, _mqtt_pwd , lastWillTopic.c_str(), 1, true, "Disconnected", false ); 
+    //Create a heartbeat-based callback that causes this device to read the local i2C bus devices for data to publish.
+    //TODO Update callback to replace with another that listens for the temperature data required for temp compensation  - set compEn false if not found. 
+    client.setCallback( callback ); 
+    client.subscribe( inTopic );
+    client.subscribe(mqttTemperatureSource);
+  */
+ SLOG_PRINTF(SLOG_INFO, "Dummy MQTT client setup performed - update when ready\n");
+}
+
+void callback( String topic)
+{
+if ( topic.indexOf( "heartbeat" ) >= 0 )
+  {
+//enumerate devices and call their reporting function 
+// consider adding to the registered callbacks handler
+SLOG_PRINTF(SLOG_INFO, "Callback received: %s: \n", topic );
+  }
+}
+
 void setup()
 {
   // setup logging and WiFi
-  g_Slog.Begin(Serial, 115200);
+  
+  // initialize SLog serial interface
+  g_Slog.Begin( Serial0, 115200);
+  //g_Slog.Begin( SYSLOG_HOST, 115200);
 #ifdef LOLIN_S2_MINI  
   delay(5000); // time to detect USB device
 #endif  
@@ -136,6 +143,8 @@ void setup()
     IPAddress ip = WiFi.localIP();
     char wifi_ipstr[32] = "xxx.yyy.zzz.www";
     snprintf(wifi_ipstr, sizeof(wifi_ipstr), "%03d.%03d.%03d.%03d", ip[0], ip[1], ip[2], ip[3]);
+    // initialize SLog host
+    g_Slog.Begin(String(SYSLOG_HOST), 514);
     SLOG_INFO_PRINTF("connected with %s\n", wifi_ipstr);
   }
 
@@ -177,16 +186,33 @@ void setup()
   g_Slog.SetLvlMsk(alpaca_server.GetLogLvl());
   g_Slog.SetEnableSerial(alpaca_server.GetSerialLog());
 
+  last_loop_run_ms = millis();
+  SLOG_PRINTF(SLOG_INFO, "Main loop soft timer initialized: %u ms interval\n", LOOP_INTERVAL_MS);
+
+  registerMQTT();
+
 }
 
 void loop()
 {
-#ifdef TEST_RESTART
+  static boolean loop_flag = false;
+
+  #ifdef TEST_RESTART
   checkForRestart();
 #endif
 
-  if ( timer1_flag ) 
+  uint32_t now_ms = millis();
+  uint32_t duration = now_ms - last_loop_run_ms ;
+
+  if ( duration >= LOOP_INTERVAL_MS ) 
+  { 
+    loop_flag = true; 
+  }
+  
+  if ( loop_flag )
   {  
+    last_loop_run_ms = now_ms;
+
     alpaca_server.Loop();
 #ifdef TEST_COVER_CALIBRATOR
     coverCalibrator.Loop();
@@ -207,21 +233,8 @@ void loop()
     focuser1.Loop();
     focuser2.Loop();
 #endif
-    timer1_flag = false;
+    loop_flag = false;
   }
-
-  /* Check - should move to focuser code, we need this to be more responsive and capable of higher rates. 
-  if ( timer2_flag ) 
-  { 
-#ifdef TEST_FOCUSER
-    // Process focuser timer-based operations (stepper control at 10 Hz)
-    if (focuser2.IsTimerInterruptFlagged())
-    {
-      focuser2.ProcessTimerInterrupt();
-      focuser2.ClearTimerInterruptFlag();
-    }
-#endif
-    timer2_flag = false;
-  }
-  */
 }
+
+

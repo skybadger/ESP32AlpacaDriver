@@ -28,7 +28,7 @@ class Focuser : public AlpacaFocuser
   //Position defaults and limits. 
   const int32_t _motor_step_min_limit = 1;//system limit
   const int32_t _motor_step_min_default = _motor_step_min_limit;//system default 
-  const int32_t _motor_step_max_limit = (int32_t) ( ( 2<<31)  - 1) ; //system limit
+  const int32_t _motor_step_max_limit = (int32_t) ( ( 2<<29) - 1) ; //system limit
   const int32_t _motor_step_max_default = _motor_step_max_limit; //system default 
   int32_t _motor_step_min = _motor_step_min_limit; //user specified 
   int32_t _motor_step_max = _motor_step_max_default; //user specified
@@ -75,6 +75,7 @@ class Focuser : public AlpacaFocuser
     
   // Timer interrupt handling for time-based operations
   hw_timer_t* _timer = nullptr;
+  uint8_t _timer_num = 1;
   volatile bool _timer_interrupt_flag = false;
   const uint32_t _TIMER_DIVIDER = 80;  // 80 MHz / 80 = 1 MHz resolution
   const uint32_t _TIMER_INTERVAL_US = 100000; // 100ms interrupt interval (10 Hz)
@@ -125,9 +126,10 @@ class Focuser : public AlpacaFocuser
   int manageFocuserState( FocuserStates targetFocuserState );
 
   public:
-  Focuser();
+  explicit Focuser(uint8_t timer_num = 1);
   // Override constructor to pass pin configuration for specific focuser implementation; e.g. for stepper motor driver  
-  Focuser(pinmap_t *pins, size_t num_pins): _pins(pins), _num_pins(num_pins) 
+  
+  Focuser(pinmap_t *pins, size_t num_pins, uint8_t timer_num = 1): _pins(pins), _num_pins(num_pins), _timer_num(timer_num) 
   { 
     _myMotor = Motor( _pins[0].pin, _pins[1].pin, _pins[2].pin, Motor::EnableModes::ENABLE_LOW);
     _myMotor.disableMotor();
@@ -137,7 +139,10 @@ class Focuser : public AlpacaFocuser
   void Loop();
   
   // Static callback bridge for timer interrupt
-  static void _timerInterruptStatic();
+  static void _timerInterruptStatic0();
+  static void _timerInterruptStatic1();
+  static void _timerInterruptStatic2();
+  static void _timerInterruptStatic3();
   void _timerInterruptHandler();
   
   // Timer management methods

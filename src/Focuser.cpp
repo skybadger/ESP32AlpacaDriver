@@ -6,23 +6,44 @@
 
   Copyright 2024-2025 peter_n@gmx.de. All rights reserved.
 **************************************************************************************************/
-#include <debug_internal.h>
 #include <Focuser.h>
 #include <PubSubClient.h>
 
-// Static instance pointer for timer callback bridge
-static Focuser* g_focuser_instance = nullptr;
+constexpr const char* Focuser::FocuserModeCh[];
+constexpr const char* Focuser::FocuserStateCh[];
 
-// Static timer callback function (bridge to class method)
-void IRAM_ATTR Focuser::_timerInterruptStatic()
+static constexpr uint8_t kMaxHardwareTimers = 4;
+static Focuser* g_focuser_timer_owner[kMaxHardwareTimers] = { nullptr };
+
+static void IRAM_ATTR dispatchFocuserTimerInterrupt(uint8_t timer_num)
 {
-  if (g_focuser_instance != nullptr)
+  if (timer_num < kMaxHardwareTimers && g_focuser_timer_owner[timer_num] != nullptr)
   {
-    g_focuser_instance->_timerInterruptHandler();
+    g_focuser_timer_owner[timer_num]->_timerInterruptHandler();
   }
 }
 
-Focuser::Focuser() : AlpacaFocuser()
+void IRAM_ATTR Focuser::_timerInterruptStatic0()
+{
+    dispatchFocuserTimerInterrupt(0);
+}
+
+void IRAM_ATTR Focuser::_timerInterruptStatic1()
+{
+    dispatchFocuserTimerInterrupt(1);
+}
+
+void IRAM_ATTR Focuser::_timerInterruptStatic2()
+{
+    dispatchFocuserTimerInterrupt(2);
+}
+
+void IRAM_ATTR Focuser::_timerInterruptStatic3()
+{
+    dispatchFocuserTimerInterrupt(3);
+}
+
+Focuser::Focuser(uint8_t timer_num) : AlpacaFocuser(), _timer_num(timer_num)
 {
 }
 
@@ -35,25 +56,9 @@ void Focuser::Begin( )
     // Initialize timer interrupt for time-based stepper control
     InitTimer();
 
-    //setup MQTT client - driver specific
-    /* 
-    WiFiClient espClient;
-    PubSubClient client(espClient);
-    client.setServer( _mqtt_server, _mqtt_port );
-    client.connect( thisID, _mqtt_user, _mqtt_pwd ); 
-    String lastWillTopic = _mqtt_health_topic; 
-    lastWillTopic.concat( myHostname );
-    client.connect( thisID, _mqtt_user, _mqtt_pwd , lastWillTopic.c_str(), 1, true, "Disconnected", false ); 
-    //Create a heartbeat-based callback that causes this device to read the local i2C bus devices for data to publish.
-    //TODO Update callback to replace with another that listens for the temperature data required for temp compensation  - set compEn false if not found. 
-    client.setCallback( callback ); 
-    client.subscribe( inTopic );
-    client.subscribe(mqttTemperatureSource);
-    */
 }
 
-//Loop is managed via timer interrupts in main. 
-//Need a second timer to handle stepper stepping. 
+// Regular device housekeeping; motor stepping is driven by this focuser's hardware timer.
 void Focuser::Loop()
 {   
     if( _focuserState == FocuserStates::FOCUSER_MOVING )
@@ -81,28 +86,53 @@ void Focuser::Loop()
  */
 void Focuser::InitTimer()
 {
-    // Set this instance as the global reference for the static callback
-    g_focuser_instance = this;
+    if (_timer_num >= kMaxHardwareTimers)
+    {
+        SLOG_PRINTF(SLOG_ERROR, "Invalid focuser timer number: %u\n", _timer_num);
+        return;
+    }
+
+    g_focuser_timer_owner[_timer_num] = this;
     
-    // Create a 1 MHz timer. Arduino ESP32 3.x uses frequency rather than timer ID/divider.
-    _timer = timerBegin(1000000);
+    // Create a 1 MHz timer from the 80 MHz APB clock.
+    _timer = timerBegin(_timer_num, _TIMER_DIVIDER, true);
     
     if ( _timer != nullptr)
     {
+        void (*interrupt_handler)() = nullptr;
+        switch (_timer_num)
+        {
+            case 0:
+                interrupt_handler = &_timerInterruptStatic0;
+                break;
+            case 1:
+                interrupt_handler = &_timerInterruptStatic1;
+                break;
+            case 2:
+                interrupt_handler = &_timerInterruptStatic2;
+                break;
+            case 3:
+                interrupt_handler = &_timerInterruptStatic3;
+                break;
+            default:
+                break;
+        }
+
         // Attach the interrupt handler
-        timerAttachInterrupt( _timer, &_timerInterruptStatic);
+        timerAttachInterrupt( _timer, interrupt_handler, true);
         
         // Set the timer to interrupt at _TIMER_INTERVAL_US microseconds
-        // The true parameter sets it to repeat (auto-reload), 0 means unlimited reloads.
-        timerAlarm(_timer, _TIMER_INTERVAL_US, true, 0);
+        timerAlarmWrite(_timer, _TIMER_INTERVAL_US, true);
+        timerAlarmEnable(_timer);
         
         timerStop(_timer);
         
-        SLOG_PRINTF(SLOG_INFO, "Focuser timer initialized: %u us interval\n", _TIMER_INTERVAL_US);
+        SLOG_PRINTF(SLOG_INFO, "Focuser timer %u initialized: %u us interval\n", _timer_num, _TIMER_INTERVAL_US);
     }
     else
     {
-        SLOG_PRINTF(SLOG_ERROR, "Failed to initialize focuser timer\n");
+        g_focuser_timer_owner[_timer_num] = nullptr;
+        SLOG_PRINTF(SLOG_ERROR, "Failed to initialize focuser timer %u\n", _timer_num);
     }
 }
 
@@ -310,12 +340,15 @@ void Focuser::AlpacaWriteJson(JsonObject &root)
     obj_states["MaxDrawDistance"] = _focuser_mm_max; 
    
     //Temp compensation
-    obj_states["TempCompAvailable"] = _temp_comp_available;
-    obj_states["TempCompEnabled"] = _temp_comp_enabled;
+    obj_states["#TempCompAvailable"] = _temp_comp_available;
+    if ( ! _temp_comp_available )
+        obj_states["#TempCompEnabled"] = false ; 
+    else 
+        obj_states["TempCompEnabled"] = _temp_comp_enabled;
     //obj_states["TempComp"] = new JsonObject(); Handkle arrays of temperature compensation offsets later. 
     
     //Backlash Compensation
-    obj_states["BacklashCompAvailable"] = _backlash_comp_available;
+    obj_states["#BacklashCompAvailable"] = _backlash_comp_available;
     obj_states["BacklashCompEnabled"] = _backlash_comp_enabled;
     obj_states["BacklashSize"] = _backlash_size;
     obj_states["BacklashDirection"] = _backlash_direction;   

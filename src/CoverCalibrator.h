@@ -3,6 +3,7 @@
   Copyright 2024-2025 peter_n@gmx.de. All rights reserved.
 **************************************************************************************************/
 #pragma once
+#include "../include/UserConfig.h"
 #include "AlpacaCoverCalibrator.h"
 
 enum struct DeviceState_t
