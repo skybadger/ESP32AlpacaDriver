@@ -11,7 +11,9 @@
  * 
  *  Copyright 2024-2025
  * */
-//#include <ESP32.h>
+#pragma once
+#include <Arduino.h>
+
 #define DIRN_CW LOW
 #define DIRN_CCW HIGH
   
@@ -26,21 +28,33 @@
   int _dirPin = 0;
   int _enPin = 0;
   int _enableMode = EnableModes::ENABLE_NONE;
+  int _last_direction = DIRN_CW;
+  bool _configured = false;
       
   void init(void) 
   {
+      if (!_configured)
+      {
+        return;
+      }
+
       //Setup hardware
       pinMode(_dirPin, OUTPUT);
       pinMode(_stepPin, OUTPUT);
-      pinMode(_enPin, OUTPUT);
+      if (_enableMode != EnableModes::ENABLE_NONE)
+      {
+        pinMode(_enPin, OUTPUT);
+      }
+
       digitalWrite( _dirPin, DIRN_CW );
       digitalWrite( _stepPin, LOW);
-      digitalWrite( _enPin , HIGH); //Active low.
+      disableMotor();
   }
   
   public: 
   
-  Motor(int step_pin, int dir_pin, int enable_pin, int enable_mode) : _stepPin(step_pin), _dirPin(dir_pin), _enPin(enable_pin), _enableMode(enable_mode){ init();};
+  Motor() = default;
+  Motor(int step_pin, int dir_pin, int enable_pin, int enable_mode) : _stepPin(step_pin), _dirPin(dir_pin), _enPin(enable_pin), _enableMode(enable_mode), _configured(true){ init();};
   
   //Re-allocate the assigned pins. 
   void setPins(int step_pin, int dir_pin, int enable_pin, int enable_mode)
@@ -49,19 +63,60 @@
     _dirPin = dir_pin;
     _enPin = enable_pin;
     _enableMode = enable_mode;
+    _configured = true;
     init();
   }
 
-  void stepMotor()
+  bool isConfigured() const
   {
+    return _configured;
+  }
+
+  void enableMotor()
+  {
+    if (!_configured || _enableMode == EnableModes::ENABLE_NONE)
+    {
+      return;
+    }
+
+    digitalWrite(_enPin, _enableMode == EnableModes::ENABLE_LOW ? LOW : HIGH);
+  }
+
+  void stepMotor( int direction)
+  {
+    if (!_configured)
+    {
+      return;
+    }
+
+    if ( direction != _last_direction )
+    {
+      digitalWrite( _dirPin, direction );
+      _last_direction = direction;
+    } 
     digitalWrite( _stepPin, HIGH);
     delayMicroseconds(2);
     digitalWrite( _stepPin, LOW);
     delayMicroseconds(2);
   }
 
+  void step(int direction)
+  {
+    stepMotor(direction);
+  }
+
+  void step()
+  {
+    stepMotor(_last_direction);
+  }
+
   void disableMotor()
   {
+    if (!_configured || _enableMode == EnableModes::ENABLE_NONE)
+    {
+      return;
+    }
+
     if (_enableMode == EnableModes::ENABLE_LOW)
     {
       digitalWrite(_enPin, HIGH); // Disable motor (active low)

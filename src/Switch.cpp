@@ -8,34 +8,36 @@
 **************************************************************************************************/
 #include "Switch.h"
 
-const uint32_t k_num_of_switch_devices = 4;
+uint32_t _num_of_switch_devices = nullptr_t;
 
-SwitchDevice_t init_switch_device[k_num_of_switch_devices] = {
+SwitchDevice_t* switch_device = [ 
     {true, true, "Switch-0", "Relay 0 (read/write)", 0.0, 0.0, 10.0, 1.0, SwitchAsyncType_t::kAsyncType},
     {false, false, "Switch-1", "Temperature (read only)", 20.0, -50.0, 50.0, 0.1, SwitchAsyncType_t::kNoAsyncType},
     {true, false, "Switch 2", "Door closed (read only) - fixed init", 0.0, 0.0, 1.0, 1.0, SwitchAsyncType_t::kNoAsyncType},
-    {false, true, "Switch-3", "Heater (read/write) - fixed init", 0.0, 0.0, 100.0, 0.5, SwitchAsyncType_t::kAsyncType}};
+    {false, true, "Switch-3", "Heater (read/write) - fixed init", 0.0, 0.0, 100.0, 0.5, SwitchAsyncType_t::kAsyncType} ,
+  ];
 
-static uint32_t simulate_async_delay_ms[k_num_of_switch_devices] = {0}; // For delayed StateChangeComplete Simulation
+static uint32_t simulate_async_delay_ms[ _num_of_switch_devices] = {0}; // For delayed StateChangeComplete Simulation
 
-Switch::Switch() : AlpacaSwitch(k_num_of_switch_devices)
+Switch::Switch() : AlpacaSwitch(_num_of_switch_devices)
 {
+
 }
 
 void Switch::Begin()
 {
   // Preinit all switch device descriptions and states
-  for (uint32_t u = 0; u < k_num_of_switch_devices; u++)
+  for (uint32_t u = 0; u < _num_of_switch_devices; u++)
   {
-    InitSwitchInitBySetup(u, init_switch_device[u].init_by_setup);
-    InitSwitchCanWrite(u, init_switch_device[u].can_write);
-    InitSwitchName(u, init_switch_device[u].name);
-    InitSwitchDescription(u, init_switch_device[u].description);
-    InitSwitchValue(u, init_switch_device[u].value);
-    InitSwitchMinValue(u, init_switch_device[u].min_value);
-    InitSwitchMaxValue(u, init_switch_device[u].max_value);
-    InitSwitchStep(u, init_switch_device[u].step);
-    InitSwitchCanAsync(u, init_switch_device[u].async_type);
+    InitSwitchInitBySetup(u, _switch_device[u].init_by_setup);
+    InitSwitchCanWrite(u, _switch_device[u].can_write);
+    InitSwitchName(u, _switch_device[u].name);
+    InitSwitchDescription(u, _switch_device[u].description);
+    InitSwitchValue(u, _switch_device[u].value);
+    InitSwitchMinValue(u, _switch_device[u].min_value);
+    InitSwitchMaxValue(u, _switch_device[u].max_value);
+    InitSwitchStep(u, _switch_device[u].step);
+    InitSwitchCanAsync(u, _switch_device[u].async_type);
   }
 
   AlpacaSwitch::Begin();
@@ -48,7 +50,7 @@ void Switch::Begin()
   // TODO
 
 #ifdef DEBUG_SWITCH
-  DebugSwitchDevice(k_num_of_switch_devices);
+  DebugSwitchDevice(_num_of_switch_devices);
 #endif
 }
 

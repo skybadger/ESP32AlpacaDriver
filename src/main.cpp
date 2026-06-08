@@ -6,25 +6,14 @@
 
 // commend/uncommend to enable/disable device testsing with templates
 //#define TEST_COVER_CALIBRATOR     // create CoverCalibrator device
-//#define TEST_SWITCH               // create Switch device
+#define TEST_SWITCH               // create Switch device
 //#define TEST_OBSERVING_CONDITIONS // create ObservingConditions device
 //#define TEST_FOCUSER              // create Focuser device
 #define TEST_THERMAL_CAMERA        // create MLX90640 Camera device
 
 // #define TEST_RESTART              // only for testing
 
-// add your WIFI credentials and uncommend
-// #define DEFAULT_SSID "my_ssid"
-// #define DEFAULT_PWD "my_pwd"
-
-#define DEFAULT_SSID "your_ssid"
-#define DEFAULT_PWD "your_pwd"
-#define HOSTNAME "ESP32AlpTherm1"
-
-#ifndef DEFAULT_SSID 
-#include "Credentials.h"
-#endif
-
+#include "../include/UserConfig.h"
 #include <SLog.h>
 #include <AlpacaDebug.h>
 #include <AlpacaServer.h>
@@ -47,86 +36,17 @@ ObservingConditions observingConditions;
 
 #ifdef TEST_FOCUSER
 #include <Focuser.h>
-Focuser focuser1;
-Focuser focuser2;
+Focuser focuser1(0);
+Focuser focuser2(1);
 #endif
 
-#ifdef TEST_THERMAL_CAMERA
-#include <AuxSensorSwitch.h>
-#include <ThermalCamera.h>
-ThermalCamera thermalCamera;
-AuxSensorSwitch auxSensorSwitch;
-#endif
+#ifdef TEST_THERMALCAMERA
 
-// MQTT heartbeat support. Define MQTT_HOST to enable.
-// Example build flags:
-//   -D MQTT_HOST=\"192.168.1.10\"
-//   -D MQTT_PORT=1883
-//   -D MQTT_HEARTBEAT_TOPIC=\"observatory/heartbeat\"
-//   -D MQTT_STATUS_TOPIC_PREFIX=\"observatory/esp32alptherm1\"
-#ifndef MQTT_PORT
-#define MQTT_PORT 1883
-#endif
-#ifndef MQTT_HEARTBEAT_TOPIC
-#define MQTT_HEARTBEAT_TOPIC "observatory/heartbeat"
-#endif
-#ifndef MQTT_STATUS_TOPIC_PREFIX
-#define MQTT_STATUS_TOPIC_PREFIX "observatory/esp32alptherm1"
-#endif
-#ifndef MQTT_RECONNECT_INTERVAL_MS
-#define MQTT_RECONNECT_INTERVAL_MS 5000
-#endif
-
-#ifdef MQTT_HOST
-#define MQTT_ENABLED
-WiFiClient mqttWifiClient;
-PubSubClient mqttClient(mqttWifiClient);
-uint32_t mqttLastReconnectAttemptMs = 0;
-
-typedef bool (*MqttHeartbeatStatusFn)(char *buffer, size_t buffer_size);
-
-struct MqttHeartbeatDeviceRegistration
-{
-  const char *status_topic;
-  MqttHeartbeatStatusFn status_fn;
-};
-
-constexpr size_t kMaxMqttHeartbeatDevices = 4;
-MqttHeartbeatDeviceRegistration mqttHeartbeatDevices[kMaxMqttHeartbeatDevices];
-size_t mqttHeartbeatDeviceCount = 0;
-
-bool mqttThermalCameraStatus(char *buffer, size_t buffer_size);
-bool mqttAuxSensorSwitchStatus(char *buffer, size_t buffer_size);
-void registerMqttHeartbeatDevice(const char *status_topic, MqttHeartbeatStatusFn status_fn);
-void publishMqttHeartbeatStatus(const char *request_payload, size_t request_payload_len);
-void mqttCallback(char *topic, byte *payload, unsigned int length);
-void setupMqtt();
-void loopMqtt();
-#endif
+#endif 
 
 #include <time.h>
-//Timer interrupts
-hw_timer_t * loop_timer = nullptr; //Used to trigger the main loop at a regular interval (e.g., 100 ms)
-hw_timer_t * timer1 = nullptr;   //Used to drive the focuser motors stepping or driving at a regular interval (e.g., 10 Hz)
-hw_timer_t * timer2 = nullptr;
-volatile bool loop_timer_flag = false;
-volatile bool timer1_flag = false;
-volatile bool timer2_flag = false;
-
-IRAM_ATTR void onloop_timer() 
-{
-  loop_timer_flag = true;
-}
-
-IRAM_ATTR void onTimer1() 
-{
-  timer1_flag = true;
-}
-
-IRAM_ATTR void onTimer2() 
-{
-  timer2_flag = true;   
-}
+static constexpr uint32_t LOOP_INTERVAL_MS = 100;
+static uint32_t last_loop_run_ms = 0;
 
 // ASCOM Alpaca server with discovery
 AlpacaServer alpaca_server(ALPACA_MNG_SERVER_NAME, ALPACA_MNG_MANUFACTURE, ALPACA_MNG_MANUFACTURE_VERSION, ALPACA_MNG_LOCATION);
@@ -294,10 +214,174 @@ void loopMqtt()
 }
 #endif
 
+#ifdef MQTT_ENABLED
+bool mqttThermalCameraStatus(char *buffer, size_t buffer_size)
+{
+#ifdef TEST_THERMAL_CAMERA
+  return thermalCamera.GetMqttHeartbeatJson(buffer, buffer_size);
+#else
+  return false;
+#endif
+}
+
+bool mqttAuxSensorSwitchStatus(char *buffer, size_t buffer_size)
+{
+#ifdef TEST_THERMAL_CAMERA
+  return auxSensorSwitch.GetMqttHeartbeatJson(buffer, buffer_size);
+#else
+  return false;
+#endif
+}
+
+void registerMqttHeartbeatDevice(const char *status_topic, MqttHeartbeatStatusFn status_fn)
+{
+  if (mqttHeartbeatDeviceCount >= kMaxMqttHeartbeatDevices)
+  {
+    SLOG_WARNING_PRINTF("MQTT heartbeat registration table full, cannot add %s\n", status_topic);
+    return;
+  }
+
+  mqttHeartbeatDevices[mqttHeartbeatDeviceCount].status_topic = status_topic;
+  mqttHeartbeatDevices[mqttHeartbeatDeviceCount].status_fn = status_fn;
+  mqttHeartbeatDeviceCount++;
+  SLOG_INFO_PRINTF("MQTT heartbeat registered %s\n", status_topic);
+}
+
+void mqttCallback(char *topic, byte *payload, unsigned int length)
+{
+  if (strcmp(topic, MQTT_HEARTBEAT_TOPIC) != 0)
+  {
+    return;
+  }
+
+  publishMqttHeartbeatStatus(reinterpret_cast<const char *>(payload), length);
+}
+
+void publishMqttHeartbeatStatus(const char *request_payload, size_t request_payload_len)
+{
+  char topic[128] = {0};
+  char payload[512] = {0};
+  char request_id[65] = {0};
+
+  const size_t copy_len = min(request_payload_len, sizeof(request_id) - 1);
+  memcpy(request_id, request_payload, copy_len);
+  request_id[copy_len] = '\0';
+
+  for (size_t device_idx = 0; device_idx < mqttHeartbeatDeviceCount; device_idx++)
+  {
+    const MqttHeartbeatDeviceRegistration &device = mqttHeartbeatDevices[device_idx];
+    if ((device.status_fn != nullptr) && device.status_fn(payload, sizeof(payload)))
+    {
+      snprintf(topic, sizeof(topic), "%s/%s", MQTT_STATUS_TOPIC_PREFIX, device.status_topic);
+      mqttClient.publish(topic, payload, true);
+    }
+  }
+
+  snprintf(payload,
+           sizeof(payload),
+           "{\"host\":\"%s\",\"heartbeatTopic\":\"%s\",\"request\":\"%s\",\"uptimeMs\":%u,\"freeHeap\":%u,\"rssi\":%d}",
+           HOSTNAME,
+           MQTT_HEARTBEAT_TOPIC,
+           request_id,
+           millis(),
+           ESP.getFreeHeap(),
+           WiFi.RSSI());
+  snprintf(topic, sizeof(topic), "%s/device/status", MQTT_STATUS_TOPIC_PREFIX);
+  mqttClient.publish(topic, payload, true);
+}
+
+void setupMqtt()
+{
+  mqttHeartbeatDeviceCount = 0;
+#ifdef TEST_THERMAL_CAMERA
+  registerMqttHeartbeatDevice("camera/0/status", mqttThermalCameraStatus);
+  registerMqttHeartbeatDevice("switch/0/status", mqttAuxSensorSwitchStatus);
+#endif
+
+  mqttClient.setServer(MQTT_HOST, MQTT_PORT);
+  mqttClient.setCallback(mqttCallback);
+  SLOG_INFO_PRINTF("MQTT heartbeat enabled host=%s port=%u heartbeat_topic=%s status_prefix=%s\n",
+                   MQTT_HOST,
+                   MQTT_PORT,
+                   MQTT_HEARTBEAT_TOPIC,
+                   MQTT_STATUS_TOPIC_PREFIX);
+}
+
+void loopMqtt()
+{
+  if (WiFi.status() != WL_CONNECTED)
+  {
+    return;
+  }
+
+  if (!mqttClient.connected())
+  {
+    const uint32_t now_ms = millis();
+    if (now_ms - mqttLastReconnectAttemptMs >= MQTT_RECONNECT_INTERVAL_MS)
+    {
+      mqttLastReconnectAttemptMs = now_ms;
+      char client_id[64] = {0};
+      snprintf(client_id, sizeof(client_id), "%s-%06X", HOSTNAME, static_cast<unsigned int>(ESP.getEfuseMac() & 0xFFFFFF));
+      if (mqttClient.connect(client_id))
+      {
+        mqttClient.subscribe(MQTT_HEARTBEAT_TOPIC);
+        SLOG_INFO_PRINTF("MQTT connected and subscribed to %s\n", MQTT_HEARTBEAT_TOPIC);
+      }
+      else
+      {
+        SLOG_WARNING_PRINTF("MQTT connect failed state=%d\n", mqttClient.state());
+      }
+    }
+  }
+  else
+  {
+    mqttClient.loop();
+  }
+}
+#endif
+
+/*
+MQTT registration is per-device not per driver soince only one port is available for receiving call backs. 
+Let the server handle the callbacks and then dish them out to the devices via a new device::reportHealth() function
+
+*/
+void registerMQTT(void )
+{
+    //setup MQTT client - driver specific
+/*
+    WiFiClient espClient;
+    PubSubClient client(espClient);
+    client.setServer( _mqtt_server, _mqtt_port );
+    client.connect( thisID, _mqtt_user, _mqtt_pwd ); 
+    String lastWillTopic = _mqtt_health_topic; 
+    lastWillTopic.concat( myHostname );
+    client.connect( thisID, _mqtt_user, _mqtt_pwd , lastWillTopic.c_str(), 1, true, "Disconnected", false ); 
+    //Create a heartbeat-based callback that causes this device to read the local i2C bus devices for data to publish.
+    //TODO Update callback to replace with another that listens for the temperature data required for temp compensation  - set compEn false if not found. 
+    client.setCallback( callback ); 
+    client.subscribe( inTopic );
+    client.subscribe(mqttTemperatureSource);
+  */
+ SLOG_PRINTF(SLOG_INFO, "Dummy MQTT client setup performed - update when ready\n");
+}
+
+void callback( String topic)
+{
+if ( topic.indexOf( "heartbeat" ) >= 0 )
+  {
+//enumerate devices and call their reporting function 
+// consider adding to the registered callbacks handler
+SLOG_PRINTF(SLOG_INFO, "Callback received: %s: \n", topic );
+  }
+}
+
 void setup()
 {
   // setup logging and WiFi
-  g_Slog.Begin(Serial, 115200);
+  
+  // initialize SLog serial interface
+  g_Slog.Begin( Serial0, 115200);
+  //g_Slog.Begin( SYSLOG_HOST, 115200);
 #ifdef LOLIN_S2_MINI  
   delay(5000); // time to detect USB device
 #endif  
@@ -317,6 +401,8 @@ void setup()
     IPAddress ip = WiFi.localIP();
     char wifi_ipstr[32] = "xxx.yyy.zzz.www";
     snprintf(wifi_ipstr, sizeof(wifi_ipstr), "%03d.%03d.%03d.%03d", ip[0], ip[1], ip[2], ip[3]);
+    // initialize SLog host
+    g_Slog.Begin(String(SYSLOG_HOST), 514);
     SLOG_INFO_PRINTF("connected with %s\n", wifi_ipstr);
   }
 
@@ -373,7 +459,9 @@ void setup()
 
 void loop()
 {
-#ifdef TEST_RESTART
+  static boolean loop_flag = false;
+
+  #ifdef TEST_RESTART
   checkForRestart();
 #endif
 
@@ -387,8 +475,28 @@ void loop()
   delay(10);
 #else
 
-  if ( timer1_flag ) 
+#ifdef TEST_THERMAL_CAMERA
+  alpaca_server.Loop();
+  thermalCamera.Loop();
+  auxSensorSwitch.Loop();
+#ifdef MQTT_ENABLED
+  loopMqtt();
+#endif
+  delay(10);
+#else
+
+  uint32_t now_ms = millis();
+  uint32_t duration = now_ms - last_loop_run_ms ;
+
+  if ( duration >= LOOP_INTERVAL_MS ) 
+  { 
+    loop_flag = true; 
+  }
+  
+  if ( loop_flag )
   {  
+    last_loop_run_ms = now_ms;
+
     alpaca_server.Loop();
 #ifdef TEST_COVER_CALIBRATOR
     coverCalibrator.Loop();
@@ -434,5 +542,6 @@ void loop()
 #endif
     timer2_flag = false;
   }
-  */
 }
+
+
