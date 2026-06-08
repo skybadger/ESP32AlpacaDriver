@@ -41,8 +41,57 @@ Focuser focuser2(1);
 #endif
 
 #ifdef TEST_THERMALCAMERA
+#include <AuxSensorSwitch.h>
+#include <ThermalCamera.h>
+ThermalCamera thermalCamera;
+AuxSensorSwitch auxSensorSwitch;
+#endif
 
-#endif 
+// MQTT heartbeat support. Define MQTT_HOST to enable.
+// Example build flags:
+//   -D MQTT_HOST=\"192.168.1.10\"
+//   -D MQTT_PORT=1883
+//   -D MQTT_HEARTBEAT_TOPIC=\"observatory/heartbeat\"
+//   -D MQTT_STATUS_TOPIC_PREFIX=\"observatory/esp32alptherm1\"
+#ifndef MQTT_PORT
+#define MQTT_PORT 1883
+#endif
+#ifndef MQTT_HEARTBEAT_TOPIC
+#define MQTT_HEARTBEAT_TOPIC "observatory/heartbeat"
+#endif
+#ifndef MQTT_STATUS_TOPIC_PREFIX
+#define MQTT_STATUS_TOPIC_PREFIX "observatory/esp32alptherm1"
+#endif
+#ifndef MQTT_RECONNECT_INTERVAL_MS
+#define MQTT_RECONNECT_INTERVAL_MS 5000
+#endif
+
+#ifdef MQTT_HOST
+#define MQTT_ENABLED
+WiFiClient mqttWifiClient;
+PubSubClient mqttClient(mqttWifiClient);
+uint32_t mqttLastReconnectAttemptMs = 0;
+
+typedef bool (*MqttHeartbeatStatusFn)(char *buffer, size_t buffer_size);
+
+struct MqttHeartbeatDeviceRegistration
+{
+  const char *status_topic;
+  MqttHeartbeatStatusFn status_fn;
+};
+
+constexpr size_t kMaxMqttHeartbeatDevices = 4;
+MqttHeartbeatDeviceRegistration mqttHeartbeatDevices[kMaxMqttHeartbeatDevices];
+size_t mqttHeartbeatDeviceCount = 0;
+
+bool mqttThermalCameraStatus(char *buffer, size_t buffer_size);
+bool mqttAuxSensorSwitchStatus(char *buffer, size_t buffer_size);
+void registerMqttHeartbeatDevice(const char *status_topic, MqttHeartbeatStatusFn status_fn);
+void publishMqttHeartbeatStatus(const char *request_payload, size_t request_payload_len);
+void mqttCallback(char *topic, byte *payload, unsigned int length);
+void setupMqtt();
+void loopMqtt();
+#endif
 
 #include <time.h>
 static constexpr uint32_t LOOP_INTERVAL_MS = 100;
@@ -541,7 +590,5 @@ void loop()
     }
 #endif
     timer2_flag = false;
-  }
+  }*/
 }
-
-
