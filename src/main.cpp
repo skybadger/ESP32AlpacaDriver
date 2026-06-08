@@ -96,6 +96,21 @@ void loopMqtt();
 #include <time.h>
 static constexpr uint32_t LOOP_INTERVAL_MS = 100;
 static uint32_t last_loop_run_ms = 0;
+//Timer interrupts
+hw_timer_t * timer2 = nullptr;
+hw_timer_t * timer2 = nullptr;
+volatile bool timer1_flag = false;
+volatile bool timer2_flag = false;
+IRAM_ATTR void onTimer1() 
+{
+  timer1_flag = true;
+}
+
+IRAM_ATTR void onTimer2() 
+{
+  timer2_flag = true;   
+}
+
 
 // ASCOM Alpaca server with discovery
 AlpacaServer alpaca_server(ALPACA_MNG_SERVER_NAME, ALPACA_MNG_MANUFACTURE, ALPACA_MNG_MANUFACTURE_VERSION, ALPACA_MNG_LOCATION);
