@@ -32,11 +32,13 @@ class Focuser : public AlpacaFocuser
   const int32_t _motor_step_max_default = 100000; //system default 
   int32_t _motor_step_min = _motor_step_min_limit; //user specified 
   int32_t _motor_step_max = _motor_step_max_default; //user specified
+  int32_t _motor_step_size = _motor_step_min; 
     
   // Increment defaults and limits.
   const int32_t _increment_min = _motor_step_min_default;
   const int32_t _increment_max = _increment_min +( ( _motor_step_max_default - _motor_step_min_default ) /64 ) *64 ;
   const int32_t _increment_default = _motor_step_min_default;
+
 
   //Not sure I care for mm. 
   const int32_t _focuser_mm_min_limit = 0;
