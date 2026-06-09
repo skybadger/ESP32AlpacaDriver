@@ -21,6 +21,7 @@
  class Motor {
   public:
   enum EnableModes { ENABLE_NONE, ENABLE_LOW, ENABLE_HIGH };
+  enum Directions { DIRECTION_CW = DIRN_CW, DIRECTION_CCW = DIRN_CCW };
 
   protected: 
   //Hardware Control motor pins
@@ -54,6 +55,7 @@
   public: 
   
   Motor() = default;
+  virtual ~Motor() = default;
   Motor(int step_pin, int dir_pin, int enable_pin, int enable_mode) : _stepPin(step_pin), _dirPin(dir_pin), _enPin(enable_pin), _enableMode(enable_mode), _configured(true){ init();};
   
   //Re-allocate the assigned pins. 
@@ -67,12 +69,12 @@
     init();
   }
 
-  bool isConfigured() const
+  virtual bool isConfigured() const
   {
     return _configured;
   }
 
-  void enableMotor()
+  virtual void enableMotor()
   {
     if (!_configured || _enableMode == EnableModes::ENABLE_NONE)
     {
@@ -82,7 +84,7 @@
     digitalWrite(_enPin, _enableMode == EnableModes::ENABLE_LOW ? LOW : HIGH);
   }
 
-  void stepMotor( int direction)
+  virtual void stepMotor( int direction)
   {
     if (!_configured)
     {
@@ -100,17 +102,17 @@
     delayMicroseconds(2);
   }
 
-  void step(int direction)
+  virtual void step(int direction)
   {
     stepMotor(direction);
   }
 
-  void step()
+  virtual void step()
   {
     stepMotor(_last_direction);
   }
 
-  void disableMotor()
+  virtual void disableMotor()
   {
     if (!_configured || _enableMode == EnableModes::ENABLE_NONE)
     {
@@ -126,4 +128,20 @@
       digitalWrite(_enPin, LOW); // Disable motor (active high)
     }
   }
+
+  virtual bool setSpeedDirection(uint8_t speed, uint8_t direction)
+  {
+    if (speed == 0)
+    {
+      disableMotor();
+      return true;
+    }
+
+    enableMotor();
+    stepMotor(direction);
+    return true;
+  }
+
+  virtual uint8_t getSpeed() const { return 0; }
+  virtual uint8_t getDirection() const { return _last_direction; }
 };

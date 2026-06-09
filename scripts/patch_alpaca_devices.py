@@ -31,6 +31,17 @@ if device_cpp.exists():
     text = text.replace("WebRequestMethod2Str(type)", "WebRequestMethod2Str(0)")
     device_cpp.write_text(text)
 
+for focuser_path in (alpaca_src / "AlpacaFocuser.h", alpaca_src / "AlpacaFocuser.cpp"):
+    if not focuser_path.exists():
+        continue
+
+    text = focuser_path.read_text()
+    text = text.replace("_alpacaGetAbsolutee", "_alpacaGetAbsolute")
+    text = text.replace("_alpacaGetAbsolut(", "_alpacaGetAbsolute(")
+    text = text.replace("_alpacaGetAbsolut)", "_alpacaGetAbsolute)")
+    text = text.replace("_alpacaGetAbsolut;", "_alpacaGetAbsolute;")
+    focuser_path.write_text(text)
+
 if server_cpp.exists():
     text = server_cpp.read_text()
     old = """const char *const WebRequestMethod2Str(uint8_t method)

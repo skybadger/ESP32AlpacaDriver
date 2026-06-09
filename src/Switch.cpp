@@ -8,18 +8,16 @@
 **************************************************************************************************/
 #include "Switch.h"
 
-uint32_t _num_of_switch_devices = nullptr_t;
+static constexpr uint32_t k_num_of_switch_devices = 4;
 
-SwitchDevice_t* switch_device = [ 
-    {true, true, "Switch-0", "Relay 0 (read/write)", 0.0, 0.0, 10.0, 1.0, SwitchAsyncType_t::kAsyncType},
-    {false, false, "Switch-1", "Temperature (read only)", 20.0, -50.0, 50.0, 0.1, SwitchAsyncType_t::kNoAsyncType},
-    {true, false, "Switch 2", "Door closed (read only) - fixed init", 0.0, 0.0, 1.0, 1.0, SwitchAsyncType_t::kNoAsyncType},
-    {false, true, "Switch-3", "Heater (read/write) - fixed init", 0.0, 0.0, 100.0, 0.5, SwitchAsyncType_t::kAsyncType} ,
-  ];
+static const SwitchDevice_t _switch_device[k_num_of_switch_devices] = {
+  {true, true, "Switch-0", "Relay 0 (read/write)", 0.0, 0.0, 10.0, 1.0, SwitchAsyncType_t::kAsyncType},
+  {false, false, "Switch-1", "Temperature (read only)", 20.0, -50.0, 50.0, 0.1, SwitchAsyncType_t::kNoAsyncType},
+  {true, false, "Switch-2", "Door closed (read only) - fixed init", 0.0, 0.0, 1.0, 1.0, SwitchAsyncType_t::kNoAsyncType},
+  {false, true, "Switch-3", "Heater (read/write) - fixed init", 0.0, 0.0, 100.0, 0.5, SwitchAsyncType_t::kAsyncType},
+};
 
-static uint32_t simulate_async_delay_ms[ _num_of_switch_devices] = {0}; // For delayed StateChangeComplete Simulation
-
-Switch::Switch() : AlpacaSwitch(_num_of_switch_devices)
+Switch::Switch() : AlpacaSwitch(k_num_of_switch_devices)
 {
 
 }
@@ -27,7 +25,7 @@ Switch::Switch() : AlpacaSwitch(_num_of_switch_devices)
 void Switch::Begin()
 {
   // Preinit all switch device descriptions and states
-  for (uint32_t u = 0; u < _num_of_switch_devices; u++)
+  for (uint32_t u = 0; u < k_num_of_switch_devices; u++)
   {
     InitSwitchInitBySetup(u, _switch_device[u].init_by_setup);
     InitSwitchCanWrite(u, _switch_device[u].can_write);
@@ -50,7 +48,7 @@ void Switch::Begin()
   // TODO
 
 #ifdef DEBUG_SWITCH
-  DebugSwitchDevice(_num_of_switch_devices);
+  DebugSwitchDevice(k_num_of_switch_devices);
 #endif
 }
 
@@ -69,7 +67,7 @@ void Switch::Loop()
   SetSwitch(2, door_closed); // bool
 
 #ifdef DEBUG_SWITCH
-  if (door_closed != GetValue(2) == 0.0 ? false : true)
+  if (door_closed != GetValue(2))
   {
     DebugSwitchDevice(1);
     DebugSwitchDevice(2);
@@ -78,7 +76,7 @@ void Switch::Loop()
 
   // StateChangeComplete Simulation for async_type
   // - set StateChangeComplete = true after 3sec
-  for (uint32_t id = 0; id < kAlpacaMaxDevices; id++)
+  for (uint32_t id = 0; id < GetMaxSwitch(); id++)
   {
     if (GetCanAsync(id) && !GetStateChangeComplete(id))
     {
@@ -259,6 +257,7 @@ void Switch::DebugSwitchDevice(uint32_t id)
                       GetSwitchDescription(u),
                       GetSwitchValue(u),
                       GetSwitchMinValue(u),
+                      GetSwitchMaxValue(u),
                       GetSwitchStep(u));
   }
 }

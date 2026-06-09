@@ -129,6 +129,12 @@ void AuxSensorSwitch::AlpacaReadJson(JsonObject &root)
   if (JsonObject obj_config = root["AuxSensorConfiguration"])
   {
     _refresh_interval_ms = obj_config["RefreshIntervalMs"] | _refresh_interval_ms;
+    _mqtt_host = obj_config["MQTTHost"] | _mqtt_host;
+    _mqtt_port = obj_config["MQTTPort"] | _mqtt_port;
+    _mqtt_user = obj_config["MQTTUser"] | _mqtt_user;
+    _mqtt_pwd = obj_config["MQTTPwd"] | _mqtt_pwd;
+    _mqtt_health_topic = obj_config["MQTTHealthTopic"] | _mqtt_health_topic;
+    _mqtt_function_topic = obj_config["MQTTFunctionTopic"] | _mqtt_function_topic;
   }
 }
 
@@ -137,6 +143,12 @@ void AuxSensorSwitch::AlpacaWriteJson(JsonObject &root)
   AlpacaSwitch::AlpacaWriteJson(root);
   JsonObject obj_config = root["AuxSensorConfiguration"].to<JsonObject>();
   obj_config["RefreshIntervalMs"] = _refresh_interval_ms;
+  obj_config["MQTTHost"] = _mqtt_host;
+  obj_config["MQTTPort"] = _mqtt_port;
+  obj_config["MQTTUser"] = _mqtt_user;
+  obj_config["MQTTPwd"] = _mqtt_pwd;
+  obj_config["MQTTHealthTopic"] = _mqtt_health_topic;
+  obj_config["MQTTFunctionTopic"] = _mqtt_function_topic;
 
   JsonObject obj_states = root["#AuxSensorStates"].to<JsonObject>();
   obj_states["MLX90614Present"] = _temperature_sensor.IsPresent();

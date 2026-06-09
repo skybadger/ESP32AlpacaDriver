@@ -386,6 +386,12 @@ void ThermalCamera::AlpacaReadJson(JsonObject &root)
     _sda_pin = obj_config["SDA"] | _sda_pin;
     _scl_pin = obj_config["SCL"] | _scl_pin;
     _i2c_clock_hz = obj_config["I2CClockHz"] | _i2c_clock_hz;
+    _mqtt_host = obj_config["MQTTHost"] | _mqtt_host;
+    _mqtt_port = obj_config["MQTTPort"] | _mqtt_port;
+    _mqtt_user = obj_config["MQTTUser"] | _mqtt_user;
+    _mqtt_pwd = obj_config["MQTTPwd"] | _mqtt_pwd;
+    _mqtt_health_topic = obj_config["MQTTHealthTopic"] | _mqtt_health_topic;
+    _mqtt_function_topic = obj_config["MQTTFunctionTopic"] | _mqtt_function_topic;
   }
 }
 
@@ -396,6 +402,12 @@ void ThermalCamera::AlpacaWriteJson(JsonObject &root)
   obj_config["SDA"] = _sda_pin;
   obj_config["SCL"] = _scl_pin;
   obj_config["I2CClockHz"] = _i2c_clock_hz;
+  obj_config["MQTTHost"] = _mqtt_host;
+  obj_config["MQTTPort"] = _mqtt_port;
+  obj_config["MQTTUser"] = _mqtt_user;
+  obj_config["MQTTPwd"] = _mqtt_pwd;
+  obj_config["MQTTHealthTopic"] = _mqtt_health_topic;
+  obj_config["MQTTFunctionTopic"] = _mqtt_function_topic;
 
   JsonObject obj_states = root["#States"].to<JsonObject>();
   obj_states["SensorOk"] = _sensor_ok;

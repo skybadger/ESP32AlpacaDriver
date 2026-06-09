@@ -1,4 +1,4 @@
-# ESP32-C3 4MB flash layout for the thermal camera firmware.
+# ESP32-family 4MB flash layout with LittleFS and OTA.
 #
 # The filesystem image is LittleFS because platformio.ini sets:
 #   board_build.filesystem = littlefs

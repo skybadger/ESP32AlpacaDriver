@@ -94,8 +94,8 @@ void Focuser::InitTimer()
 
     g_focuser_timer_owner[_timer_num] = this;
     
-    // Create a 1 MHz timer from the 80 MHz APB clock.
-    _timer = timerBegin(_timer_num, _TIMER_DIVIDER, true);
+    // Create a 1 MHz timer; _timer_num is used to select this focuser's ISR bridge.
+    _timer = timerBegin(_TIMER_FREQUENCY_HZ);
     
     if ( _timer != nullptr)
     {
@@ -119,11 +119,10 @@ void Focuser::InitTimer()
         }
 
         // Attach the interrupt handler
-        timerAttachInterrupt( _timer, interrupt_handler, true);
+        timerAttachInterrupt(_timer, interrupt_handler);
         
         // Set the timer to interrupt at _TIMER_INTERVAL_US microseconds
-        timerAlarmWrite(_timer, _TIMER_INTERVAL_US, true);
-        timerAlarmEnable(_timer);
+        timerAlarm(_timer, _TIMER_INTERVAL_US, true, 0);
         
         timerStop(_timer);
         
@@ -354,12 +353,12 @@ void Focuser::AlpacaWriteJson(JsonObject &root)
     obj_states["BacklashDirection"] = _backlash_direction;   
 
     //MQTT interface
-    obj_states["MQTTHost"] = _mqtt_server;
-    obj_states["MQTTPort"] = _mqtt_port;
-    obj_states["MQTTUser"] = _mqtt_user;
-    obj_states["MQTTPwd"] = _mqtt_pwd;
-    obj_states["MQTTHealthTopic"] = _mqtt_health_topic;
-    obj_states["MQTTFunctionTopic"] = _mqtt_function_topic; 
+    obj_config["MQTTHost"] = _mqtt_server;
+    obj_config["MQTTPort"] = _mqtt_port;
+    obj_config["MQTTUser"] = _mqtt_user;
+    obj_config["MQTTPwd"] = _mqtt_pwd;
+    obj_config["MQTTHealthTopic"] = _mqtt_health_topic;
+    obj_config["MQTTFunctionTopic"] = _mqtt_function_topic; 
 
     DBG_JSON_PRINTFJ(SLOG_NOTICE, root, "... END root=<%s>\n", _ser_json_);
 }

@@ -39,6 +39,13 @@ private:
   float _max_temp_c = 0.0f;
   float _mean_temp_c = 0.0f;
 
+  String _mqtt_host;
+  uint16_t _mqtt_port = 1883;
+  String _mqtt_user;
+  String _mqtt_pwd;
+  String _mqtt_health_topic = "observatory/heartbeat";
+  String _mqtt_function_topic = "camera/0/status";
+
   void _refreshFrame(bool force = false);
   void _updateStats();
   void _respondSimple(AsyncWebServerRequest *request, const char *value, JsonValue_t value_type = JsonValue_t::kAsPlainStringValue);
@@ -129,4 +136,10 @@ public:
   void AlpacaReadJson(JsonObject &root);
   void AlpacaWriteJson(JsonObject &root);
   bool GetMqttHeartbeatJson(char *buffer, size_t buffer_size) const;
+  const char *GetMqttHost() const { return _mqtt_host.c_str(); }
+  uint16_t GetMqttPort() const { return _mqtt_port; }
+  const char *GetMqttUser() const { return _mqtt_user.c_str(); }
+  const char *GetMqttPassword() const { return _mqtt_pwd.c_str(); }
+  const char *GetMqttHealthTopic() const { return _mqtt_health_topic.c_str(); }
+  const char *GetMqttFunctionTopic() const { return _mqtt_function_topic.c_str(); }
 };
