@@ -2,6 +2,7 @@
   Description: ASCOM Alpaca Camera device for a Melexis MLX90640 thermal array.
 **************************************************************************************************/
 #include "ThermalCamera.h"
+#include "RuntimeSettings.h"
 
 #include <math.h>
 
@@ -383,6 +384,7 @@ void ThermalCamera::AlpacaReadJson(JsonObject &root)
   AlpacaDevice::AlpacaReadJson(root);
   if (JsonObject obj_config = root["ThermalCameraConfiguration"])
   {
+    RuntimeSettings::ReadJson(obj_config);
     _sda_pin = obj_config["SDA"] | _sda_pin;
     _scl_pin = obj_config["SCL"] | _scl_pin;
     _i2c_clock_hz = obj_config["I2CClockHz"] | _i2c_clock_hz;
@@ -399,6 +401,7 @@ void ThermalCamera::AlpacaWriteJson(JsonObject &root)
 {
   AlpacaDevice::AlpacaWriteJson(root);
   JsonObject obj_config = root["ThermalCameraConfiguration"].to<JsonObject>();
+  RuntimeSettings::WriteJson(obj_config);
   obj_config["SDA"] = _sda_pin;
   obj_config["SCL"] = _scl_pin;
   obj_config["I2CClockHz"] = _i2c_clock_hz;

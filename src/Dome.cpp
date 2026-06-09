@@ -2,6 +2,7 @@
   Description: ASCOM Alpaca Dome device using a shared I2C motor controller.
 **************************************************************************************************/
 #include "Dome.h"
+#include "RuntimeSettings.h"
 
 #include <HTTPClient.h>
 #include <WiFiClient.h>
@@ -592,6 +593,7 @@ void Dome::AlpacaReadJson(JsonObject &root)
   bool motor_config_changed = false;
   if (JsonObject obj_config = root["DomeConfiguration"])
   {
+    RuntimeSettings::ReadJson(obj_config);
     const uint8_t sda_pin = obj_config["SDA"] | _sda_pin;
     const uint8_t scl_pin = obj_config["SCL"] | _scl_pin;
     const uint32_t i2c_clock_hz = obj_config["I2CClockHz"] | _i2c_clock_hz;
@@ -645,6 +647,7 @@ void Dome::AlpacaWriteJson(JsonObject &root)
 {
   AlpacaDevice::AlpacaWriteJson(root);
   JsonObject obj_config = root["DomeConfiguration"].to<JsonObject>();
+  RuntimeSettings::WriteJson(obj_config);
   obj_config["SDA"] = _sda_pin;
   obj_config["SCL"] = _scl_pin;
   obj_config["I2CClockHz"] = _i2c_clock_hz;

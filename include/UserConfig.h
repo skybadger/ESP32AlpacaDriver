@@ -55,6 +55,16 @@
 #define SYSLOG_HOST "192.168.0.48" // your SysLog-Host
 #define HOSTNAME "ESP32AlpFoc1"
 
+#define WIFI_CONNECT_TIMEOUT_MS 20000
+#define WIFI_AP_FALLBACK_SSID HOSTNAME "-setup"
+#define WIFI_AP_FALLBACK_PWD "alpaca-setup"
+
+#define DEFAULT_NTP_SERVER_1 "pool.ntp.org"
+#define DEFAULT_NTP_SERVER_2 "time.nist.gov"
+#define DEFAULT_NTP_SERVER_3 "time.google.com"
+#define DEFAULT_TIMEZONE_NAME "Europe/London"
+#define DEFAULT_TIMEZONE_POSIX "GMT0BST,M3.5.0/1,M10.5.0"
+
 #ifndef DEFAULT_SSID 
 #include "Credentials.h"
 #endif

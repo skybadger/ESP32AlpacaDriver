@@ -2,6 +2,7 @@
   Description: Read-only Alpaca Switch device for auxiliary thermal/lux sensors.
 **************************************************************************************************/
 #include "AuxSensorSwitch.h"
+#include "RuntimeSettings.h"
 
 namespace
 {
@@ -128,6 +129,7 @@ void AuxSensorSwitch::AlpacaReadJson(JsonObject &root)
   AlpacaSwitch::AlpacaReadJson(root);
   if (JsonObject obj_config = root["AuxSensorConfiguration"])
   {
+    RuntimeSettings::ReadJson(obj_config);
     _refresh_interval_ms = obj_config["RefreshIntervalMs"] | _refresh_interval_ms;
     _mqtt_host = obj_config["MQTTHost"] | _mqtt_host;
     _mqtt_port = obj_config["MQTTPort"] | _mqtt_port;
@@ -142,6 +144,7 @@ void AuxSensorSwitch::AlpacaWriteJson(JsonObject &root)
 {
   AlpacaSwitch::AlpacaWriteJson(root);
   JsonObject obj_config = root["AuxSensorConfiguration"].to<JsonObject>();
+  RuntimeSettings::WriteJson(obj_config);
   obj_config["RefreshIntervalMs"] = _refresh_interval_ms;
   obj_config["MQTTHost"] = _mqtt_host;
   obj_config["MQTTPort"] = _mqtt_port;

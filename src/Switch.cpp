@@ -7,6 +7,7 @@
   Copyright 2024-2025 peter_n@gmx.de. All rights reserved.
 **************************************************************************************************/
 #include "Switch.h"
+#include "RuntimeSettings.h"
 
 static constexpr uint32_t k_num_of_switch_devices = 4;
 
@@ -136,6 +137,10 @@ void Switch::AlpacaReadJson(JsonObject &root)
 {
   DBG_JSON_PRINTFJ(SLOG_NOTICE, root, "BEGIN (root=<%s>) ...\n", _ser_json_);
   AlpacaSwitch::AlpacaReadJson(root);
+  if (JsonObject obj_config = root["RuntimeConfiguration"])
+  {
+    RuntimeSettings::ReadJson(obj_config);
+  }
 
   char title[32] = "";
   for (uint32_t u = 0; u < GetMaxSwitch(); u++)
@@ -162,6 +167,8 @@ void Switch::AlpacaWriteJson(JsonObject &root)
 {
   DBG_JSON_PRINTFJ(SLOG_NOTICE, root, "BEGIN root=%s ...\n", _ser_json_);
   AlpacaSwitch::AlpacaWriteJson(root);
+  JsonObject obj_runtime_config = root["RuntimeConfiguration"].to<JsonObject>();
+  RuntimeSettings::WriteJson(obj_runtime_config);
 
   char title[32] = "";
 

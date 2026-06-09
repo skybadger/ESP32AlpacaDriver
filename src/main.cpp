@@ -11,6 +11,10 @@
 
 #ifdef ESP32_DOME
 #define TEST_DOME                  // create Dome device
+#elif defined(ESP32_OBSERVING_CONDITIONS)
+#define TEST_OBSERVING_CONDITIONS  // create ObservingConditions device
+#elif defined(ESP32_SWITCH)
+#define TEST_SWITCH                // create Switch device
 #elif defined(ESP32_C3_MLX90640)
 #define TEST_THERMAL_CAMERA        // create MLX90640 Camera device
 #else
@@ -24,6 +28,8 @@
 #include <AlpacaDebug.h>
 #include <AlpacaServer.h>
 #include <PubSubClient.h>
+#include <WiFi.h>
+#include <WiFiMulti.h>
 
 #ifdef TEST_COVER_CALIBRATOR
 #include <CoverCalibrator.h>
@@ -57,6 +63,8 @@ AuxSensorSwitch auxSensorSwitch;
 #include <Dome.h>
 Dome dome;
 #endif
+
+#include "RuntimeSettings.h"
 
 // MQTT heartbeat support. Device JSON configuration enables the connection.
 // Optional build flags can seed default values:
@@ -123,8 +131,34 @@ void loopMqtt();
 static constexpr uint32_t LOOP_TIMER_FREQUENCY_HZ = 1000000;
 static constexpr uint64_t LOOP_INTERVAL_US = 100000;
 
+#ifndef WIFI_CONNECT_TIMEOUT_MS
+#define WIFI_CONNECT_TIMEOUT_MS 20000
+#endif
+
+#ifndef WIFI_RECONNECT_INTERVAL_MS
+#define WIFI_RECONNECT_INTERVAL_MS 30000
+#endif
+
+#ifndef NTP_RETRY_INTERVAL_MS
+#define NTP_RETRY_INTERVAL_MS 60000
+#endif
+
+#ifndef WIFI_AP_FALLBACK_SSID
+#define WIFI_AP_FALLBACK_SSID HOSTNAME "-setup"
+#endif
+
+#ifndef WIFI_AP_FALLBACK_PWD
+#define WIFI_AP_FALLBACK_PWD "alpaca-setup"
+#endif
+
 hw_timer_t *loop_timer = nullptr;
 volatile bool loop_timer_flag = false;
+WiFiMulti wifi_multi;
+bool wifi_fallback_ap_started = false;
+bool ntp_configured = false;
+uint32_t wifi_last_reconnect_attempt_ms = 0;
+uint32_t ntp_last_attempt_ms = 0;
+uint32_t ntp_last_deferred_log_ms = 0;
 
 void IRAM_ATTR onLoopTimer()
 {
@@ -145,6 +179,156 @@ void setupLoopTimer()
   timerStart(loop_timer);
 
   SLOG_INFO_PRINTF("Loop timer initialized: %u us interval\n", static_cast<unsigned int>(LOOP_INTERVAL_US));
+}
+
+void logWifiAddress(const char *prefix, IPAddress ip)
+{
+  char wifi_ipstr[32] = "xxx.yyy.zzz.www";
+  snprintf(wifi_ipstr, sizeof(wifi_ipstr), "%03d.%03d.%03d.%03d", ip[0], ip[1], ip[2], ip[3]);
+  SLOG_INFO_PRINTF("%s %s\n", prefix, wifi_ipstr);
+}
+
+void startFallbackAccessPoint()
+{
+  if (wifi_fallback_ap_started)
+  {
+    return;
+  }
+
+  WiFi.mode(WIFI_AP_STA);
+  if (WiFi.softAP(WIFI_AP_FALLBACK_SSID, WIFI_AP_FALLBACK_PWD))
+  {
+    wifi_fallback_ap_started = true;
+    logWifiAddress("WiFi fallback AP started at", WiFi.softAPIP());
+    SLOG_WARNING_PRINTF("WiFi station not connected; setup/OTA available on SSID=%s\n", WIFI_AP_FALLBACK_SSID);
+  }
+  else
+  {
+    SLOG_ERROR_PRINTF("Failed to start WiFi fallback AP SSID=%s\n", WIFI_AP_FALLBACK_SSID);
+  }
+}
+
+void setupWifi()
+{
+  WiFi.persistent(false);
+  WiFi.setHostname(HOSTNAME);
+  WiFi.mode(WIFI_STA);
+
+#ifdef DEFAULT_SSID
+  wifi_multi.addAP(DEFAULT_SSID, DEFAULT_PWD);
+#endif
+#ifdef DEFAULT_SSID_2
+  wifi_multi.addAP(DEFAULT_SSID_2, DEFAULT_PWD_2);
+#endif
+#ifdef DEFAULT_SSID_3
+  wifi_multi.addAP(DEFAULT_SSID_3, DEFAULT_PWD_3);
+#endif
+
+  SLOG_INFO_PRINTF("Connecting to WiFi station networks for %u ms\n", static_cast<unsigned int>(WIFI_CONNECT_TIMEOUT_MS));
+  const uint32_t start_ms = millis();
+  while (WiFi.status() != WL_CONNECTED && (millis() - start_ms) < WIFI_CONNECT_TIMEOUT_MS)
+  {
+    wifi_multi.run(500);
+    SLOG_INFO_PRINTF("Connecting to WiFi ..\n");
+    delay(250);
+  }
+
+  if (WiFi.status() == WL_CONNECTED)
+  {
+    logWifiAddress("WiFi station connected at", WiFi.localIP());
+    return;
+  }
+
+  startFallbackAccessPoint();
+}
+
+const char *nullIfEmpty(const char *value)
+{
+  return (value == nullptr || value[0] == '\0') ? nullptr : value;
+}
+
+void setupNtpTime()
+{
+  if (ntp_configured)
+  {
+    return;
+  }
+
+  if (WiFi.status() != WL_CONNECTED)
+  {
+    const uint32_t now_ms = millis();
+    if (ntp_last_deferred_log_ms == 0 || (now_ms - ntp_last_deferred_log_ms) >= NTP_RETRY_INTERVAL_MS)
+    {
+      ntp_last_deferred_log_ms = now_ms;
+      SLOG_WARNING_PRINTF("NTP sync deferred until WiFi station is connected\n");
+    }
+    return;
+  }
+
+  const uint32_t now_ms = millis();
+  if (ntp_last_attempt_ms != 0 && (now_ms - ntp_last_attempt_ms) < NTP_RETRY_INTERVAL_MS)
+  {
+    return;
+  }
+  ntp_last_attempt_ms = now_ms;
+
+  setenv("TZ", RuntimeSettings::TimeZonePosix(), 1);
+  tzset();
+  configTzTime(RuntimeSettings::TimeZonePosix(),
+               nullIfEmpty(RuntimeSettings::NtpServer1()),
+               nullIfEmpty(RuntimeSettings::NtpServer2()),
+               nullIfEmpty(RuntimeSettings::NtpServer3()));
+
+  struct tm timeinfo;
+  if (getLocalTime(&timeinfo, 2500))
+  {
+    char time_buffer[40] = {0};
+    strftime(time_buffer, sizeof(time_buffer), "%Y-%m-%d %H:%M:%S %Z", &timeinfo);
+    ntp_configured = true;
+    SLOG_INFO_PRINTF("NTP synced: %s timezone=%s posix=%s\n",
+                     time_buffer,
+                     RuntimeSettings::TimeZoneName(),
+                     RuntimeSettings::TimeZonePosix());
+  }
+  else
+  {
+    SLOG_WARNING_PRINTF("NTP sync started but no valid time received yet from %s/%s/%s\n",
+                        RuntimeSettings::NtpServer1(),
+                        RuntimeSettings::NtpServer2(),
+                        RuntimeSettings::NtpServer3());
+  }
+}
+
+void loopWifiRecovery()
+{
+  if (!wifi_fallback_ap_started || WiFi.status() == WL_CONNECTED)
+  {
+    if (wifi_fallback_ap_started && WiFi.status() == WL_CONNECTED)
+    {
+      WiFi.softAPdisconnect(true);
+      WiFi.mode(WIFI_STA);
+      wifi_fallback_ap_started = false;
+      logWifiAddress("WiFi station recovered at", WiFi.localIP());
+    }
+    return;
+  }
+
+  const uint32_t now_ms = millis();
+  if (now_ms - wifi_last_reconnect_attempt_ms < WIFI_RECONNECT_INTERVAL_MS)
+  {
+    return;
+  }
+
+  wifi_last_reconnect_attempt_ms = now_ms;
+  SLOG_INFO_PRINTF("Retrying WiFi station connection while fallback AP is active\n");
+  if (wifi_multi.run(500) == WL_CONNECTED)
+  {
+    WiFi.softAPdisconnect(true);
+    WiFi.mode(WIFI_STA);
+    wifi_fallback_ap_started = false;
+    logWifiAddress("WiFi station recovered at", WiFi.localIP());
+    setupNtpTime();
+  }
 }
 
 
@@ -435,22 +619,11 @@ void setup()
 
   SLOG_INFO_PRINTF("BigPet ESP32ALPACADeviceDemo started ...\n");
 
-  WiFi.setHostname(HOSTNAME);
-  WiFi.mode(WIFI_STA);
-  WiFi.begin(DEFAULT_SSID, DEFAULT_PWD);
-
-  while (WiFi.status() != WL_CONNECTED)
+  setupWifi();
+  if (WiFi.status() == WL_CONNECTED)
   {
-    SLOG_INFO_PRINTF("Connecting to WiFi ..\n");
-    delay(1000);
-  }
-  {
-    IPAddress ip = WiFi.localIP();
-    char wifi_ipstr[32] = "xxx.yyy.zzz.www";
-    snprintf(wifi_ipstr, sizeof(wifi_ipstr), "%03d.%03d.%03d.%03d", ip[0], ip[1], ip[2], ip[3]);
     // initialize SLog host
     g_Slog.Begin(String(SYSLOG_HOST), 514);
-    SLOG_INFO_PRINTF("connected with %s\n", wifi_ipstr);
   }
 
   // setup ESP32AlpacaDevices
@@ -495,7 +668,9 @@ void setup()
 #endif
 
   alpaca_server.RegisterCallbacks();
+  SLOG_INFO_PRINTF("OTA update endpoint enabled at /update\n");
   alpaca_server.LoadSettings();
+  setupNtpTime();
 
   // finalize logging setup
   g_Slog.Begin(alpaca_server.GetSyslogHost().c_str());
@@ -513,6 +688,9 @@ void setup()
 
 void processLoopTimerEvent()
 {
+  loopWifiRecovery();
+  setupNtpTime();
+
 #ifdef TEST_RESTART
   checkForRestart();
 #endif
