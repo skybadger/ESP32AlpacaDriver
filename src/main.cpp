@@ -11,11 +11,17 @@
 #define TEST_FOCUSER              // create Focuser device
 
 // #define TEST_RESTART              // only for testing
-
 #include "../include/UserConfig.h"
 #include <SLog.h>
 #include <AlpacaDebug.h>
 #include <AlpacaServer.h>
+#include <PubSubClient.h>
+
+//NTP services
+#include <time.h>
+#include <sys/time.h>
+time_t now; //use as 'gmtime(&now);
+
 
 #ifdef TEST_COVER_CALIBRATOR
 #include <CoverCalibrator.h>
@@ -44,6 +50,12 @@ static uint32_t last_loop_run_ms = 0;
 
 // ASCOM Alpaca server with discovery
 AlpacaServer alpaca_server(ALPACA_MNG_SERVER_NAME, ALPACA_MNG_MANUFACTURE, ALPACA_MNG_MANUFACTURE_VERSION, ALPACA_MNG_LOCATION);
+
+WiFiClient mqtt_wifi_client;
+PubSubClient mqtt_client(mqtt_wifi_client);
+char mqtt_heartbeat_topic[96] = MQTT_DEFAULT_HEARTBEAT_TOPIC;
+uint32_t last_mqtt_reconnect_ms = 0;
+static constexpr uint32_t MQTT_RECONNECT_INTERVAL_MS = 5000;
 
 #ifdef TEST_RESTART
 // ========================================================================
@@ -82,39 +94,90 @@ void checkForRestart()
 }
 #endif
 
-/*
-MQTT registration is per-device not per driver soince only one port is available for receiving call backs. 
-Let the server handle the callbacks and then dish them out to the devices via a new device::reportHealth() function
-
-*/
-void registerMQTT(void )
+void publishMqttStatus()
 {
-    //setup MQTT client - driver specific
-/*
-    WiFiClient espClient;
-    PubSubClient client(espClient);
-    client.setServer( _mqtt_server, _mqtt_port );
-    client.connect( thisID, _mqtt_user, _mqtt_pwd ); 
-    String lastWillTopic = _mqtt_health_topic; 
-    lastWillTopic.concat( myHostname );
-    client.connect( thisID, _mqtt_user, _mqtt_pwd , lastWillTopic.c_str(), 1, true, "Disconnected", false ); 
-    //Create a heartbeat-based callback that causes this device to read the local i2C bus devices for data to publish.
-    //TODO Update callback to replace with another that listens for the temperature data required for temp compensation  - set compEn false if not found. 
-    client.setCallback( callback ); 
-    client.subscribe( inTopic );
-    client.subscribe(mqttTemperatureSource);
-  */
- SLOG_PRINTF(SLOG_INFO, "Dummy MQTT client setup performed - update when ready\n");
+  alpaca_server.PublishMqttStatus(mqtt_client);
 }
 
-void callback( String topic)
+void mqttCallback(char* topic, byte* payload, unsigned int length)
 {
-if ( topic.indexOf( "heartbeat" ) >= 0 )
+  (void)payload;
+  (void)length;
+
+  if (strcmp(topic, mqtt_heartbeat_topic) == 0 || strstr(topic, "heartbeat") != nullptr)
   {
-//enumerate devices and call their reporting function 
-// consider adding to the registered callbacks handler
-SLOG_PRINTF(SLOG_INFO, "Callback received: %s: \n", topic );
+    SLOG_PRINTF(SLOG_INFO, "MQTT heartbeat received: %s\n", topic);
+    publishMqttStatus();
   }
+}
+
+void configureMQTT()
+{
+  const char *host = nullptr;
+  const char *user = nullptr;
+  const char *password = nullptr;
+  const char *heartbeat_topic = nullptr;
+  uint16_t port = 0;
+
+  if (!alpaca_server.GetMqttConnectionSettings(host, port, user, password, heartbeat_topic))
+  {
+    SLOG_PRINTF(SLOG_WARNING, "MQTT disabled or no valid MQTT host configured\n");
+    return;
+  }
+
+  strlcpy(mqtt_heartbeat_topic, heartbeat_topic, sizeof(mqtt_heartbeat_topic));
+  mqtt_client.setServer(host, port);
+  mqtt_client.setCallback(mqttCallback);
+  mqtt_client.setBufferSize(1200);
+  SLOG_PRINTF(SLOG_INFO, "MQTT configured host=%s port=%u heartbeat=%s\n", host, port, mqtt_heartbeat_topic);
+}
+
+void serviceMQTT()
+{
+  if (WiFi.status() != WL_CONNECTED)
+    return;
+
+  if (!mqtt_client.connected())
+  {
+    uint32_t now_ms = millis();
+    if ((uint32_t)(now_ms - last_mqtt_reconnect_ms) < MQTT_RECONNECT_INTERVAL_MS)
+      return;
+
+    last_mqtt_reconnect_ms = now_ms;
+
+    const char *host = nullptr;
+    const char *user = nullptr;
+    const char *password = nullptr;
+    const char *heartbeat_topic = nullptr;
+    uint16_t port = 0;
+    if (!alpaca_server.GetMqttConnectionSettings(host, port, user, password, heartbeat_topic))
+      return;
+
+    strlcpy(mqtt_heartbeat_topic, heartbeat_topic, sizeof(mqtt_heartbeat_topic));
+    mqtt_client.setServer(host, port);
+
+    char client_id[48] = {0};
+    snprintf(client_id, sizeof(client_id), "%s-%s", HOSTNAME, alpaca_server.GetUID());
+
+    bool connected = false;
+    if (strlen(user) > 0)
+      connected = mqtt_client.connect(client_id, user, password);
+    else
+      connected = mqtt_client.connect(client_id);
+
+    if (connected)
+    {
+      mqtt_client.subscribe(mqtt_heartbeat_topic);
+      SLOG_PRINTF(SLOG_INFO, "MQTT connected and subscribed to %s\n", mqtt_heartbeat_topic);
+      publishMqttStatus();
+    }
+    else
+    {
+      SLOG_PRINTF(SLOG_WARNING, "MQTT connect failed state=%d\n", mqtt_client.state());
+    }
+  }
+
+  mqtt_client.loop();
 }
 
 void setup()
@@ -129,7 +192,10 @@ void setup()
 #endif  
 
   SLOG_INFO_PRINTF("BigPet ESP32ALPACADeviceDemo started ...\n");
-
+  
+  //Start time
+  configTime(TZ_SEC, DST_MN, timeServer1, timeServer2, timeServer3 );
+  
   WiFi.setHostname(HOSTNAME);
   WiFi.mode(WIFI_STA);
   WiFi.begin(DEFAULT_SSID, DEFAULT_PWD);
@@ -189,7 +255,7 @@ void setup()
   last_loop_run_ms = millis();
   SLOG_PRINTF(SLOG_INFO, "Main loop soft timer initialized: %u ms interval\n", LOOP_INTERVAL_MS);
 
-  registerMQTT();
+  configureMQTT();
 
 }
 
@@ -214,6 +280,7 @@ void loop()
     last_loop_run_ms = now_ms;
 
     alpaca_server.Loop();
+    serviceMQTT();
 #ifdef TEST_COVER_CALIBRATOR
     coverCalibrator.Loop();
     delay(10);

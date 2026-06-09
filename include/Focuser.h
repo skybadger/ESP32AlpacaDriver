@@ -18,12 +18,70 @@ class Focuser : public AlpacaFocuser
   static constexpr const char* FocuserModeCh[] = { "ABSOLUTE", "RELATIVE" };
   enum FocuserStates {  FOCUSER_INIT=0,  FOCUSER_IDLE, FOCUSER_MOVING,  FOCUSER_HALTED,  FOCUSER_STOPPING };
   static constexpr const char* FocuserStateCh[] = { "INIT", "IDLE", "MOVING", "HALTED", "STOPPING" };
+  enum CommandType { COMMAND_NONE, COMMAND_MOVE_ABSOLUTE, COMMAND_MOVE_RELATIVE, COMMAND_HALT };
+
+  struct command_t
+  {
+    uint32_t clientId = 0;
+    uint32_t clientTransactionId = 0;
+    CommandType command_type = COMMAND_NONE;
+    char command_argument[64] = {0};
+  };
+
+  class CommandQueue
+  {
+    static constexpr size_t kMaxCommands = 12;
+    command_t _commands[kMaxCommands];
+    size_t _count = 0;
+
+  public:
+    bool push(const command_t &command)
+    {
+      return insert(_count, command);
+    }
+
+    bool insert(size_t index, const command_t &command)
+    {
+      if (_count >= kMaxCommands || index > _count)
+        return false;
+
+      for (size_t i = _count; i > index; --i)
+        _commands[i] = _commands[i - 1];
+
+      _commands[index] = command;
+      _count++;
+      return true;
+    }
+
+    bool pop(command_t &command)
+    {
+      if (_count == 0)
+        return false;
+
+      command = _commands[0];
+      for (size_t i = 1; i < _count; ++i)
+        _commands[i - 1] = _commands[i];
+
+      _count--;
+      return true;
+    }
+
+    void clear()
+    {
+      _count = 0;
+    }
+
+    bool empty() const { return _count == 0; }
+    bool full() const { return _count >= kMaxCommands; }
+    size_t size() const { return _count; }
+    size_t capacity() const { return kMaxCommands; }
+  };
 
   private:
   pinmap_t *_pins;
   size_t _num_pins; 
   void moveFocuser();
-  Motor _myMotor;
+  StepperMotor _myMotor;
 
   //Position defaults and limits. 
   const int32_t _motor_step_min_limit = 1;//system limit
@@ -72,6 +130,8 @@ class Focuser : public AlpacaFocuser
   bool _is_moving = false;
   uint32_t _position = 0;
   uint32_t _target_position = _position;
+  command_t _current_command;
+  CommandQueue _command_queue;
     
   // Timer interrupt handling for time-based operations
   hw_timer_t* _timer = nullptr;
@@ -80,22 +140,15 @@ class Focuser : public AlpacaFocuser
   const uint32_t _TIMER_DIVIDER = 80;  // 80 MHz / 80 = 1 MHz resolution
   const uint32_t _TIMER_INTERVAL_US = 100000; // 100ms interrupt interval (10 Hz)
   
-  //MQTT parameters and flags
-  String _mqtt_server;
-  uint16_t _mqtt_port;
-  String _mqtt_user;
-  String _mqtt_pwd;
-  String _mqtt_health_topic;
-  String _mqtt_function_topic;
-  volatile bool _callbackFlag = false;
-
   // Alpaca command handlers
   void AlpacaReadJson(JsonObject &root);
   void AlpacaWriteJson(JsonObject &root);
 
   const bool _putTempComp(bool temp_comp) { return true; };
   const bool _putHalt();
+  const bool _putHalt(uint32_t client_id, uint32_t client_transaction_id);
   const bool _putMove(int32_t target_position_steps);
+  const bool _putMove(int32_t target_position_steps, uint32_t client_id, uint32_t client_transaction_id);
 
   // optional Alpaca service: to be implemented if needed
   const bool _putAction(const char *const action, const char *const parameters, char *string_response, size_t string_response_size) { return false; }
@@ -124,6 +177,11 @@ class Focuser : public AlpacaFocuser
 
 
   int manageFocuserState( FocuserStates targetFocuserState );
+  bool enqueueCommand(const command_t &command);
+  bool insertCommand(size_t index, const command_t &command);
+  bool processNextCommand();
+  bool executeCommand(const command_t &command);
+  bool beginMoveTo(int32_t target_position);
 
   public:
   explicit Focuser(uint8_t timer_num = 1);
@@ -131,7 +189,7 @@ class Focuser : public AlpacaFocuser
   
   Focuser(pinmap_t *pins, size_t num_pins, uint8_t timer_num = 1): _pins(pins), _num_pins(num_pins), _timer_num(timer_num) 
   { 
-    _myMotor = Motor( _pins[0].pin, _pins[1].pin, _pins[2].pin, Motor::EnableModes::ENABLE_LOW);
+    _myMotor = StepperMotor( _pins, _num_pins, Motor::EnableModes::ENABLE_LOW);
     _myMotor.disableMotor();
 
   };
@@ -152,17 +210,5 @@ class Focuser : public AlpacaFocuser
   bool IsTimerInterruptFlagged() const { return _timer_interrupt_flag; }
   void ClearTimerInterruptFlag() { _timer_interrupt_flag = false; }
   void ProcessTimerInterrupt();
-
-  //MQTT support methods
-  void setMQTT( String mqtt_server, uint16_t mqtt_port, String mqtt_user, String mqtt_pwd, String health_topic, String function_topic )
-  {
-    _mqtt_server = mqtt_server;
-    _mqtt_port = mqtt_port;
-    _mqtt_user = mqtt_user;
-    _mqtt_pwd = mqtt_pwd;
-    _mqtt_health_topic = health_topic;
-    _mqtt_function_topic = function_topic;
-  }
-  void MQTTCallback(char* topic, byte* payload, unsigned int length);
 
 };

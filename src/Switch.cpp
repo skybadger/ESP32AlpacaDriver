@@ -11,10 +11,10 @@
 const uint32_t k_num_of_switch_devices = 4;
 
 SwitchDevice_t init_switch_device[k_num_of_switch_devices] = {
-    {true, true, "Switch-0", "Relay 0 (read/write)", 0.0, 0.0, 10.0, 1.0, SwitchAsyncType_t::kAsyncType},
-    {false, false, "Switch-1", "Temperature (read only)", 20.0, -50.0, 50.0, 0.1, SwitchAsyncType_t::kNoAsyncType},
-    {true, false, "Switch 2", "Door closed (read only) - fixed init", 0.0, 0.0, 1.0, 1.0, SwitchAsyncType_t::kNoAsyncType},
-    {false, true, "Switch-3", "Heater (read/write) - fixed init", 0.0, 0.0, 100.0, 0.5, SwitchAsyncType_t::kAsyncType}};
+    {true, true, "Switch-0", "Relay 0 (read/write)", 0.0, 0.0, 10.0, 1.0, SwitchValueType_t::kDouble, SwitchAsyncType_t::kAsyncType},
+    {false, false, "Switch-1", "Temperature (read only)", 20.0, -50.0, 50.0, 0.1, SwitchValueType_t::kDouble, SwitchAsyncType_t::kNoAsyncType},
+    {true, false, "Switch 2", "Door closed (read only) - fixed init", 0.0, 0.0, 1.0, 1.0, SwitchValueType_t::kBool, SwitchAsyncType_t::kNoAsyncType},
+    {false, true, "Switch-3", "Heater (read/write) - fixed init", 0.0, 0.0, 100.0, 0.5, SwitchValueType_t::kDouble, SwitchAsyncType_t::kAsyncType}};
 
 static uint32_t simulate_async_delay_ms[k_num_of_switch_devices] = {0}; // For delayed StateChangeComplete Simulation
 

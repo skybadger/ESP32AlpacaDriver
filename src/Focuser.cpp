@@ -7,7 +7,6 @@
   Copyright 2024-2025 peter_n@gmx.de. All rights reserved.
 **************************************************************************************************/
 #include <Focuser.h>
-#include <PubSubClient.h>
 
 constexpr const char* Focuser::FocuserModeCh[];
 constexpr const char* Focuser::FocuserStateCh[];
@@ -56,6 +55,9 @@ void Focuser::Begin( )
     // Initialize timer interrupt for time-based stepper control
     InitTimer();
 
+    _focuserState = FocuserStates::FOCUSER_HALTED;
+    _targetFocuserState = FocuserStates::FOCUSER_HALTED;
+    _is_moving = false;
 }
 
 // Regular device housekeeping; motor stepping is driven by this focuser's hardware timer.
@@ -65,19 +67,6 @@ void Focuser::Loop()
       SLOG_PRINTF(SLOG_DEBUG, "focuser position : %d\n", _position); 
     
     manageFocuserState( _targetFocuserState );
-
-    //TODO manage MQTT client loop and reconnect if needed
-    if ( /*client.connected()*/ false ) 
-    {
-        //client.loop();
-    } 
-    else 
-    {
-        // Attempt to reconnect
-        //if (client.connect( thisID, _mqtt_user, _mqtt_pwd )) {
-        //  client.subscribe(inTopic);
-        //}
-    }
 }
 
 /**
@@ -172,6 +161,9 @@ void IRAM_ATTR Focuser::_timerInterruptHandler()
     {
       StopTimer();
       _focuserState = FocuserStates::FOCUSER_HALTED;
+      _targetFocuserState = FocuserStates::FOCUSER_HALTED;
+      _is_moving = false;
+      _myMotor.disableMotor();
     }
     _timer_interrupt_flag = true;
 }
@@ -197,7 +189,24 @@ void Focuser::ProcessTimerInterrupt()
   String msg = "";
   //need a targetFocuserState.
   if ( _focuserState == targetFocuserState ) 
+  {
+    if ( _command_queue.empty())
+    {
+        return false;
+    }
+
+    command_t command;
+    if (!_command_queue.pop(command))
+    {
+        return false;
+    }
+
+    _current_command = command;
+    _targetFocuserState = command.command_argument;
+
+    //Check for other queued commands
     return 0;
+  } 
    
   switch( _focuserState )
   {          
@@ -246,7 +255,8 @@ void Focuser::ProcessTimerInterrupt()
                  break;
             case FocuserStates::FOCUSER_HALTED:
                  //Already idle. 
-                 _putHalt();
+                 if (_focuserState == FocuserStates::FOCUSER_HALTED || _focuserState == FocuserStates::FOCUSER_IDLE)
+                     _putHalt();
             default:
                  SLOG_PRINTF(SLOG_WARNING, "Unexpected targetFocuserState %s from IDLE\n", FocuserStateCh[ targetFocuserState ] );
               break;
@@ -301,13 +311,6 @@ void Focuser::AlpacaReadJson(JsonObject &root)
         _temp_comp_enabled = obj_config["TempComp"] | _temp_comp_enabled;
         _temp_comp_available = obj_config["TempCompAvailable"] | _temp_comp_available;
 
-        _mqtt_server = obj_config["MQTTHost"] | _mqtt_server;
-        _mqtt_port = obj_config["MQTTPort"] | _mqtt_port;
-        _mqtt_user = obj_config["MQTTUser"] | _mqtt_user;
-        _mqtt_pwd = obj_config["MQTTPwd"] | _mqtt_pwd;
-        _mqtt_health_topic = obj_config["MQTTHealthTopic"] | _mqtt_health_topic;
-        _mqtt_function_topic = obj_config["MQTTFunctionTopic"] | _mqtt_function_topic;
-
         SLOG_PRINTF(SLOG_INFO, "... END \n");
     }
     else
@@ -353,56 +356,180 @@ void Focuser::AlpacaWriteJson(JsonObject &root)
     obj_states["BacklashSize"] = _backlash_size;
     obj_states["BacklashDirection"] = _backlash_direction;   
 
-    //MQTT interface
-    obj_states["MQTTHost"] = _mqtt_server;
-    obj_states["MQTTPort"] = _mqtt_port;
-    obj_states["MQTTUser"] = _mqtt_user;
-    obj_states["MQTTPwd"] = _mqtt_pwd;
-    obj_states["MQTTHealthTopic"] = _mqtt_health_topic;
-    obj_states["MQTTFunctionTopic"] = _mqtt_function_topic; 
-
     DBG_JSON_PRINTFJ(SLOG_NOTICE, root, "... END root=<%s>\n", _ser_json_);
 }
 
 const bool Focuser::_putMove(int32_t target_position)
 {
+    return _putMove(target_position, 0, 0);
+}
+
+const bool Focuser::_putMove(int32_t target_position, uint32_t client_id, uint32_t client_transaction_id)
+{
     bool result = false;
 
-    if ( _focuserState == FocuserStates::FOCUSER_HALTED || 
-        _focuserState == FocuserStates::FOCUSER_STOPPING || 
-        _focuserState == FocuserStates::FOCUSER_IDLE )
+    if ( target_position >= _motor_step_min && 
+         target_position <= _motor_step_max ) 
     {
-        if ( target_position >= _motor_step_min && 
-             target_position <= _motor_step_max ) 
-        {
-            _target_position = target_position;
-            const bool moving_out = _target_position > _position;
-            _myMotor.step(moving_out ? _focuser_direction : !_focuser_direction);
-            StartTimer();
-            _focuserState = FocuserStates::FOCUSER_MOVING;
-            result = true;
-        }
-        else
-        {
-            // wrong state
-        }
+        command_t command;
+        command.clientId = client_id;
+        command.clientTransactionId = client_transaction_id;
+        command.command_type = CommandType::COMMAND_MOVE_ABSOLUTE;
+        snprintf(command.command_argument, sizeof(command.command_argument), "%ld", (long)target_position);
+        result = enqueueCommand(command);
     }
     return result;
 }
 
 const bool Focuser::_putHalt()
 {
+    return _putHalt(0, 0);
+}
+
+const bool Focuser::_putHalt(uint32_t client_id, uint32_t client_transaction_id)
+{
     bool result = false;
+
+    _command_queue.clear();
+    _current_command.clientId = client_id;
+    _current_command.clientTransactionId = client_transaction_id;
+    _current_command.command_type = CommandType::COMMAND_HALT;
+    strlcpy(_current_command.command_argument, "halt", sizeof(_current_command.command_argument));
 
     if ( _focuserState == FocuserStates::FOCUSER_MOVING || _focuserState == FocuserStates::FOCUSER_STOPPING)
     {
         StopTimer();
         _focuserState = FocuserStates::FOCUSER_HALTED;
+        _targetFocuserState = FocuserStates::FOCUSER_HALTED;
+        _is_moving = false;
+        _myMotor.disableMotor();
         result = true;
     }
     else 
     {
         StopTimer();
+        _focuserState = FocuserStates::FOCUSER_HALTED;
+        _targetFocuserState = FocuserStates::FOCUSER_HALTED;
+        _is_moving = false;
+        _myMotor.disableMotor();
+        result = true;
     }
     return result;
+}
+
+bool Focuser::enqueueCommand(const command_t &command)
+{
+    bool queued = _command_queue.push(command);
+    if (!queued)
+    {
+        SLOG_PRINTF(SLOG_WARNING, "Focuser command queue full, command type=%d rejected\n", command.command_type);
+    }
+    return queued;
+}
+
+bool Focuser::insertCommand(size_t index, const command_t &command)
+{
+    //split a single command into parts here so it only happens once. 
+    switch (command.command_type)
+    {
+        case CommandType::COMMAND_MOVE_ABSOLUTE:
+            if ( _backlash_comp_available && _backlash_comp_enabled )
+            {
+                int32_t distance = (int32_t) strtol( command.command_argument, nullptr, 10 );
+                bool direction = ( distance >= 0 )? DIRN_CCW:  DIRN_CW ; 
+                if ( direction == _backlash_direction )
+                {
+                       //We're already taking up the backlash by moving in the same direction as the backlash setting
+                       updated_cmd = command_t( )
+                       bool queued = _command_queue.insert(index = 0 , command);                      
+                }
+                else
+                {
+                    //go past the target by the backlash distance and come back in teh backlash direction. 
+                    /* code */
+                }
+                
+
+            }
+        
+        
+        return beginMoveTo((int32_t)strtol(command.command_argument, nullptr, 10));
+
+        case CommandType::COMMAND_MOVE_RELATIVE:
+            return beginMoveTo((int32_t)_position + (int32_t)strtol(command.command_argument, nullptr, 10));
+
+        case CommandType::COMMAND_HALT:
+            return _putHalt(command.clientId, command.clientTransactionId);
+        
+        default: 
+
+    }
+    
+    bool queued = _command_queue.insert(index, command);
+    if (!queued)
+    {
+        SLOG_PRINTF(SLOG_WARNING, "Focuser command queue insert failed index=%u type=%d\n", (unsigned int)index, command.command_type);
+    }
+    return queued;
+}
+
+bool Focuser::processNextCommand()
+{
+    if ( _command_queue.empty())
+    {
+        return false;
+    }
+
+    command_t command;
+    if (!_command_queue.pop(command))
+    {
+        return false;
+    }
+
+    _current_command = command;
+    return executeCommand(command);
+}
+
+bool Focuser::executeCommand(const command_t &command)
+{
+    switch (command.command_type)
+    {
+        case CommandType::COMMAND_MOVE_ABSOLUTE:
+            return beginMoveTo((int32_t)strtol(command.command_argument, nullptr, 10));
+
+        case CommandType::COMMAND_MOVE_RELATIVE:
+            return beginMoveTo((int32_t)_position + (int32_t)strtol(command.command_argument, nullptr, 10));
+
+        case CommandType::COMMAND_HALT:
+            _command_queue.clear();
+            return _putHalt(command.clientId, command.clientTransactionId);
+
+        default:
+            SLOG_PRINTF(SLOG_WARNING, "Unknown focuser command type=%d\n", command.command_type);
+            return false;
+    }
+}
+
+bool Focuser::beginMoveTo(int32_t target_position)
+{
+    if (target_position < _motor_step_min || target_position > _motor_step_max)
+    {
+        SLOG_PRINTF(SLOG_WARNING, "Focuser move target out of range: %ld\n", (long)target_position);
+        return false;
+    }
+
+    _target_position = (uint32_t)target_position;
+    if (_target_position == _position)
+    {
+        _focuserState = FocuserStates::FOCUSER_HALTED;
+        _targetFocuserState = FocuserStates::FOCUSER_HALTED;
+        _is_moving = false;
+        return true;
+    }
+
+    _is_moving = true;
+    _focuserState = FocuserStates::FOCUSER_MOVING;
+    _targetFocuserState = FocuserStates::FOCUSER_MOVING;
+    StartTimer();
+    return true;
 }

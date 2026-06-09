@@ -39,22 +39,29 @@
                     });
                     data;       
                 });
-                $("#json_update").click(function () {
-                    $.ajax({
+                function updateJsonData(onSuccess) {
+                    return $.ajax({
                         url: 'jsondata',
                         type: 'POST',
                         dataType: "json",
                         data: JSON.stringify($('#form-container').jsonFormer('formData')),
                         contentType: 'application/json',
                         success: function(msg) {
-
+                            if (onSuccess) {
+                                onSuccess(msg);
+                            }
                         }
                     })
+                }
+                $("#json_update").click(function () {
+                    updateJsonData();
                 });
                 $("#json_save").click(function () {
-                    $.getJSON("/save_settings", function(data) {
-                        alert(data['saved'] == true? "Saved succesfully" : "Save failed!");
-                    })
+                    updateJsonData(function() {
+                        $.getJSON("/save_settings", function(data) {
+                            alert(data['saved'] == true? "Saved succesfully" : "Save failed!");
+                        })
+                    });
                 });
                 $("#json_refresh").click(function () {
                     location.reload(); // until json-only refresh is ready
