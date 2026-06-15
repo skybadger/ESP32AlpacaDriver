@@ -7,8 +7,9 @@
   Copyright 2024-2025 peter_n@gmx.de. All rights reserved.
 **************************************************************************************************/
 #include "Switch.h"
+#include "RuntimeSettings.h"
 
-const uint32_t k_num_of_switch_devices = 4;
+static constexpr uint32_t k_num_of_switch_devices = 4;
 
 SwitchDevice_t init_switch_device[k_num_of_switch_devices] = {
     {true, true, "Switch-0", "Relay 0 (read/write)", 0.0, 0.0, 10.0, 1.0, SwitchValueType_t::kDouble, SwitchAsyncType_t::kAsyncType},
@@ -20,6 +21,7 @@ static uint32_t simulate_async_delay_ms[k_num_of_switch_devices] = {0}; // For d
 
 Switch::Switch() : AlpacaSwitch(k_num_of_switch_devices)
 {
+
 }
 
 void Switch::Begin()
@@ -27,15 +29,15 @@ void Switch::Begin()
   // Preinit all switch device descriptions and states
   for (uint32_t u = 0; u < k_num_of_switch_devices; u++)
   {
-    InitSwitchInitBySetup(u, init_switch_device[u].init_by_setup);
-    InitSwitchCanWrite(u, init_switch_device[u].can_write);
-    InitSwitchName(u, init_switch_device[u].name);
-    InitSwitchDescription(u, init_switch_device[u].description);
-    InitSwitchValue(u, init_switch_device[u].value);
-    InitSwitchMinValue(u, init_switch_device[u].min_value);
-    InitSwitchMaxValue(u, init_switch_device[u].max_value);
-    InitSwitchStep(u, init_switch_device[u].step);
-    InitSwitchCanAsync(u, init_switch_device[u].async_type);
+    InitSwitchInitBySetup(u, _switch_device[u].init_by_setup);
+    InitSwitchCanWrite(u, _switch_device[u].can_write);
+    InitSwitchName(u, _switch_device[u].name);
+    InitSwitchDescription(u, _switch_device[u].description);
+    InitSwitchValue(u, _switch_device[u].value);
+    InitSwitchMinValue(u, _switch_device[u].min_value);
+    InitSwitchMaxValue(u, _switch_device[u].max_value);
+    InitSwitchStep(u, _switch_device[u].step);
+    InitSwitchCanAsync(u, _switch_device[u].async_type);
   }
 
   AlpacaSwitch::Begin();
@@ -67,7 +69,7 @@ void Switch::Loop()
   SetSwitch(2, door_closed); // bool
 
 #ifdef DEBUG_SWITCH
-  if (door_closed != GetValue(2) == 0.0 ? false : true)
+  if (door_closed != GetValue(2))
   {
     DebugSwitchDevice(1);
     DebugSwitchDevice(2);
@@ -76,7 +78,7 @@ void Switch::Loop()
 
   // StateChangeComplete Simulation for async_type
   // - set StateChangeComplete = true after 3sec
-  for (uint32_t id = 0; id < kAlpacaMaxDevices; id++)
+  for (uint32_t id = 0; id < GetMaxSwitch(); id++)
   {
     if (GetCanAsync(id) && !GetStateChangeComplete(id))
     {
@@ -136,6 +138,10 @@ void Switch::AlpacaReadJson(JsonObject &root)
 {
   DBG_JSON_PRINTFJ(SLOG_NOTICE, root, "BEGIN (root=<%s>) ...\n", _ser_json_);
   AlpacaSwitch::AlpacaReadJson(root);
+  if (JsonObject obj_config = root["RuntimeConfiguration"])
+  {
+    RuntimeSettings::ReadJson(obj_config);
+  }
 
   char title[32] = "";
   for (uint32_t u = 0; u < GetMaxSwitch(); u++)
@@ -162,6 +168,8 @@ void Switch::AlpacaWriteJson(JsonObject &root)
 {
   DBG_JSON_PRINTFJ(SLOG_NOTICE, root, "BEGIN root=%s ...\n", _ser_json_);
   AlpacaSwitch::AlpacaWriteJson(root);
+  JsonObject obj_runtime_config = root["RuntimeConfiguration"].to<JsonObject>();
+  RuntimeSettings::WriteJson(obj_runtime_config);
 
   char title[32] = "";
 
@@ -257,6 +265,7 @@ void Switch::DebugSwitchDevice(uint32_t id)
                       GetSwitchDescription(u),
                       GetSwitchValue(u),
                       GetSwitchMinValue(u),
+                      GetSwitchMaxValue(u),
                       GetSwitchStep(u));
   }
 }

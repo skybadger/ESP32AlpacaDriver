@@ -90,12 +90,13 @@ class Focuser : public AlpacaFocuser
   const int32_t _motor_step_max_default = _motor_step_max_limit; //system default 
   int32_t _motor_step_min = _motor_step_min_limit; //user specified 
   int32_t _motor_step_max = _motor_step_max_default; //user specified
-  boolean _focuser_direction = DIRN_CW; //user specified, default to CW.
+  int32_t _motor_step_size = _motor_step_min; 
     
   // Increment defaults and limits.
   const int32_t _increment_min = _motor_step_min_default;
   const int32_t _increment_max = ( ( _motor_step_max_limit - _motor_step_min_limit ) /64 );
   int32_t _motor_step_increment = _increment_max;
+
 
   //Not sure I care for mm. 
   const int32_t _focuser_mm_min_limit = 0;
@@ -108,6 +109,7 @@ class Focuser : public AlpacaFocuser
   FocuserStates _focuserState = FocuserStates::FOCUSER_INIT;
   FocuserStates _targetFocuserState = FocuserStates::FOCUSER_INIT;
   FocuserMode _focuser_mode = FOCUSER_MODE_ABSOLUTE;
+  bool _focuser_direction = DIRN_CW;
   
   //Absolute vs relative 
   int32_t _base_absolute_count = 0;
@@ -137,9 +139,13 @@ class Focuser : public AlpacaFocuser
   hw_timer_t* _timer = nullptr;
   uint8_t _timer_num = 1;
   volatile bool _timer_interrupt_flag = false;
-  const uint32_t _TIMER_DIVIDER = 80;  // 80 MHz / 80 = 1 MHz resolution
+  const uint32_t _TIMER_FREQUENCY_HZ = 1000000;  // 1 MHz resolution
   const uint32_t _TIMER_INTERVAL_US = 100000; // 100ms interrupt interval (10 Hz)
   
+  //MQTT parameters and flags
+  String _mqtt_function_topic = "focuser/0/status";
+  volatile bool _callbackFlag = false;
+
   // Alpaca command handlers
   void AlpacaReadJson(JsonObject &root);
   void AlpacaWriteJson(JsonObject &root);

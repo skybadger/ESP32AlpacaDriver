@@ -31,6 +31,7 @@ class Motor
 public:
   enum EnableModes { ENABLE_NONE, ENABLE_LOW, ENABLE_HIGH };
   enum MotorType { MOTOR_UNKNOWN, MOTOR_STEPPER, MOTOR_BRUSHED_DC, MOTOR_BRUSHLESS };
+  enum Directions { DIRECTION_CW = DIRN_CW, DIRECTION_CCW = DIRN_CCW };
 
 protected:
   MotorPinSet _pins;

@@ -83,8 +83,8 @@ void Focuser::InitTimer()
 
     g_focuser_timer_owner[_timer_num] = this;
     
-    // Create a 1 MHz timer from the 80 MHz APB clock.
-    _timer = timerBegin(_timer_num, _TIMER_DIVIDER, true);
+    // Create a 1 MHz timer; _timer_num is used to select this focuser's ISR bridge.
+    _timer = timerBegin(_TIMER_FREQUENCY_HZ);
     
     if ( _timer != nullptr)
     {
@@ -108,11 +108,10 @@ void Focuser::InitTimer()
         }
 
         // Attach the interrupt handler
-        timerAttachInterrupt( _timer, interrupt_handler, true);
+        timerAttachInterrupt(_timer, interrupt_handler);
         
         // Set the timer to interrupt at _TIMER_INTERVAL_US microseconds
-        timerAlarmWrite(_timer, _TIMER_INTERVAL_US, true);
-        timerAlarmEnable(_timer);
+        timerAlarm(_timer, _TIMER_INTERVAL_US, true, 0);
         
         timerStop(_timer);
         
